@@ -93,21 +93,23 @@ public class PlayerController : BaseGameObject {
     }
     Transform rectPlayer = new RectTransform();
     Vector3 worldPoint = Vector3.one;
+    Vector3 pos = new Vector3();
     void MovePlayer()
     {        
-        Vector3 pos = Camera.main.WorldToScreenPoint(gameObject.transform.position);
-        //Debug.Log("POS PLayer = " + gameObject.transform.position);
         
-       
+        //Debug.Log("POS PLayer = " + gameObject.transform.position);
+
+        pos = Camera.main.WorldToScreenPoint(gameObject.transform.position);
         if (Input.GetMouseButtonDown(0))
         {
+            
             rectPlayer = gameObject.transform;
-            Debug.Log("Rect Player = " + rectPlayer.position);
+            //Debug.Log("Rect Player = " + rectPlayer.position);
             worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             //Debug.Log(worldPoint);
             //rayCat = Physics2D.Raycast(worldPoint, Vector3.one);
             posMouse = Input.mousePosition;
-            Debug.Log("Pos Mouse = " + worldPoint);
+            //Debug.Log("Pos Mouse = " + worldPoint);
             isJumb = true;
             isMove = true;
             //if (rayCat.collider != null && rayCat.collider.gameObject.tag == "Ground")
@@ -121,7 +123,7 @@ public class PlayerController : BaseGameObject {
                 Flip();                
             }
         }
-
+        Debug.Log("Camera = " + pos);
         float angle = AngleRotation(pos, posMouse);
         float x = Mathf.Cos(Mathf.Deg2Rad * angle) * speed * Time.deltaTime;
         if (isMove == true )
@@ -137,7 +139,7 @@ public class PlayerController : BaseGameObject {
     bool DistanceClickMouse(Transform _posPlayer, Vector3 _posMouse)
     {
         float _dis = Vector3.Distance(_posPlayer.localPosition, _posMouse);
-        Debug.Log("Dis = " + _dis);
+        //Debug.Log("Dis = " + _dis);
         if (_dis < 11)
             return true;
         return false;

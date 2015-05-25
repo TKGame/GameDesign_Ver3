@@ -3,7 +3,9 @@ using System.Collections;
 
 public class EnemyController : BaseGameObject {
 
+    // biến xác định di chuyển
     public bool isMove;
+
 	// Use this for initialization
 	void Start () {
         isMove = false;
@@ -14,6 +16,7 @@ public class EnemyController : BaseGameObject {
         Die();
 	}
     
+   
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.tag == "Player")

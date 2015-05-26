@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BlueGragonScripts : BaseGameObject {
-    
+public class BossController : BaseGameObject {
     // trạng thái của enemy
     public bool isMove;
 
@@ -28,58 +27,46 @@ public class BlueGragonScripts : BaseGameObject {
         isMove = false;
         _startPosition = transform.position;
 	}
-
-	
-    /// <summary>
-    /// 3s sẽ đổi trạng thái 1 lần
-    /// </summary>
     float timeDelay = 0.0f;
-    public float distanceTimeDelay = 0.0f;
-	void Update () {
 
+    public float distanceTimeDelay = 0.0f;
+
+	// Update is called once per frame
+	void Update () {
         _distanceToPlayer = player.transform.position.x - transform.position.x;
 
-        StatusMove(speed,isMove,inAroundOfPlayer,_distanceToPlayer);
+        UpdateStatusMove(speed, isMove, inAroundOfPlayer, _distanceToPlayer);
 
-        ////di chuyển
-        //if((timeDelay += Time.deltaTime) >= 4.0f && isAttack== false && inAroundOfPlayer == false)
-        //{
-        //    isMove = !isMove;
-        //    timeDelay = 0;
-        //} 
-
-        UpdateAttack(isAttack,_distanceToPlayer);
+        UpdateAttack(isAttack, _distanceToPlayer);
 	}
 
-    public void UpdateAttack(bool attack , float distanceToPlayer)
+    /// Hàm update trạng thái tấn công của boss
+    /// có 4 trạng thái tấn công 
+    /// <summary>
+    /// 3 trạng thái tấn công gần -> random 1=attack1 ;2 = attck3 ; 3=attack4;4 = stand;
+    /// </summary>
+    /// <param name="attack"></param>
+    /// <param name="distanceToPlayer"></param>
+    /// 
+    public void UpdateAttack(bool attack, float distanceToPlayer)
     {
         if (attack)
         {
             isMove = false;
         }
-
-        if (distanceToPlayer >= 2.0f || distanceToPlayer <= -2.0f)
-        {
-            isAttack = false;
-        }
-        _animator.SetBool("isAttack", attack);
     }
 
-    // hàm di chuyển của enemy
-    // Nếu ngoài vùng bao thì di chuyển quanh 1 vị trí 
-    // nếu trong vùng bao thì di chuyển lại gần player
-
-    public void StatusMove(float speedMove , bool move, bool inAround, float distanceToPlayer)
+    public void UpdateStatusMove(float speedMove, bool move, bool inAround, float distanceToPlayer)
     {
-        if(inAround == false)                        // nếu nằm ngoài vùng bao
+        if (inAround == false)                        // nếu nằm ngoài vùng bao
         {
-            //di chuyển
+            // di chuyển
             if ((timeDelay += Time.deltaTime) >= distanceTimeDelay && isAttack == false && inAroundOfPlayer == false)
             {
                 isMove = !isMove;
                 timeDelay = 0;
-            } 
-            if(move && isAttack == false)
+            }
+            if (move && isAttack == false)
             {
                 // di chuyển quanh vị trí ban đầu
                 Move(speed);
@@ -87,13 +74,12 @@ public class BlueGragonScripts : BaseGameObject {
         }
         else                                        // nếu nằm trong vùng bao
         {
-            if(isAttack == false)
+            if (isAttack == false)
             {
-                //if (transform.position.x >= _startPosition.x + distanceMove || transform.position.x <= _startPosition.x - distanceMove)
-                //{
-                //    inAroundOfPlayer = false;
-                //}
-
+                if (transform.position.x >= _startPosition.x + distanceMove+1.0f || transform.position.x <= _startPosition.x - distanceMove +1.0f)
+                {
+                    inAroundOfPlayer = false;
+                }
                 // di chuyển đến gần player
                 // có 4 trường hợp xảy ra cần xử lý
                 if (distanceToPlayer < 0 && speed < 0)
@@ -110,7 +96,7 @@ public class BlueGragonScripts : BaseGameObject {
                     transform.position = newPos;
                     move = true;                    // xet animation
                 }
-                else if(distanceToPlayer < 0 && speed > 0)
+                else if (distanceToPlayer < 0 && speed > 0)
                 {
                     if (_facingRight)
                     {
@@ -137,8 +123,8 @@ public class BlueGragonScripts : BaseGameObject {
                         _facingRight = !_facingRight;
                 }
             }
-            
-            if(distanceToPlayer < -9 || distanceToPlayer > 9)
+
+            if (distanceToPlayer < -9 || distanceToPlayer > 9)
             {
                 inAroundOfPlayer = false;
             }
@@ -147,7 +133,7 @@ public class BlueGragonScripts : BaseGameObject {
         _animator.SetBool("isMove", move);
     }
 
-    public void Move(float speedMove )
+    public void Move(float speedMove)
     {
         Vector3 newPos = transform.position;
         newPos.x += Time.deltaTime * speedMove;
@@ -161,48 +147,6 @@ public class BlueGragonScripts : BaseGameObject {
         }
     }
 
-    // hàm đổi hướng di chuyển của enemy
-    public void Flip()
-    {
-        Vector3 theScale = transform.localScale;
-        theScale.x = -theScale.x;
-        transform.localScale = theScale;
-
-        if(transform.position.x < _startPosition.x+distanceMove)
-        {
-            Vector3 newPos = transform.position;
-            newPos.x += 0.2f;
-            transform.position = newPos;
-        }
-        else
-        {
-            Vector3 newPos = transform.position;
-            newPos.x -= 0.2f;
-            transform.position = newPos;
-        }
-        
-    }
-    public void FlipOne()
-    {
-        Vector3 theScale = transform.localScale;
-        theScale.x = -theScale.x;
-        transform.localScale = theScale;
-    }
-
-    //private bool _facingRight = false;
-    //public void FlipOneWay()
-    //{
-    //    if (_facingRight)
-    //    {
-    //        _facingRight = !_facingRight;
-    //        Vector3 theScale = transform.localScale;
-    //        theScale.x = -theScale.x;
-    //        transform.localScale = theScale;
-    //    }
-    //}
-
-
-    // va cham voi vung bao cua player
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.tag == "Around")
@@ -212,11 +156,6 @@ public class BlueGragonScripts : BaseGameObject {
         }
     }
 
-    public void SetActiveAttack()
-    {
-        isAttack = false;
-    }
-
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "Player")
@@ -224,4 +163,24 @@ public class BlueGragonScripts : BaseGameObject {
             isAttack = true;
         }
     }
+
+    public void Flip()
+    {
+        Vector3 theScale = transform.localScale;
+        theScale.x = -theScale.x;
+        transform.localScale = theScale;
+        if (transform.position.x < _startPosition.x + distanceMove)
+        {
+            Vector3 newPos = transform.position;
+            newPos.x += 0.25f;
+            transform.position = newPos;
+        }
+        else
+        {
+            Vector3 newPos = transform.position;
+            newPos.x -= 0.25f;
+            transform.position = newPos;
+        }
+    }
+
 }

@@ -34,10 +34,17 @@ public class CameraController : MonoBehaviour {
         return Mathf.Abs(transform.position.y - player.position.y) > yMargin;
     }
 
-
+    void Update()
+    {
+        MoveCamera();
+    }
+    void MoveCamera()
+    {
+        transform.position = new Vector3(player.position.x, player.position.y, -10); 
+    }
     void FixedUpdate()
     {
-        TrackPlayer();
+        //TrackPlayer();
     }
 
 
@@ -72,7 +79,7 @@ public class CameraController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+    //void Update () {
 	
-	}
+    //}
 }

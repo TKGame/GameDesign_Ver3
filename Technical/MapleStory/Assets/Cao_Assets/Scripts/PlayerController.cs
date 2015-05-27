@@ -12,21 +12,28 @@ public class PlayerController : BaseGameObject {
     public GameObject boxJump;
     public Transform groundCheck;
     private bool grounded = false;
-
-   
-
-    
+    public float distance;//khoang cach nhay
+    private Vector3 posMousePoint = new Vector3();//vi tri cua chuot theo Screen
+    private Vector3 posRaycastPoint = new Vector3();//vi tri cua raycast theo Screen
+    private bool isMove;// bien di chuyen
+    private bool isMouse;// khi duoc Click
+    private RaycastHit2D rayCast;
+    private Vector3 posPlayerStart = new Vector3();
+    private BattleCameraMovement cameraMovement;
 	// Use this for initialization
 	void Start () {
-        //rayCat = Physics2D.Raycast()
-        //posMouse = Vector3.zero;
-        //_checkBoxGround = gameObject.GetComponentInChildren<CheckBoxGround>();
+        posPlayerStart = transform.position;
+        cameraMovement = GameObject.Find("Canvas").GetComponentInChildren<BattleCameraMovement>();
+        if (cameraMovement == null)
+        {
+            Debug.Log("Chua lay duoc CameraMovement");
+        }
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        //grounded = Physics2D.Linecast(transform.localPosition, groundCheck.localPosition, 1 << LayerMask.NameToLayer("Ground"));
-       // MovePlayer();
+        grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+
         Move();
 	}
 #if LOI
@@ -220,35 +227,49 @@ public class PlayerController : BaseGameObject {
     }
 #endif
 
+    //quay huong di chuyen cua Player
     void Flip()
     {
+        
         facingRight = !facingRight;
+        
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
     }
+    //tim goc giua 2 diem
+    // gia tri tra ve la 1 goc
     float AngleRotation(Vector3 posBegin, Vector3 posEnd)
     {
         Vector3 relative = posEnd - posBegin;
         float angle1 = Mathf.Atan2(relative.y, relative.x) * Mathf.Rad2Deg;
         return angle1;
     }
+
+    //ham nhay va xet trigger khi nhay
     void Jump()
     {
-        if (isJumb == true && isMouse == true)
+        if (isJumb == true && isMouse == true && rigid.velocity.y == 0)
+        {
             rigid.AddForce(new Vector2(1.0f, jumpForce));
+            isMouse = false;
+        }
         if (rigid.velocity.y >= 0 && isJumb == true)
         {
             gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
+            isJumb = false;
         }
-        else
+        if(rigid.velocity.y < 0 && grounded == false)
         {
             gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
             
-            isJumb = false;
+            
         }
-        isMouse = false;
+       
     }
+
+    //kiem tra khoang cach giua 2 diem
+    //so sanh voi khoang cach di chuyen
     bool DistanceClickMouse(Vector3 _posPlayer, Vector3 _posMouse)
     {
         float _dis = Vector3.Distance(_posPlayer, _posMouse);
@@ -257,20 +278,21 @@ public class PlayerController : BaseGameObject {
             return true;
         return false;
     }
-    public float distance;
-    private Vector3 posMousePoint = new Vector3();
-    private Vector3 posRaycastPoint = new Vector3();
-    private bool isMove;
-    private bool isMouse;
-    private RaycastHit2D rayCast;
+   
+    //ham di chuyen cua player
     void Move()
     {
-        Vector3 posPlayerPoint = Camera.main.WorldToScreenPoint(transform.position);
+        Vector3 pos = cameraMovement.GetPosTouch();
+        
+        Vector3 posPlayerPoint = Camera.main.WorldToScreenPoint(transform.position);//vi tri player theo Screen
         if (Input.GetMouseButtonDown(0))
         {
             posMousePoint = Input.mousePosition;
+            Debug.Log(System.String.Format("Pos Touch Camera Moment = {0}", pos));
+            Debug.Log(System.String.Format("Pos Touch Mouse = {0}", posMousePoint));
             isMove = true;
-            isMouse = true;
+            if (grounded == true)
+                isMouse = true;
             if (posPlayerPoint.x < posMousePoint.x && !facingRight)
             {
                 Flip();
@@ -282,27 +304,40 @@ public class PlayerController : BaseGameObject {
         }
         if (isMouse == true)
         {
-            Vector3 posMouse = Camera.main.ScreenToWorldPoint(posMousePoint);
+            Vector3 posMouse = Camera.main.ScreenToWorldPoint(posMousePoint);//vi tri chuot theo Word
             Vector3 direction = posMouse - transform.position;
 
-            rayCast = Physics2D.Raycast(posMouse, Vector3.down, 1.5f);
-            posRaycastPoint = Camera.main.WorldToScreenPoint(rayCast.point);
+            rayCast = Physics2D.Raycast(posMouse, Vector3.down, 1.5f);//chieu tia Raycast
+            posRaycastPoint = Camera.main.WorldToScreenPoint(rayCast.point);//vi tri rayCast theo Screen
 
-            if (rayCast.collider != null && rayCast.collider.gameObject.tag == "Ground")
+            if (rayCast.collider != null && rayCast.collider.gameObject.tag == "Ground" )
             {
-                isJumb = true;
+                if (posMousePoint.y > posPlayerPoint.y && grounded == true)
+                    isJumb = true;
+                
             }
         }
-        
+        //Debug.Log(System.String.Format("Pos RayCast = {0}", posRaycastPoint));
+
         float angle = AngleRotation(posPlayerPoint, posMousePoint);
-        float x = Mathf.Cos(Mathf.Deg2Rad * angle) * speed * Time.deltaTime;
         
+        float x = Mathf.Cos(Mathf.Deg2Rad * angle) * speed * Time.deltaTime;
+        if (x <= 0.02 && x >= -0.02)
+        {
+            isMove = false;
+            _animator.SetBool("isMove", false);
+        }
+        posMousePoint.z = 0;
         if (isMove == true)
         {
+           
+            _animator.SetBool("isMove", true);
             transform.localPosition += new Vector3(x, 0, 0);
-            if (DistanceClickMouse(posPlayerPoint, posMousePoint))
-                Jump();
+            //transform.localPosition = Vector3.MoveTowards(transform.localPosition, pos, speed * Time.deltaTime);
+            
         }
-        
+        if (DistanceClickMouse(posPlayerPoint, posMousePoint))
+            Jump();//nhay
     }
+    
 }

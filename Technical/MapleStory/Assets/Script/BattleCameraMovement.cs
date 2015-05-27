@@ -11,6 +11,7 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
 
     private bool isTouch;
     public Vector3 pointTouch;
+    private Vector3 posTouch;
 	// Use this for initialization
 	void Start () {
         Debug.Log("Start Battle Camera Movement");
@@ -32,7 +33,9 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
             Vector3 pointTouchInPlayer;
             isTouch = RectTransformUtility.ScreenPointToWorldPointInRectangle(canvasWorldTrans, eventData.position, battleCamera.GetComponent<Camera>(), out pointTouchInPlayer);
 
-            player.transform.position = pointTouchInPlayer;
+            posTouch = eventData.position;
+            Debug.Log(posTouch);
+            //player.transform.position = pointTouchInPlayer;
             //player.transform.position = pointTouch;
             Debug.Log(System.String.Format("Point touch = {0} --- Point Touch = {1}", pointTouchInPlayer, eventData.position));
         } 
@@ -56,4 +59,9 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
     //{
     //    throw new System.NotImplementedException();
     //}
+    public Vector3 GetPosTouch()
+    {
+        
+        return posTouch;
+    }
 }

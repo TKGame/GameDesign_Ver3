@@ -280,7 +280,9 @@ public class PlayerController : BaseGameObject {
     }
 
     /// <summary>
-    /// 
+    /// Khi người chơi touch trên màn hình, thì mới gọi MoveTarget
+    /// Lúc này lấy được vị trí Touch - Vị trí người chơi(Tọa độ ở Canvas Wolrd). 
+    /// Sau đó vẽ Raycast và tính toán logic
     /// </summary>
     /// <param name="posTarget"> Pos truyền vào là pos ở Canvas World Space</param>
     public void MoveToTarget(Vector3 posTarget) 

@@ -34,7 +34,7 @@ public class PlayerController : BaseGameObject {
 	void Update () {
         grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
-        Move();
+        //Move();
 	}
 #if LOI
     void Move()
@@ -277,6 +277,15 @@ public class PlayerController : BaseGameObject {
         if (_dis < distance)
             return true;
         return false;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="posTarget"> Pos truyền vào là pos ở Canvas World Space</param>
+    public void MoveToTarget(Vector3 posTarget) 
+    {
+        transform.position = posTarget;
     }
    
     //ham di chuyen cua player

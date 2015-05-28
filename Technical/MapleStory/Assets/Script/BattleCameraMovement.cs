@@ -6,6 +6,7 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
 {
     public Transform battleCamera;
     public GameObject player;
+    public PlayerController playerControl;
 
     public RectTransform canvasWorldTrans;
 
@@ -19,22 +20,35 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
 	
 	// Update is called once per frame
 	void Update () {
-	
+        if (player != null) 
+        {
+            MoveCameraByPlayer();
+        }
 	}
+
+    void MoveCameraByPlayer() 
+    {
+        float x = player.transform.position.x;
+        battleCamera.position = new Vector3(x, battleCamera.position.y, battleCamera.position.z);
+    }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         if (player)
         {
-            Vector3 pointPlayerInCamera = battleCamera.GetComponent<Camera>().WorldToScreenPoint(player.transform.position);
-            pointPlayerInCamera.z = 0;
+            //Vector3 pointPlayerInCamera = battleCamera.GetComponent<Camera>().WorldToScreenPoint(player.transform.position);
+            //pointPlayerInCamera.z = 0;
 
             //Position of touch in canvas wolrd 
             Vector3 pointTouchInPlayer;
             isTouch = RectTransformUtility.ScreenPointToWorldPointInRectangle(canvasWorldTrans, eventData.position, battleCamera.GetComponent<Camera>(), out pointTouchInPlayer);
 
             posTouch = eventData.position;
-            Debug.Log(posTouch);
+
+            //Goi ham move Player toi target
+            playerControl.MoveToTarget(pointTouchInPlayer);
+
+            //Debug.Log(posTouch);
             //player.transform.position = pointTouchInPlayer;
             //player.transform.position = pointTouch;
             Debug.Log(System.String.Format("Point touch = {0} --- Point Touch = {1}", pointTouchInPlayer, eventData.position));

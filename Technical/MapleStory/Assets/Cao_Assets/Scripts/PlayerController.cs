@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerController : BaseGameObject {
 
     public Transform transfBullet;
+    public float Mana;
     private bool facingRight = true;
     private bool isJumb = false;
     public float moveForce = 365f;			// Amount of force added to move the player left and right.
@@ -20,8 +21,10 @@ public class PlayerController : BaseGameObject {
     private RaycastHit2D rayCast;
     private Vector3 posPlayerStart = new Vector3();
     private BattleCameraMovement cameraMovement;
+    private bool attackSkill;
 	// Use this for initialization
 	void Start () {
+        attackSkill = false;
         posPlayerStart = transform.position;
         cameraMovement = GameObject.Find("Canvas").GetComponentInChildren<BattleCameraMovement>();
         if (cameraMovement == null)
@@ -34,7 +37,7 @@ public class PlayerController : BaseGameObject {
 	void Update () {
         grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
-        //Move();
+        Move();
 	}
 #if LOI
     void Move()
@@ -287,15 +290,36 @@ public class PlayerController : BaseGameObject {
     /// <param name="posTarget"> Pos truyền vào là pos ở Canvas World Space</param>
     public void MoveToTarget(Vector3 posTarget) 
     {
-        transform.position = posTarget;
+        //transform.position = posTarget;
+        float angle = AngleRotation(transform.position, posTarget);
+
+        float x = Mathf.Cos(Mathf.Deg2Rad * angle) * speed * Time.deltaTime;
+        transform.localPosition += new Vector3(x, 0, 0);
+        if (isMouse == true)
+        {
+            Vector3 posMouse = Camera.main.ScreenToWorldPoint(posMousePoint);//vi tri chuot theo Word
+            Vector3 direction = posMouse - transform.position;
+
+            rayCast = Physics2D.Raycast(posMouse, Vector3.down, 1.5f);//chieu tia Raycast
+            posRaycastPoint = Camera.main.WorldToScreenPoint(rayCast.point);//vi tri rayCast theo Screen
+
+            if (rayCast.collider != null && rayCast.collider.gameObject.tag == "Ground")
+            {
+                if (posMousePoint.y > posPlayerPoint.y && grounded == true)
+                    isJumb = true;
+
+            }
+        }
+        if (DistanceClickMouse(transform.position, posTarget))
+            Jump();//nhay
     }
-   
+    Vector3 posPlayerPoint = new Vector3();
     //ham di chuyen cua player
     void Move()
     {
         Vector3 pos = cameraMovement.GetPosTouch();
         
-        Vector3 posPlayerPoint = Camera.main.WorldToScreenPoint(transform.position);//vi tri player theo Screen
+        posPlayerPoint = Camera.main.WorldToScreenPoint(transform.position);//vi tri player theo Screen
         if (Input.GetMouseButtonDown(0))
         {
             posMousePoint = Input.mousePosition;
@@ -313,21 +337,7 @@ public class PlayerController : BaseGameObject {
                 Flip();
             }
         }
-        if (isMouse == true)
-        {
-            Vector3 posMouse = Camera.main.ScreenToWorldPoint(posMousePoint);//vi tri chuot theo Word
-            Vector3 direction = posMouse - transform.position;
-
-            rayCast = Physics2D.Raycast(posMouse, Vector3.down, 1.5f);//chieu tia Raycast
-            posRaycastPoint = Camera.main.WorldToScreenPoint(rayCast.point);//vi tri rayCast theo Screen
-
-            if (rayCast.collider != null && rayCast.collider.gameObject.tag == "Ground" )
-            {
-                if (posMousePoint.y > posPlayerPoint.y && grounded == true)
-                    isJumb = true;
-                
-            }
-        }
+        
         //Debug.Log(System.String.Format("Pos RayCast = {0}", posRaycastPoint));
 
         float angle = AngleRotation(posPlayerPoint, posMousePoint);
@@ -343,12 +353,36 @@ public class PlayerController : BaseGameObject {
         {
            
             _animator.SetBool("isMove", true);
-            transform.localPosition += new Vector3(x, 0, 0);
+           // transform.localPosition += new Vector3(x, 0, 0);
             //transform.localPosition = Vector3.MoveTowards(transform.localPosition, pos, speed * Time.deltaTime);
             
         }
-        if (DistanceClickMouse(posPlayerPoint, posMousePoint))
-            Jump();//nhay
+        
     }
-    
+    public void AddHPandMana(float _hp, float _mana)
+    {
+        HP += _hp;
+        Mana += _mana;
+    }
+    void AttackSkillDefault()
+    {
+        _animator.SetTrigger("isAttack_1");
+        attackSkill = true;
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.tag == "Enemy")
+        {
+            if (attackSkill == true)
+            {
+                EnemyController _enemy = col.GetComponent<EnemyController>();
+                if (_enemy != null)
+                {
+                    _enemy.Hit(damge);
+                    attackSkill = false;
+                }
+            }
+        }
+    }
 }

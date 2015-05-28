@@ -24,6 +24,7 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
         {
             MoveCameraByPlayer();
         }
+        playerControl.MoveToTarget(posTouch);
 	}
 
     void MoveCameraByPlayer() 
@@ -43,10 +44,10 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
             Vector3 pointTouchInPlayer;
             isTouch = RectTransformUtility.ScreenPointToWorldPointInRectangle(canvasWorldTrans, eventData.position, battleCamera.GetComponent<Camera>(), out pointTouchInPlayer);
 
-            posTouch = eventData.position;
+            posTouch = pointTouchInPlayer;
 
             //Goi ham move Player toi target
-            playerControl.MoveToTarget(pointTouchInPlayer);
+            //playerControl.MoveToTarget(pointTouchInPlayer);
 
             //Debug.Log(posTouch);
             //player.transform.position = pointTouchInPlayer;

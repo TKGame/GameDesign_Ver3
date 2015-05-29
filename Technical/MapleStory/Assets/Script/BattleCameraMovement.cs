@@ -37,15 +37,17 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
     {
         if (player)
         {
+            playerControl.isMouse = true;
             //Vector3 pointPlayerInCamera = battleCamera.GetComponent<Camera>().WorldToScreenPoint(player.transform.position);
             //pointPlayerInCamera.z = 0;
 
             //Position of touch in canvas wolrd 
             Vector3 pointTouchInPlayer;
+           // Vector2 pointTouchInPlayer2;
             isTouch = RectTransformUtility.ScreenPointToWorldPointInRectangle(canvasWorldTrans, eventData.position, battleCamera.GetComponent<Camera>(), out pointTouchInPlayer);
-
+            //isTouch = RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasWorldTrans, eventData.position, battleCamera.GetComponent<Camera>(), out pointTouchInPlayer2);
             posTouch = pointTouchInPlayer;
-
+            //Debug.Log(System.String.Format("Point Vecter 2 = {0}",pointTouchInPlayer2));
             //Goi ham move Player toi target
             //playerControl.MoveToTarget(pointTouchInPlayer);
 
@@ -78,5 +80,9 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
     {
         
         return posTouch;
+    }
+    public void AttackSkillDeffault()
+    {
+        playerControl.AttackSkillDefault();
     }
 }

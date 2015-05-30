@@ -74,6 +74,7 @@ public class BossController : BaseGameObject {
         }
         else                                        // nếu nằm trong vùng bao
         {
+            
             if (isAttack == false)
             {
                 if (transform.position.x >= _startPosition.x + distanceMove+1.0f || transform.position.x <= _startPosition.x - distanceMove +1.0f)

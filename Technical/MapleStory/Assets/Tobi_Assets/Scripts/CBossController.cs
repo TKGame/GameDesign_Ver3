@@ -19,6 +19,7 @@ public class CBossController : BaseEnemyScripts {
         if (playerObj != null)
         {
             UpdateStatusOfBoss();
+            UpdateBossShoot(distanceEnemyToPlayer);
             if((_timeDelayOfBoss += Time.deltaTime) >= 4.0f && inAroundOfPlayer == false && attack == false)
             {
                 move = !move;
@@ -37,12 +38,21 @@ public class CBossController : BaseEnemyScripts {
 
     void UpdateBossShoot(float _distanceBossToPlayer)
     {
-        if (Mathf.Abs(_distanceBossToPlayer) <= 9 && Mathf.Abs(_distanceBossToPlayer) >= 8.5)
+        if (Mathf.Abs(_distanceBossToPlayer) <= 11 && Mathf.Abs(_distanceBossToPlayer) >= 10.5)
         {
-            //_animator.SetBool("isAttack2", true);
-            //isAttack = false;
+            _animator.SetBool("isAttack2", true);
+            attack = false;
+            move = false;
         }
     }
+
+    //public void SetStartFrameAttack2()
+    //{
+    //    speed = 0;
+    //}
+
+
+
 
     #region Xet Va Cham
 
@@ -52,6 +62,10 @@ public class CBossController : BaseEnemyScripts {
         {
             inAroundOfPlayer = true;
             move = true;
+        }
+        if(col.gameObject.tag == "Player")
+        {
+            move = false;
         }
         //if(col.tag == "Player")
         //{

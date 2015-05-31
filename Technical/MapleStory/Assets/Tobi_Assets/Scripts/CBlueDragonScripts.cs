@@ -61,27 +61,5 @@ public class CBlueDragonScripts : BaseEnemyScripts {
             inAroundOfPlayer = true;
         }
     }
-    //void OnCollisionStay2D(Collision2D col)
-    //{
-    //    if (col.gameObject.tag == "Player")
-    //    {
-    //        move = false;
-    //        //Debug.Log("attack");
-    //        attack = true;
-    //        inAroundOfPlayer = false;
-    //    }
-    //}
-
-    //void OnCollisionExit2D(Collision2D collExit)
-    //{
-    //    if (collExit.gameObject.tag == "Player")
-    //    {
-    //        Debug.Log("exit");
-    //        attack = false;
-    //        move = true;
-    //        inAroundOfPlayer = true;
-    //    }
-        
-    //}
-#endregion 
+    #endregion 
 }

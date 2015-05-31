@@ -16,7 +16,7 @@ public class CBlueDragonScripts : BaseEnemyScripts {
         if(playerObj != null)
         {
             UpdateStatusOfEnemy();
-            if((timeDelay += Time.deltaTime) >= 3 && inAroundOfPlayer == false) 
+            if((timeDelay += Time.deltaTime) >= distanceTimeDelayOfEnemy && inAroundOfPlayer == false) 
             {
                 move = !move;
                 timeDelay = 0;

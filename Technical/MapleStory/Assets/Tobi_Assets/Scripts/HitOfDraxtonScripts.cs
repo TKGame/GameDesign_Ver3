@@ -17,7 +17,7 @@ public class HitOfDraxtonScripts : MonoBehaviour {
 
         float speedCurrent = draxtonObj.GetComponent<DrextonScripts>().speed;
 
-        this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(speedCurrent*speedMoveY,speedMoveY);
+        this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(speedCurrent*speedMoveX,0);
 	}
 	
     void OnTriggerEnter2D(Collider2D col)

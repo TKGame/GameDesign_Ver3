@@ -4,7 +4,8 @@ using System.Collections;
 public class HitOfDraxtonScripts : MonoBehaviour {
 
     // van toc di chuyen cua hit
-    public float speedMove;
+    public float speedMoveX;
+    public float speedMoveY;
 
     Animator _anim;
 
@@ -16,14 +17,14 @@ public class HitOfDraxtonScripts : MonoBehaviour {
 
         float speedCurrent = draxtonObj.GetComponent<DrextonScripts>().speed;
 
-        this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(speedCurrent*speedMove,0);
+        this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(speedCurrent*speedMoveY,speedMoveY);
 	}
 	
     void OnTriggerEnter2D(Collider2D col)
     {
         if(col.gameObject.tag == "Player")
         {
-            speedMove = 0;
+            speedMoveY = 0;
             _anim.SetTrigger("collision");
         }
     }

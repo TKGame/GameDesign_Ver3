@@ -18,17 +18,7 @@ public class DrextonScripts : BaseEnemyScripts {
     // Update is called once per frame
     void Update()
     {
-        distanceEnemyToPlayer = playerObj.transform.position.x - this.transform.position.x;
-        if (playerObj != null)
-        {
-            UpdateStatusOfEnemy();
-            if ((timeDelay += Time.deltaTime) >= 3 && inAroundOfPlayer == false)
-            {
-                move = !move;
-                timeDelay = 0;
-            }
-            Die();
-        }
+        RunUpdateEnemy(transform);
     }
 
     public void CreateHit()
@@ -39,46 +29,23 @@ public class DrextonScripts : BaseEnemyScripts {
     #region XetVaCham
     void OnTriggerEnter2D(Collider2D colEnter)
     {
-        if (colEnter.tag == "Around")
-        {
-            // trong vung bao cua player
-            //inAroundOfPlayer = false;
-            //move = false;
-            //attack = true;
-        }
+        //if (colEnter.tag == "Around")
+        //{
+        //    // trong vung bao cua player
+        //    inAroundOfPlayer = false;
+        //    move = false;
+        //    attack = true;
+        //}
     }
 
     void OnTriggerStay2D(Collider2D collStay)
     {
-        if(collStay.gameObject.tag == "Around")
-        {
-            inAroundOfPlayer = false;
-            attack = true;
-            move = false;
-        }
-        if (collStay.gameObject.tag == "Player")
-        {
-            //move = true;
-            //attack = false;
-            //inAroundOfPlayer = false;
-        }
+        onTriggerStay2D_Shoot(collStay, "Around");
     }
 
     void OnTriggerExit2D(Collider2D colExit)
     {
-        if (colExit.tag == "Around")
-        {
-            inAroundOfPlayer = false;
-            attack = false;
-            move = true;
-        }
-
-        if (colExit.gameObject.tag == "Player")
-        {
-            //attack = false;
-            //move = true;
-            //inAroundOfPlayer = true;
-        }
+        onTriggerExit2D(colExit, "Around");
     }
     #endregion
 }

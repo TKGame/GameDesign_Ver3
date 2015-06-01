@@ -13,17 +13,7 @@ public class ZombieScripts : BaseEnemyScripts {
 	
 	// Update is called once per frame
 	void Update () {
-        distanceEnemyToPlayer = playerObj.transform.position.x - this.transform.position.x;
-        if (playerObj != null)
-        {
-            UpdateStatusOfEnemy();
-            if ((timeDelay += Time.deltaTime) >= 3 && inAroundOfPlayer == false)
-            {
-                move = !move;
-                timeDelay = 0;
-            }
-            Die();
-        }
+        RunUpdateEnemy(transform);
 	}
 
     #region XetVaCham

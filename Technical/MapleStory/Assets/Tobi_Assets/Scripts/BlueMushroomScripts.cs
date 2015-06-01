@@ -2,8 +2,6 @@
 using System.Collections;
 
 public class BlueMushroomScripts : BaseEnemyScripts {
-
-    float timeDelay = 0.0f;
 	// Use this for initialization
 	void Start () {
         startPosition = transform.position;
@@ -12,17 +10,7 @@ public class BlueMushroomScripts : BaseEnemyScripts {
 	
 	// Update is called once per frame
 	void Update () {
-        distanceEnemyToPlayer = playerObj.transform.position.x - this.transform.position.x;
-        if (playerObj != null)
-        {
-            UpdateStatusOfEnemy();
-            if ((timeDelay += Time.deltaTime) >= 3 && inAroundOfPlayer == false)
-            {
-                move = !move;
-                timeDelay = 0;
-            }
-            Die();
-        }
+        RunUpdateEnemy(transform);
 	}
 
     public void DestroyWhenDie()

@@ -15,15 +15,14 @@ public class BaseEnemyScripts : BaseGameObject
 {
     // biến xác định Flip
     bool _facingRight = true;
-
     // thời gian delay
-    float _timeDelay = 0.0f;
-    
+    float _timeDelayOfBoss = 0.0f;
+
+    float _timeDelayOfEnemy = 0.0f;
     // thời gian giữa 2 lần chuyển trạng thái của enemy
     public float distanceTimeDelayOfEnemy = 0.0f;
-
     // khoang cách
-    public float distanceEnemyToPlayer = 0.0f;
+    float distanceEnemyToPlayer = 0.0f;
     // khoảng cách di chuyển quanh vị trí ban đầu
     public float distanceMove = 0.0f;
     // vị trí ban đầu 
@@ -40,36 +39,44 @@ public class BaseEnemyScripts : BaseGameObject
     public bool move;
     public bool attack;
     public bool shoot;
-    public void Init()
-    {
-        //status = new Status();
-        //status.move = false;
-        //status.attack = false;
-        //status.shoot = false;
-    }
 
-    public void BossStand()
+    #region Enemy
+    public void RunUpdateEnemy(Transform tranformTarget)
     {
-        _animator.SetBool("isAttack3", false);
-        _animator.SetBool("isAttack4", false);
-        _animator.SetBool("isAttack2", false);
+        if (playerObj != null)
+        {
+            distanceEnemyToPlayer = playerObj.transform.position.x - this.transform.position.x;
+            UpdateStatusOfEnemy();
+            if ((_timeDelayOfEnemy += Time.deltaTime) >= distanceTimeDelayOfEnemy && inAroundOfPlayer == false)
+            {
+                move = !move;
+                _timeDelayOfEnemy = 0;
+            }
+            Die();
+        }
     }
-
     // Hàm update trạng thái của Enemy
     public void UpdateStatusOfEnemy()
     {
         if (move)
         {
             UpdateStatusMove();
-        }  
-        
+        }
         _animator.SetBool("isAttack", attack); // enemy attack
         _animator.SetBool("isMove", move);
-           
-    }
 
-    int[] arrAttack = { 3,3,0,3,4,0,4,0,3,3,4,4,3,0,4};
+    }
+    #endregion
+    //*************************************************************************//
+    #region Boss
+    int[] arrAttack = { 3, 3, 0, 3, 4, 0, 4, 0, 3, 3, 4, 4, 3, 0, 4 };
     int i = 0;
+    public void BossStand()
+    {
+        _animator.SetBool("isAttack3", false);
+        _animator.SetBool("isAttack4", false);
+        _animator.SetBool("isAttack2", false);
+    }
     // Hàm update trạng thái của Boss
     public void UpdateStatusOfBoss()
     {
@@ -79,7 +86,7 @@ public class BaseEnemyScripts : BaseGameObject
         }
         else if(attack)
         {
-            if((_timeDelay += Time.deltaTime)>= distanceTimeAttack)
+            if((_timeDelayOfBoss += Time.deltaTime)>= distanceTimeAttack)
             {
                 //System.Random rand = new System.Random();
                 //int indexAttack = rand.Next(0, 3);
@@ -87,12 +94,10 @@ public class BaseEnemyScripts : BaseGameObject
                 if (arrAttack[i] == 3)
                 {
                     _animator.SetBool("isAttack3", true);
-                    
                 }
                 else if (arrAttack[i] == 4)
                 {
                     _animator.SetBool("isAttack4", true);
-                    
                 }
                 else
                     BossStand();
@@ -103,7 +108,7 @@ public class BaseEnemyScripts : BaseGameObject
                 }
                 else
                     i++;
-                _timeDelay = 0.0f;
+                _timeDelayOfBoss = 0.0f;
             }
         }
         else if(shoot)
@@ -112,6 +117,23 @@ public class BaseEnemyScripts : BaseGameObject
         }
         _animator.SetBool("isMove",move);
     }
+    #endregion
+    public void RunUpdateBoss(Transform tranformTarget)
+    {
+        if (playerObj != null)
+        {
+            distanceEnemyToPlayer = playerObj.transform.position.x - this.transform.position.x;
+            UpdateStatusOfBoss();
+            if ((_timeDelayOfEnemy += Time.deltaTime) >= distanceTimeDelayOfEnemy && inAroundOfPlayer == false)
+            {
+                move = !move;
+                _timeDelayOfEnemy = 0;
+            }
+            Die();
+        }
+    }
+    //**************************************************************************//
+    #region Chung
 
     /// <summary>
     /// hàm di chuyển của enemy
@@ -151,7 +173,6 @@ public class BaseEnemyScripts : BaseGameObject
             }
         }
     }
-
     // hàm di chuyển 
     public void Move(float speedMove)
     {
@@ -159,7 +180,6 @@ public class BaseEnemyScripts : BaseGameObject
         newPos.x += Time.deltaTime * speedMove;
         transform.position = newPos;
     }
-
     // hàm đổi hướng di chuyển của enemy
     public void Flip()
     {
@@ -180,6 +200,63 @@ public class BaseEnemyScripts : BaseGameObject
             newPos.x -= 0.2f;
             transform.position = newPos;
         }
-
     }
+
+    #endregion
+
+    #region Xử lý va chạm
+
+    public void onTriggerEnter2D(Collider2D col, string tag)
+    {
+        if(col.tag == tag)
+        {
+            inAroundOfPlayer = true;
+            move = true;
+        }
+    }
+
+    public void onTriggerStay2D(Collider2D col , string tagPlayer)
+    {
+        if(col.tag == tagPlayer)
+        {
+            move = false;
+            attack = true;
+            inAroundOfPlayer = false;
+        }
+    }
+
+    public void onTriggerExit2D(Collider2D col , string tagAround)
+    {
+        if (col.tag == tagAround)
+        {
+            inAroundOfPlayer = false;
+            move = true;
+            attack = false;
+        }
+    }
+
+    public void onTriggerExit2D(Collider2D col, string tagAround, string tagPlayer)
+    {
+        if(col.tag == tagAround)
+        {
+            inAroundOfPlayer = false;
+        }
+        if(col.tag== tagPlayer)
+        {
+            attack = false;
+            move = true;
+            inAroundOfPlayer = true;
+        }
+    }
+
+    public void onTriggerStay2D_Shoot(Collider2D col, string tagAround)
+    {
+        if(col.tag == tagAround)
+        {
+            inAroundOfPlayer = false;
+            attack = true;
+            move = false;
+        }
+    }
+    #endregion
 }

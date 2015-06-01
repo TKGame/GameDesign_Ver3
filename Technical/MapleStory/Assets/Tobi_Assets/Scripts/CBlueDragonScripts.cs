@@ -2,8 +2,6 @@
 using System.Collections;
 
 public class CBlueDragonScripts : BaseEnemyScripts {
-
-    float timeDelay = 0.0f;
 	// Use this for initialization
 	void Start () {
         startPosition = transform.position;
@@ -12,54 +10,23 @@ public class CBlueDragonScripts : BaseEnemyScripts {
 	
 	// Update is called once per frame
 	void Update () {
-        distanceEnemyToPlayer = playerObj.transform.position.x - this.transform.position.x;
-        if(playerObj != null)
-        {
-            UpdateStatusOfEnemy();
-            if((timeDelay += Time.deltaTime) >= distanceTimeDelayOfEnemy && inAroundOfPlayer == false) 
-            {
-                move = !move;
-                timeDelay = 0;
-            }
-            Die();
-        }
+        RunUpdateEnemy(transform);
 	}
 
     #region XetVaCham
     void OnTriggerEnter2D(Collider2D colEnter)
     {
-        if (colEnter.tag == "Around")
-        {
-            // trong vung bao cua player
-            inAroundOfPlayer = true;
-            move = true;
-        }
+        onTriggerEnter2D(colEnter, "Around");
     }
 
     void OnTriggerStay2D(Collider2D collStay)
     {
-        if (collStay.gameObject.tag == "Player")
-        {
-            move = false;
-            //Debug.Log("attack");
-            attack = true;
-            inAroundOfPlayer = false;
-        }
+        onTriggerStay2D(collStay, "Player");
     }
 
     void OnTriggerExit2D(Collider2D colExit)
     {
-        if(colExit.tag == "Around")
-        {
-            inAroundOfPlayer = false;
-        }
-
-        if (colExit.gameObject.tag == "Player")
-        {
-            attack = false;
-            move = true;
-            inAroundOfPlayer = true;
-        }
+        onTriggerExit2D(colExit, "Around","Player");
     }
     #endregion 
 }

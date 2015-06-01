@@ -2,9 +2,9 @@
 using System.Collections;
 
 public class StoneScripts : BaseEnemyScripts {
+
     float timeDelay = 0.0f;
 
-    public Transform positionCreateHit;
 	// Use this for initialization
 	void Start () {
         startPosition = transform.position;
@@ -13,25 +13,8 @@ public class StoneScripts : BaseEnemyScripts {
 	
 	// Update is called once per frame
 	void Update () {
-        distanceEnemyToPlayer = playerObj.transform.position.x - this.transform.position.x;
-        if (playerObj != null)
-        {
-            UpdateStatusOfEnemy();
-            if ((timeDelay += Time.deltaTime) >= distanceTimeDelayOfEnemy && inAroundOfPlayer == false)
-            {
-                move = !move;
-                timeDelay = 0;
-            }
-            Die();
-        }
+        RunUpdateEnemy(transform);
 	}
-
-    public void Createhit()
-    {
-        Instantiate(bullet, positionCreateHit.position, Quaternion.identity);
-    }
-
-
 
     #region XetVaCham
     void OnTriggerEnter2D(Collider2D colEnter)
@@ -68,5 +51,6 @@ public class StoneScripts : BaseEnemyScripts {
             inAroundOfPlayer = true;
         }
     }
+
     #endregion 
 }

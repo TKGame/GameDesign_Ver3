@@ -6,21 +6,22 @@ public class CBossController : BaseEnemyScripts {
     float _timeDelayOfBoss = 0.0f;
 
     public Transform bulletPosition;
+
+
 	// Use this for initialization
 	void Start () {
         startPosition = transform.position;
-        Init();
         playerObj = GameObject.FindGameObjectWithTag("Player").gameObject;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        distanceEnemyToPlayer = playerObj.transform.position.x - this.transform.position.x;
+         float distance= playerObj.transform.position.x - this.transform.position.x;
         if (playerObj != null)
         {
             UpdateStatusOfBoss();
-            UpdateBossShoot(distanceEnemyToPlayer);
-            if((_timeDelayOfBoss += Time.deltaTime) >= 4.0f && inAroundOfPlayer == false && attack == false)
+            UpdateBossShoot(distance);
+            if ((_timeDelayOfBoss += Time.deltaTime) >= 4.0f && inAroundOfPlayer == false && attack == false)
             {
                 move = !move;
                 _timeDelayOfBoss = 0.0f;
@@ -50,11 +51,7 @@ public class CBossController : BaseEnemyScripts {
     //{
     //    speed = 0;
     //}
-
-
-
-
-    #region Xet Va Cham
+    #region Xet Va Cham 
 
     void OnTriggerEnter2D(Collider2D col)
     {

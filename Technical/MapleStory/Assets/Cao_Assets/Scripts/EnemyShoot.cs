@@ -3,6 +3,7 @@ using System.Collections;
 
 public class EnemyShoot : EnemyController {
 
+    public bool isMove;
     public Transform transfBullet;
     
 	// Use this for initialization
@@ -22,5 +23,9 @@ public class EnemyShoot : EnemyController {
     void Move()
     {
         gameObject.transform.Translate(new Vector3(speed, 0, 0) * Time.deltaTime);
+    }
+    void Attack()
+    {
+        
     }
 }

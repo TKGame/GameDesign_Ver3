@@ -15,8 +15,7 @@ public class EnemyController : BaseGameObject {
 	void Update () {
         Die();
 	}
-    
-   
+
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.tag == "Player")

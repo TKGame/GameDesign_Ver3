@@ -32,13 +32,12 @@ public class BaseGameObject : MonoBehaviour {
     }
     public virtual void Die()
     {
-        if(HP <= 0 )
+        if (HP <= 0)
         {
             speed = 0;
             _animator.SetBool("isDie", true);
-
-            //Destroy(gameObject);
-            //_animator.SetBool("activeDie", true);
+            rigid.gravityScale = 0;
+            GetComponent<BoxCollider2D>().enabled = false;
         }
     }
     

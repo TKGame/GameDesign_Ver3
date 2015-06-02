@@ -89,47 +89,7 @@ public class PlayerController : BaseGameObject {
     public void MoveToTarget(Vector3 posTarget) 
     {
         MovePlayer(posTarget);
-#if PB2
-        //transform.position = posTarget;
-        //float angle = AngleRotation(transform.position, posTarget);
 
-        //float x = Mathf.Cos(Mathf.Deg2Rad * angle) * speed * Time.deltaTime;
-        //transform.localPosition += new Vector3(x, 0, 0);
-        //if (isMouse == true)
-        //{
-        //    Vector3 posMouse = Camera.main.ScreenToWorldPoint(posMousePoint);//vi tri chuot theo Word
-        //    Vector3 direction = posMouse - transform.position;
-
-        //    rayCast = Physics2D.Raycast(posMouse, Vector3.down, 1.5f);//chieu tia Raycast
-        //    posRaycastPoint = Camera.main.WorldToScreenPoint(rayCast.point);//vi tri rayCast theo Screen
-
-        //    if (rayCast.collider != null && rayCast.collider.gameObject.tag == "Ground")
-        //    {
-        //        if (posMousePoint.y > posPlayerPoint.y && grounded == true)
-        //            isJumb = true;
-
-        //    }
-            
-        //    //posPlayerPoint = Camera.main.WorldToScreenPoint(transform.position);
-            
-        //}
-        //Vector3 pos = cameraMovement.GetPosTouch();
-        //if (transform.position.x < pos.x && !facingRight)
-        //{
-        //    Flip();
-        //}
-        //if (transform.position.x > pos.x && facingRight)
-        //{
-        //    Flip();
-        //}
-        //if (DistanceClickMouse(transform.position, posTarget))
-        //    Jump();//nhay
-        ////if (transform.position.x >= posTarget.x - 0.3f && transform.position.x <= posTarget.x + 0.3f)
-        ////{
-        ////    isMove = false;            
-        ////     _animator.SetBool("isMove", false);
-        ////}
-#endif
     }
     //di chuyen player
     void MovePlayer(Vector3 _posTouch)
@@ -137,7 +97,8 @@ public class PlayerController : BaseGameObject {
         float angle = AngleRotation(transform.position, _posTouch);
 
         float x = Mathf.Cos(Mathf.Deg2Rad * angle) * speed * Time.deltaTime;
-        transform.localPosition += new Vector3(x, 0, 0);
+        if (finishSkillFire == false)
+            transform.localPosition += new Vector3(x, 0, 0);
         //transform.position = Vector3.MoveTowards(transform.position, _posTouch, 0.1f);
         if (isMouse == true)
         {
@@ -219,16 +180,82 @@ public class PlayerController : BaseGameObject {
         _animator.SetTrigger("isAttack");
         for (int i = 0; i < rangeControll.listTaget.Count; i++)
         {
-            BaseEnemyScripts _enemy = rangeControll.listTaget[i].GetComponent<BaseEnemyScripts>();
+            EnemyController _enemy = rangeControll.listTaget[i].GetComponent<EnemyController>();
             if (_enemy != null)
             {
-                _enemy.Hit(damge);
-                
+                _enemy.Hit(damge);                
             }
         }
         attackSkill = true;
     }
+    public GameObject firePrefabs;
+    public GameObject telePrefabs;
+    public GameObject arrowPrefabs;
+    private bool finishSkillFire;
+    [ContextMenu("SkillFire")]
+    public void SkillFire()
+    {
+        rangeControll.listTaget.Clear();
+        finishSkillFire = true;
+        GameObject _fire = Instantiate(firePrefabs, transform.position, Quaternion.identity) as GameObject;
+        _fire.transform.SetParent(gameObject.transform);
+        _fire.transform.localScale = new Vector3(0.5f, 0.5f, 1);
+        DeActiveRender();
+    }
+    void DeActiveRender()
+    {
+        
+        SpriteRenderer _spritePlayer = gameObject.GetComponent<SpriteRenderer>();     
+        if (_spritePlayer != null)
+        {
+            _spritePlayer.enabled = false;
+        }
+    }
+    void ActiveRender()
+    {
+        SpriteRenderer _spritePlayer = gameObject.GetComponent<SpriteRenderer>();
+        if (_spritePlayer != null)
+        {
+            _spritePlayer.enabled = true;
+        }
+    }
+    [ContextMenu("SkillTeleportation")]
+    public void SkillTeleportation()
+    {
+        rangeControll.listTaget.Clear();
+        finishSkillFire = true;
+        GameObject _fire = Instantiate(telePrefabs, transform.position, Quaternion.identity) as GameObject;
+        _fire.transform.SetParent(gameObject.transform);
+        _fire.transform.localScale = new Vector3(0.5f, 0.5f, 1);
+        _fire.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        DeActiveRender();
 
+    }
+
+    public Transform arrowTransform;
+    [ContextMenu("SkillArrowTape")]
+    public void SkillArrowTape()
+    {
+        rangeControll.listTaget.Clear();
+        arrowTransform.position = transform.position;
+        if (!facingRight)
+        {
+            arrowTransform.localScale = new Vector3(4, 4, 1);
+        }
+        else
+        {
+            arrowTransform.localScale = new Vector3(-4, 4, 1);
+        }
+        GameObject _fire = Instantiate(arrowPrefabs, transform.position, Quaternion.identity) as GameObject;
+        _fire.transform.SetParent(arrowTransform);
+        _fire.transform.localScale = new Vector3(0.5f, 0.5f, 1);
+        
+    }
+    public void ActiveSpriteRender()
+    {
+        finishSkillFire = false;
+        ActiveRender();
+    }
     void OnTriggerEnter2D(Collider2D col)
     {
         

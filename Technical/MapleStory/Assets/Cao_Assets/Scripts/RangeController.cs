@@ -40,6 +40,13 @@ public class RangeController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        for (int i = 0; i < listTaget.Count; i++)
+        {
+            if (listTaget[i] == null)
+            {
+                listTaget.Remove(listTaget[i]);
+            }
+        }
 
     }
 

@@ -4,8 +4,10 @@ using System.Collections;
 public class Animation : MonoBehaviour {
 
     public EnemyShoot _enemyShoot;
+    public PlayerController _playerControl;
 	// Use this for initialization
 	void Start () {
+        _playerControl = gameObject.GetComponentInParent<PlayerController>();
 	
 	}
 	
@@ -21,5 +23,13 @@ public class Animation : MonoBehaviour {
     {
         if (_enemyShoot != null)
             _enemyShoot.InstantiateBullet();
+    }
+    void ActiveSpriteRender()
+    {
+        if (_playerControl != null)
+        {
+            _playerControl.ActiveSpriteRender();
+        }
+        
     }
 }

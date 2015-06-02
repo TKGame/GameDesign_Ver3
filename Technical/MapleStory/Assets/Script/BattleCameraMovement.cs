@@ -85,4 +85,16 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
     {
         playerControl.AttackSkillDefault();
     }
+    public void AttackSkillFire()
+    {
+        playerControl.SkillFire();
+    }
+    public void AttackSkillTele()
+    {
+        playerControl.SkillTeleportation();
+    }
+    public void AttackSkillArrow()
+    {
+        playerControl.SkillArrowTape();
+    }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CBossController : BaseEnemyScripts {
     // thời gian delay giữa 2 lần tấn công
-    float _timeDelayOfBoss = 0.0f;
+    float _timeDelay = 0.0f;
 
     public Transform bulletPosition;
 
@@ -16,15 +16,15 @@ public class CBossController : BaseEnemyScripts {
 	
 	// Update is called once per frame
 	void Update () {
-         float distance= playerObj.transform.position.x - this.transform.position.x;
+        float distance= playerObj.transform.position.x - this.transform.position.x;
         if (playerObj != null)
         {
             UpdateStatusOfBoss();
             UpdateBossShoot(distance);
-            if ((_timeDelayOfBoss += Time.deltaTime) >= 4.0f && inAroundOfPlayer == false && attack == false)
+            if ((_timeDelay += Time.deltaTime) >= 4.0f && inAroundOfPlayer == false && attack == false)
             {
                 move = !move;
-                _timeDelayOfBoss = 0.0f;
+                _timeDelay = 0.0f;
             }
         }
 	}
@@ -96,11 +96,11 @@ public class CBossController : BaseEnemyScripts {
 
     public void UpdateBossAttack()
     {
-        if ((_timeDelayOfBoss += Time.deltaTime) >= 3.0f)
+        if ((_timeDelay += Time.deltaTime) >= 3.0f)
         {
             int rand = UnityEngine.Random.Range(0, 4);
 
-            _timeDelayOfBoss = 0.0f;
+            _timeDelay = 0.0f;
         }
     }
 

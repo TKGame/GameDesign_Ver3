@@ -24,7 +24,7 @@ public class HitOfDraxtonScripts : MonoBehaviour {
     {
         if(col.gameObject.tag == "Player")
         {
-            speedMoveY = 0;
+            speedMoveX = 0;
             _anim.SetTrigger("collision");
         }
     }

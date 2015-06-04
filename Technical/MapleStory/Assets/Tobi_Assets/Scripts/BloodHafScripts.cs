@@ -14,20 +14,14 @@ public class BloodHafScripts : BaseEnemyScripts {
 	// Use this for initialization
 	void Start () {
         startPosition = transform.position;
-        //playerObj = GameObject.FindGameObjectWithTag("Player").gameObject;
+        playerObj = GameObject.FindGameObjectWithTag("Player").gameObject;
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if (playerObj != null)
         {
-            UpdateStatusOfEnemy();
-            if ((timeDelay += Time.deltaTime) >= distanceTimeDelayOfEnemy && inAroundOfPlayer == false)
-            {
-                move = !move;
-                timeDelay = 0;
-            }
-            Die();
+            RunUpdateEnemy(transform);
         }
 	}
 
@@ -39,21 +33,16 @@ public class BloodHafScripts : BaseEnemyScripts {
         Instantiate(hit2, PositionCreateHit.position, Quaternion.identity);
     }
 
+    void OnTriggerEnter2D(Collider2D colEnter)
+    {
+        onTriggerEnter2D_Shoot(colEnter);
+    }
     void OnTriggerStay2D(Collider2D colStay)
     {
-        if(colStay.tag == "Around")
-        {
-            attack = true;
-            move = false;
-        }
+        onTriggerStay2D_Shoot(colStay);
     }
-
     void OnTriggerExit2D(Collider2D colExit)
     {
-        if(colExit.tag == "Around")
-        {
-            attack = false;
-            move = true;
-        }
+        onTriggerExit2D_Shoot(colExit);
     }
 }

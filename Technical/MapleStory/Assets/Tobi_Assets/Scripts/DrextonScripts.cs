@@ -29,23 +29,17 @@ public class DrextonScripts : BaseEnemyScripts {
     #region XetVaCham
     void OnTriggerEnter2D(Collider2D colEnter)
     {
-        //if (colEnter.tag == "Around")
-        //{
-        //    // trong vung bao cua player
-        //    inAroundOfPlayer = false;
-        //    move = false;
-        //    attack = true;
-        //}
+        onTriggerEnter2D_Shoot(colEnter);
     }
 
     void OnTriggerStay2D(Collider2D collStay)
     {
-        onTriggerStay2D_Shoot(collStay, "Around");
+        onTriggerStay2D_Shoot(collStay);
     }
 
     void OnTriggerExit2D(Collider2D colExit)
     {
-        onTriggerExit2D(colExit, "Around");
+        onTriggerExit2D_Shoot(colExit);
     }
     #endregion
 }

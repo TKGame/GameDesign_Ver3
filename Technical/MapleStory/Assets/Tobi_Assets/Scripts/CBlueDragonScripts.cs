@@ -16,17 +16,17 @@ public class CBlueDragonScripts : BaseEnemyScripts {
     #region XetVaCham
     void OnTriggerEnter2D(Collider2D colEnter)
     {
-        onTriggerEnter2D(colEnter, "Around");
+        onTriggerEnter2D(colEnter);
     }
 
     void OnTriggerStay2D(Collider2D collStay)
     {
-        onTriggerStay2D(collStay, "Player");
+        onTriggerStay2D(collStay);
     }
 
     void OnTriggerExit2D(Collider2D colExit)
     {
-        onTriggerExit2D(colExit, "Around","Player");
+        onTriggerExit2D(colExit);
     }
     #endregion 
 }

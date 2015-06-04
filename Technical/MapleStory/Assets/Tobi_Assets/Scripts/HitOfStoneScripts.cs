@@ -5,7 +5,7 @@ public class HitOfStoneScripts : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+        
 	}
 
     public void DestroyObj()

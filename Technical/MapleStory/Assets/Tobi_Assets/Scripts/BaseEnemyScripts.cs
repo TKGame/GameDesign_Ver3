@@ -15,9 +15,9 @@ public class BaseEnemyScripts : BaseGameObject
 {
     // biến xác định Flip
     bool _facingRight = true;
-    // thời gian delay
+    // thời gian delay giữa 2 lần chuyển trạng thái của Boss
     float _timeDelayOfBoss = 0.0f;
-
+    //// thời gian delay giữa 2 lần chuyển trạng thái của Enemy
     float _timeDelayOfEnemy = 0.0f;
     // thời gian giữa 2 lần chuyển trạng thái của enemy
     public float distanceTimeDelayOfEnemy = 0.0f;
@@ -202,22 +202,39 @@ public class BaseEnemyScripts : BaseGameObject
         }
     }
 
+    public void DestroyWhenDie()
+    {
+        Destroy(gameObject);
+    }
+
+    //public float GetSpeed()
+    //{
+    //    return speed;
+    //}
     #endregion
 
     #region Xử lý va chạm
-
-    public void onTriggerEnter2D(Collider2D col, string tag)
+    // xử lý va chạm với Hit của Player
+    // sử dụng cho enemy đánh gần
+    public void onTriggerEnter2D(Collider2D col)
     {
-        if(col.tag == tag)
+        if(col.tag == "Around")
         {
             inAroundOfPlayer = true;
             move = true;
         }
+        if (col.gameObject.tag == "HitOfPlayer")
+        {
+            //float damageOfPlayer = playerObj.GetComponent<PlayerController>().damge;
+            Debug.Log("tru mau");
+            Hit(5);
+        }
     }
 
-    public void onTriggerStay2D(Collider2D col , string tagPlayer)
+    //sử dụng cho enemy đánh gần
+    public void onTriggerStay2D(Collider2D col)
     {
-        if(col.tag == tagPlayer)
+        if(col.tag == "Player")
         {
             move = false;
             attack = true;
@@ -225,23 +242,14 @@ public class BaseEnemyScripts : BaseGameObject
         }
     }
 
-    public void onTriggerExit2D(Collider2D col , string tagAround)
+    // Sử dụng cho enemy đánh gần
+    public void onTriggerExit2D(Collider2D col)
     {
-        if (col.tag == tagAround)
-        {
-            inAroundOfPlayer = false;
-            move = true;
-            attack = false;
-        }
-    }
-
-    public void onTriggerExit2D(Collider2D col, string tagAround, string tagPlayer)
-    {
-        if(col.tag == tagAround)
+        if (col.tag == "Around")
         {
             inAroundOfPlayer = false;
         }
-        if(col.tag== tagPlayer)
+        if (col.tag == "Player")
         {
             attack = false;
             move = true;
@@ -249,13 +257,35 @@ public class BaseEnemyScripts : BaseGameObject
         }
     }
 
-    public void onTriggerStay2D_Shoot(Collider2D col, string tagAround)
+    //sử dụng cho enemy bắn
+    public void onTriggerExit2D_Shoot(Collider2D col )
     {
-        if(col.tag == tagAround)
+        if (col.tag == "Around")
+        {
+            inAroundOfPlayer = false;
+            move = true;
+            attack = false;
+        }
+    }
+
+    // chỉ sử dụng đối với enemy bắn
+    public void onTriggerStay2D_Shoot(Collider2D col)
+    {
+        if(col.tag == "Around")
         {
             inAroundOfPlayer = false;
             attack = true;
             move = false;
+        }
+    }
+
+    public void onTriggerEnter2D_Shoot(Collider2D col)
+    {
+        if (col.gameObject.tag == "HitOfPlayer")
+        {
+            //float damageOfPlayer = playerObj.GetComponent<PlayerController>().damge;
+            //Debug.Log(damageOfPlayer);
+            Hit(5);
         }
     }
     #endregion

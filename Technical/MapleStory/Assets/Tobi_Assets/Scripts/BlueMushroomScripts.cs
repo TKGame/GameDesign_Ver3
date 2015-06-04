@@ -6,51 +6,29 @@ public class BlueMushroomScripts : BaseEnemyScripts {
 	void Start () {
         startPosition = transform.position;
         playerObj = GameObject.FindGameObjectWithTag("Player").gameObject;
+        gameObject.tag = "Hit";
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        RunUpdateEnemy(transform);
-	}
-
-    public void DestroyWhenDie()
+    void Update()
     {
-        Destroy(this.gameObject);
+        if (playerObj != null)
+        {
+            RunUpdateEnemy(transform);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D colEnter)
     {
-        if (colEnter.tag == "Around")
-        {
-            // trong vung bao cua player
-            inAroundOfPlayer = true;
-            move = true;
-        }
+        onTriggerEnter2D(colEnter);
     }
-
     void OnTriggerStay2D(Collider2D collStay)
     {
-        if (collStay.gameObject.tag == "Player")
-        {
-            move = false;
-            //Debug.Log("attack");
-            //attack = true;
-            inAroundOfPlayer = false;
-        }
+        onTriggerStay2D(collStay);
     }
 
     void OnTriggerExit2D(Collider2D colExit)
     {
-        if (colExit.tag == "Around")
-        {
-            inAroundOfPlayer = false;
-        }
-
-        if (colExit.gameObject.tag == "Player")
-        {
-            //attack = false;
-            move = true;
-            inAroundOfPlayer = true;
-        }
+        onTriggerExit2D(colExit);
     }
 }

@@ -6,7 +6,6 @@ public class BlueSnailScripts : BaseEnemyScripts {
     {
         startPosition = transform.position;
         playerObj = GameObject.FindGameObjectWithTag("Player").gameObject;
-        gameObject.tag = "Hit";
     }
 
     // Update is called once per frame
@@ -20,6 +19,14 @@ public class BlueSnailScripts : BaseEnemyScripts {
 
     void OnTriggerEnter2D(Collider2D colEnter)
     {
+        if (colEnter.tag == "Player")
+        {
+            PlayerController _player = colEnter.gameObject.GetComponent<PlayerController>();
+            if (_player != null)
+            {
+                _player.Hit(damge);
+            }
+        }
         onTriggerEnter2D(colEnter);
     }
     void OnTriggerStay2D(Collider2D collStay)

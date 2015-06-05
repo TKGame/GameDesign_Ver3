@@ -16,5 +16,6 @@ public class EffectController : MonoBehaviour {
     void InstanceEffectHit()
     {
         GameObject _effect = Instantiate(effect, Vector3.zero, Quaternion.identity) as GameObject;
+
     }
 }

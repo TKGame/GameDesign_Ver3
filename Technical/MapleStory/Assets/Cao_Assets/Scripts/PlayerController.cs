@@ -25,8 +25,12 @@ public class PlayerController : BaseGameObject {
     private bool attackSkill;
     private RangeController rangeControll;
 
+    float HpStart;
+    float manaStart;
 	// Use this for initialization
 	void Start () {
+        HpStart = HP;
+        manaStart = Mana;
         rangeControll = gameObject.GetComponentInChildren<RangeController>();
         attackSkill = false;
         posPlayerStart = transform.position;
@@ -40,9 +44,18 @@ public class PlayerController : BaseGameObject {
             Debug.Log("K the get lay Rigidbody");
         }
 	}
-	
+    private float timeAddHp = 0;
 	// Update is called once per frame
 	void Update () {
+        if (timeAddHp > 1)
+        {
+            if (HP < HpStart)
+                HP += 2;
+            if (Mana  < manaStart)
+                Mana += 1;
+            timeAddHp = 0;
+        }
+        timeAddHp += Time.deltaTime;
         Die();
         grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));        
         UpdateManaAndHp();
@@ -199,7 +212,8 @@ public class PlayerController : BaseGameObject {
         _animator.SetTrigger("isAttack");
         for (int i = 0; i < rangeControll.listTaget.Count; i++)
         {
-            EnemyController _enemy = rangeControll.listTaget[i].GetComponent<EnemyController>();
+            //EnemyController _enemy = rangeControll.listTaget[i].GetComponent<EnemyController>();
+            BaseEnemyScripts _enemy = rangeControll.listTaget[i].GetComponent<BaseEnemyScripts>();
             if (_enemy != null)
             {
                 _enemy.Hit(damge);                

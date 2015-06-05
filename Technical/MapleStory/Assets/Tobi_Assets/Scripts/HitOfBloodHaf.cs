@@ -5,6 +5,7 @@ public class HitOfBloodHaf : MonoBehaviour {
 
     public float speedX;
     public float speedY;
+    public float damge;
 
     public GameObject BloodHafObj;
 	// Use this for initialization
@@ -17,6 +18,14 @@ public class HitOfBloodHaf : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
+        if (col.tag == "Player")
+        {
+            PlayerController _player = col.gameObject.GetComponent<PlayerController>();
+            if (_player != null)
+            {
+                _player.Hit(damge);
+            }
+        }
         if(col.tag == "Ground")
         {
             Destroy(this.gameObject);

@@ -16,7 +16,7 @@ public class DamgeSkill : MonoBehaviour {
     {
         if (col.tag == "Enemy" || col.tag == "Boss")
         {
-            EnemyController _enemy = col.GetComponent<EnemyController>();
+            BaseEnemyScripts _enemy = col.GetComponent<BaseEnemyScripts>();
             if (_enemy != null)
             {
                 _enemy.Hit(damgeSkill);

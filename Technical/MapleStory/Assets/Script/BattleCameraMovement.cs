@@ -19,7 +19,8 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
     public CowdownSkill cowdownArrow;
 	// Use this for initialization
 	void Start () {
-        Debug.Log("Start Battle Camera Movement");
+        posTouch = player.transform.position;
+        //Debug.Log("Start Battle Camera Movement");
 	}
 	
 	// Update is called once per frame
@@ -35,7 +36,9 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
     void MoveCameraByPlayer() 
     {
         float x = player.transform.position.x;
-        battleCamera.position = new Vector3(x, battleCamera.position.y, battleCamera.position.z);
+        float y = player.transform.position.y;
+        battleCamera.position = new Vector3(x, y, battleCamera.position.z);
+
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -59,7 +62,7 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
             //Debug.Log(posTouch);
             //player.transform.position = pointTouchInPlayer;
             //player.transform.position = pointTouch;
-            Debug.Log(System.String.Format("Point touch = {0} --- Point Touch = {1}", pointTouchInPlayer, eventData.position));
+            //Debug.Log(System.String.Format("Point touch = {0} --- Point Touch = {1}", pointTouchInPlayer, eventData.position));
         } 
         else
         {

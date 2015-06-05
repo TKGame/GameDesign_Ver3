@@ -43,11 +43,9 @@ public class PlayerController : BaseGameObject {
 	
 	// Update is called once per frame
 	void Update () {
-        grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
-        if (healthController != null)
-        {
-            healthController.ChangleHPFillAmountImage(HP);
-        }
+        Die();
+        grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));        
+        UpdateManaAndHp();
 	}
     //quay huong di chuyen cua Player
     void Flip()
@@ -63,8 +61,12 @@ public class PlayerController : BaseGameObject {
     // gia tri tra ve la 1 goc
     float AngleRotation(Vector3 posBegin, Vector3 posEnd)
     {
+        
+        float angle1;
         Vector3 relative = posEnd - posBegin;
-        float angle1 = Mathf.Atan2(relative.y, relative.x) * Mathf.Rad2Deg;
+      
+        angle1 = Mathf.Atan2(relative.y, relative.x) * Mathf.Rad2Deg;
+
         return angle1;
     }
 
@@ -94,12 +96,17 @@ public class PlayerController : BaseGameObject {
     //di chuyen player
     void MovePlayer(Vector3 _posTouch)
     {
+        if (gameObject == null)
+        {
+            return;
+        }
         float angle = AngleRotation(transform.position, _posTouch);
-
+        //Debug.Log(System.String.Format("Angle = {0}", angle));
         float x = Mathf.Cos(Mathf.Deg2Rad * angle) * speed * Time.deltaTime;
         if (finishSkillFire == false)
-            transform.localPosition += new Vector3(x, 0, 0);
-        //transform.position = Vector3.MoveTowards(transform.position, _posTouch, 0.1f);
+        {
+            transform.position += new Vector3(x, 0, 0);
+        }
         if (isMouse == true)
         {
             
@@ -169,14 +176,26 @@ public class PlayerController : BaseGameObject {
         HP += _hp;
         Mana += _mana;
     }
-    //skil danh thuong
-    public void AttackSkillDefault()
+
+    void UpdateManaAndHp()
     {
-        Mana -= 10;
+        if (healthController != null)
+        {
+            healthController.ChangleHPFillAmountImage(HP);
+        }
         if (manaController != null)
         {
-            manaController.ChangleHPFillAmountImage(Mana);
+            manaController.ChangleHPFillAmountImage(Mana);//update thanh mana
         }
+    }
+    void AddManaSecond()
+    {
+ 
+    }
+    //skil danh thuong
+    public void AttackSkillDefault()
+    {        
+        
         _animator.SetTrigger("isAttack");
         for (int i = 0; i < rangeControll.listTaget.Count; i++)
         {
@@ -191,17 +210,25 @@ public class PlayerController : BaseGameObject {
     public GameObject firePrefabs;
     public GameObject telePrefabs;
     public GameObject arrowPrefabs;
+    public Transform arrowTransform;
+    public float manaSkillFire;
+    public float manaSkillTele;
+    public float manaSkillArrow;
     private bool finishSkillFire;
-    [ContextMenu("SkillFire")]
+    
+    //skil no lua
     public void SkillFire()
     {
-        rangeControll.listTaget.Clear();
+        Mana -= manaSkillFire;//tru mana khi su dung skill
         finishSkillFire = true;
         GameObject _fire = Instantiate(firePrefabs, transform.position, Quaternion.identity) as GameObject;
         _fire.transform.SetParent(gameObject.transform);
+        
         _fire.transform.localScale = new Vector3(0.5f, 0.5f, 1);
         DeActiveRender();
+        
     }
+    //tat nhan vat tren mam hinh
     void DeActiveRender()
     {
         
@@ -210,7 +237,9 @@ public class PlayerController : BaseGameObject {
         {
             _spritePlayer.enabled = false;
         }
+        
     }
+    //hien thi lai nhan vat tren man hinh
     void ActiveRender()
     {
         SpriteRenderer _spritePlayer = gameObject.GetComponent<SpriteRenderer>();
@@ -219,24 +248,23 @@ public class PlayerController : BaseGameObject {
             _spritePlayer.enabled = true;
         }
     }
-    [ContextMenu("SkillTeleportation")]
+   //skill toc bien
     public void SkillTeleportation()
     {
-        rangeControll.listTaget.Clear();
+        Mana -= manaSkillTele;
         finishSkillFire = true;
         GameObject _fire = Instantiate(telePrefabs, transform.position, Quaternion.identity) as GameObject;
         _fire.transform.SetParent(gameObject.transform);
         _fire.transform.localScale = new Vector3(0.5f, 0.5f, 1);
         _fire.transform.localRotation = Quaternion.Euler(0, 0, 0);
-        DeActiveRender();
+        DeActiveRender();     
 
     }
 
-    public Transform arrowTransform;
-    [ContextMenu("SkillArrowTape")]
-    public void SkillArrowTape()
+    //Skill ban mui ten bang
+    public void SkillArrowIce()
     {
-        rangeControll.listTaget.Clear();
+        Mana -= manaSkillArrow;
         arrowTransform.position = transform.position;
         if (!facingRight)
         {
@@ -248,14 +276,19 @@ public class PlayerController : BaseGameObject {
         }
         GameObject _fire = Instantiate(arrowPrefabs, transform.position, Quaternion.identity) as GameObject;
         _fire.transform.SetParent(arrowTransform);
-        _fire.transform.localScale = new Vector3(0.5f, 0.5f, 1);
+        _fire.transform.localScale = new Vector3(0.5f, 0.5f, 1);       
         
     }
+
+    // khi su dung Skill thi tat nhan vat tren man hinh
+    //khong cho di chuyen
     public void ActiveSpriteRender()
     {
         finishSkillFire = false;
         ActiveRender();
     }
+
+    
     void OnTriggerEnter2D(Collider2D col)
     {
         

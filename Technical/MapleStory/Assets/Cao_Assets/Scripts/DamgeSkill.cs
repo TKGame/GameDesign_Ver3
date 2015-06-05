@@ -14,7 +14,6 @@ public class DamgeSkill : MonoBehaviour {
 	}
     void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("Da vao");
         if (col.tag == "Enemy" || col.tag == "Boss")
         {
             EnemyController _enemy = col.GetComponent<EnemyController>();

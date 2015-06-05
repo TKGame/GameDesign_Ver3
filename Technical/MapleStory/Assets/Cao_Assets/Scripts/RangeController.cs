@@ -6,10 +6,11 @@ public class RangeController : MonoBehaviour {
 
 	// Use this for initialization
     public List<GameObject> listTaget;
-
+    public GameObject player;
     void Awake()
     {
         listTaget = new List<GameObject>();
+        player = new GameObject();
     }
     // Use this for initialization
     void Start()

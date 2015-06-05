@@ -8,7 +8,7 @@ public class BaseGameObject : MonoBehaviour {
     public float speed;
     protected Animator _animator;
     public GameObject bullet;
-    public Rigidbody2D rigid;
+    protected Rigidbody2D rigid;
 
     void Awake()
     {

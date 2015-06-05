@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 017a6fb9cc1ba1f4aa7086def887ca7b
-timeCreated: 1432803089
+timeCreated: 1433484206
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
@@ -22,6 +22,19 @@ TextureImporter:
     21300030: 36608_15
     21300032: 36608_16
     21300034: 36608_17
+    21300036: 36608_18
+    21300038: 36608_19
+    21300040: 36608_20
+    21300042: 36608_21
+    21300044: 36608_22
+    21300046: 36608_23
+    21300048: 36608_24
+    21300050: 36608_25
+    21300052: 36608_26
+    21300054: 36608_27
+    21300056: 36608_28
+    21300058: 36608_29
+    21300060: 36608_30
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -244,6 +257,136 @@ TextureImporter:
         y: 806
         width: 82
         height: 71
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 36608_18
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 12
+        width: 81
+        height: 101
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 36608_19
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 12
+        width: 81
+        height: 101
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 36608_20
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 12
+        width: 81
+        height: 101
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 36608_21
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 11
+        width: 81
+        height: 101
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 36608_22
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 7
+        width: 59
+        height: 102
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 36608_23
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 8
+        width: 59
+        height: 102
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 36608_24
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 5
+        width: 66
+        height: 101
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 36608_25
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 5
+        width: 66
+        height: 101
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 36608_26
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 9
+        width: 59
+        height: 92
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 36608_27
+      rect:
+        serializedVersion: 2
+        x: 625
+        y: 12
+        width: 59
+        height: 92
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 36608_28
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 12
+        width: 59
+        height: 92
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 36608_29
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 13
+        width: 59
+        height: 92
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 36608_30
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 10
+        width: 59
+        height: 92
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}

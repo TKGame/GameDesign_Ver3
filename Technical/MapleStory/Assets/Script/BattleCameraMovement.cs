@@ -7,12 +7,16 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
     public Transform battleCamera;
     public GameObject player;
     public PlayerController playerControl;
-
+    
     public RectTransform canvasWorldTrans;
 
     private bool isTouch;
     public Vector3 pointTouch;
     private Vector3 posTouch;
+
+    public CowdownSkill cowdownFire;
+    public CowdownSkill cowdownTele;
+    public CowdownSkill cowdownArrow;
 	// Use this for initialization
 	void Start () {
         Debug.Log("Start Battle Camera Movement");
@@ -23,8 +27,9 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
         if (player != null) 
         {
             MoveCameraByPlayer();
+            playerControl.MoveToTarget(posTouch);
         }
-        playerControl.MoveToTarget(posTouch);
+       
 	}
 
     void MoveCameraByPlayer() 
@@ -81,20 +86,42 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
         
         return posTouch;
     }
+
+    // khi nhan button danh thuong
     public void AttackSkillDeffault()
     {
         playerControl.AttackSkillDefault();
+        
     }
+    //khi nhan button skill Fire
     public void AttackSkillFire()
     {
-        playerControl.SkillFire();
+        if (playerControl.Mana > playerControl.manaSkillFire)//kiem tra xem con du mana dung Skill khong
+            if (CheckSkillCowdown(cowdownFire))//kiem tra cowdown
+                playerControl.SkillFire(); //thuc hien Skill
     }
+    //khi nhan button skill Tele
     public void AttackSkillTele()
     {
-        playerControl.SkillTeleportation();
+        if (playerControl.Mana > playerControl.manaSkillTele)
+            if (CheckSkillCowdown(cowdownTele))
+                playerControl.SkillTeleportation(); 
     }
+    //khi nhan button skill Arrow
     public void AttackSkillArrow()
     {
-        playerControl.SkillArrowTape();
+        if (playerControl.Mana > playerControl.manaSkillArrow)
+            if (CheckSkillCowdown(cowdownArrow))
+                playerControl.SkillArrowIce();        
+    }
+    //kiem tra xem skill da cowdown xong chua
+    bool CheckSkillCowdown(CowdownSkill typeSkill)
+    {
+        if (typeSkill.SkillCowdown())
+        {
+            typeSkill.timeCowdown = typeSkill.GetTimeDelayStart(); //time cowdow ve ban dau
+            return  true;
+        }
+        return false;
     }
 }

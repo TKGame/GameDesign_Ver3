@@ -28,7 +28,7 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
         if (player != null) 
         {
             MoveCameraByPlayer();
-            playerControl.MoveToTarget(posTouch);
+            //playerControl.MoveToTarget(posTouch);
         }
        
 	}
@@ -37,7 +37,13 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
     {
         float x = player.transform.position.x;
         float y = player.transform.position.y;
-        battleCamera.position = new Vector3(x, y, battleCamera.position.z);
+        if (x > 0 && x < 1)
+            battleCamera.position = new Vector3(x, battleCamera.position.y, battleCamera.position.z);
+        if(y > -3)
+        {
+            //battleCamera.position = new Vector3(battleCamera.position.x, y, battleCamera.position.z);
+             //battleCamera.position = Mathf.c
+        }
 
     }
 
@@ -122,9 +128,17 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
     {
         if (typeSkill.SkillCowdown())
         {
-            typeSkill.timeCowdown = typeSkill.GetTimeDelayStart(); //time cowdow ve ban dau
+            typeSkill.ResetTimeCountdown(); //time cowdow ve ban dau
             return  true;
         }
         return false;
+    }
+    public void Jumb()
+    {
+        playerControl.Jumb();
+    }
+    public void Move()
+    {
+        //playerControl.Move();
     }
 }

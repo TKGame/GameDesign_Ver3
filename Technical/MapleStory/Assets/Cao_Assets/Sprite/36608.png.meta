@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 017a6fb9cc1ba1f4aa7086def887ca7b
-timeCreated: 1433484206
+timeCreated: 1433561879
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
@@ -197,18 +197,18 @@ TextureImporter:
         y: 516
         width: 135
         height: 94
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .699999988, y: .449999988}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: 36608_12
       rect:
         serializedVersion: 2
-        x: 592
+        x: 593
         y: 516
         width: 131
         height: 95
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .689999998, y: .449999988}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: 36608_13
       rect:
@@ -217,8 +217,8 @@ TextureImporter:
         y: 518
         width: 57
         height: 95
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .699999988, y: .449999988}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: 36608_14
       rect:
@@ -227,8 +227,8 @@ TextureImporter:
         y: 516
         width: 99
         height: 98
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .400000006, y: .439999998}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: 36608_15
       rect:

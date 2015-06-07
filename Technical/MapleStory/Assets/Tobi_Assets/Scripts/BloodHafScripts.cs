@@ -35,6 +35,14 @@ public class BloodHafScripts : BaseEnemyScripts {
 
     void OnTriggerEnter2D(Collider2D colEnter)
     {
+        if (colEnter.tag == "Player")
+        {
+            PlayerController _player = colEnter.gameObject.GetComponent<PlayerController>();
+            if (_player != null)
+            {
+                _player.Hit(damge);
+            }
+        }
         onTriggerEnter2D_Shoot(colEnter);
     }
     void OnTriggerStay2D(Collider2D colStay)

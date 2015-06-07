@@ -8,10 +8,11 @@ public class HitOfBloodHaf : MonoBehaviour {
     public float damge;
 
     public GameObject BloodHafObj;
+    public float speedCurrent;
 	// Use this for initialization
 	void Start () {
-        BloodHafObj = GameObject.FindGameObjectWithTag("BloodHaf").gameObject;
-        float speedCurrent = BloodHafObj.GetComponent<BloodHafScripts>().speed;
+        //BloodHafObj = GameObject.FindGameObjectWithTag("BloodHaf").gameObject;
+        //float speedCurrent = BloodHafObj.GetComponent<BloodHafScripts>().speed;
         
         this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(speedX*speedCurrent,speedY); 
 	}
@@ -26,7 +27,7 @@ public class HitOfBloodHaf : MonoBehaviour {
                 _player.Hit(damge);
             }
         }
-        if(col.tag == "Ground")
+        if(col.tag == "Untagged")
         {
             Destroy(this.gameObject);
         }

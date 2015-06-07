@@ -16,14 +16,24 @@ public class CowdownSkill : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (timeDelay >= 1 && timeCowdown > 0)
-        {
-            timeCowdown -= 1;
-            timeDelay = 0;
-        }
-        timeDelay += Time.deltaTime;
-        imageCowdown.fillAmount = timeCowdown * 1 / timeCowdownStart;
+        //if (timeDelay >= 1 && timeCowdown > 0)
+        //{
+        //    timeCowdown -= 1;
+        //    timeDelay = 0;
+        //}
+        //timeDelay += Time.deltaTime;
+        //imageCowdown.fillAmount = timeCowdown * 1 / timeCowdownStart;
+        CountDown();
 	}
+    public void ResetTimeCountdown()
+    {
+        imageCowdown.fillAmount = 1;
+    }
+
+    void CountDown()
+    {
+        imageCowdown.fillAmount -= 1 / timeCowdownStart * Time.deltaTime;
+    }
     //kiem tra thoi gian cowdown da xong chwua 
     public bool SkillCowdown()
     {

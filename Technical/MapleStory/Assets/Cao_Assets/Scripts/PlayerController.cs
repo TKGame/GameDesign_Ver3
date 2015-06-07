@@ -4,8 +4,8 @@ using System.Collections;
 public class PlayerController : BaseGameObject {
 
     public float Mana;
-    private bool facingRight = true;
-    private bool isJumb = false;
+    public  bool facingRight = true;
+    public bool isJumb = false;
     public float moveForce = 365f;			// Amount of force added to move the player left and right.
     public float maxSpeed = 5f;
     public float jumpForce = 1000f;
@@ -13,11 +13,11 @@ public class PlayerController : BaseGameObject {
     public Transform groundCheck;
     public HealthController healthController;
     public HealthController manaController;
-    private bool grounded = false;
+    public bool grounded = false;
     public float distance;//khoang cach nhay
     private Vector3 posMousePoint = new Vector3();//vi tri cua chuot theo Screen
     private Vector3 posRaycastPoint = new Vector3();//vi tri cua raycast theo Screen
-    private bool isMove;// bien di chuyen
+    public bool isMove;// bien di chuyen
     public bool isMouse;// khi duoc Click
     private RaycastHit2D rayCast;
     private Vector3 posPlayerStart = new Vector3();
@@ -42,11 +42,13 @@ public class PlayerController : BaseGameObject {
         if (rigid == null)
         {
             Debug.Log("K the get lay Rigidbody");
+            
         }
 	}
     private float timeAddHp = 0;
 	// Update is called once per frame
 	void Update () {
+        Move();
         if (timeAddHp > 1)
         {
             if (HP < HpStart)
@@ -61,11 +63,10 @@ public class PlayerController : BaseGameObject {
         UpdateManaAndHp();
 	}
     //quay huong di chuyen cua Player
-    void Flip()
+    public void Flip()
     {
         
-        facingRight = !facingRight;
-        
+        facingRight = !facingRight;        
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
@@ -116,9 +117,12 @@ public class PlayerController : BaseGameObject {
         float angle = AngleRotation(transform.position, _posTouch);
         //Debug.Log(System.String.Format("Angle = {0}", angle));
         float x = Mathf.Cos(Mathf.Deg2Rad * angle) * speed * Time.deltaTime;
+        
         if (finishSkillFire == false)
         {
-            transform.position += new Vector3(x, 0, 0);
+            if (Mathf.Abs(transform.position.x - _posTouch.x) > 0.2f)
+                transform.position += new Vector3(x, 0, 0);          
+            
         }
         if (isMouse == true)
         {
@@ -144,13 +148,30 @@ public class PlayerController : BaseGameObject {
                 isJumb = true;
                 if (isJumb == true && Mathf.Abs(rigid.velocity.y) < 0.2f)
                 {
-                    JumpPlayer();
+                    JumbPlayer();
                 }
             }
             
         }
         OnOffAnimatorMove(_posTouch);
         OnOffIsTrigger();
+    }
+    public void Move()
+    {
+        OnOffIsTrigger();  
+        if (isMove == true)
+        {                 
+            _animator.SetBool("isMove", true);            
+            transform.position += new Vector3(speed, 0, 0) * Time.deltaTime; 
+        }
+        if (isMove == false)
+        {
+            _animator.SetBool("isMove", false);
+        }
+    }
+    public void Jumb()
+    {
+        JumbPlayer(); 
     }
     void OnOffAnimatorMove(Vector3 _pos)
     {
@@ -167,21 +188,24 @@ public class PlayerController : BaseGameObject {
     void OnOffIsTrigger()
     {
         if (rigid.velocity.y >= 0 && isJumb == true)
-        {
-            
+        {            
             GetComponent<BoxCollider2D>().isTrigger = true;
         }
         if (rigid.velocity.y < 0)
-        {
+        {            
             GetComponent<BoxCollider2D>().isTrigger = false;
             isJumb = false;
         }
     }
     //nhay
-    void JumpPlayer()
-    {       
-        rigid.AddForce(new Vector2(1.0f, jumpForce));
-        isMouse = false;        
+    void JumbPlayer()
+    {        
+        if (grounded &&  isJumb == false )
+        {
+            isJumb = true;      
+            rigid.AddForce(new Vector2(1.0f, jumpForce));
+        }
+              
     }
     //bo sung mana va Hp cho Player
     public void AddHPandMana(float _hp, float _mana)
@@ -213,6 +237,10 @@ public class PlayerController : BaseGameObject {
         for (int i = 0; i < rangeControll.listTaget.Count; i++)
         {
             //EnemyController _enemy = rangeControll.listTaget[i].GetComponent<EnemyController>();
+            if (rangeControll.listTaget[i] == null)
+            {
+                return;
+            }
             BaseEnemyScripts _enemy = rangeControll.listTaget[i].GetComponent<BaseEnemyScripts>();
             if (_enemy != null)
             {
@@ -235,10 +263,10 @@ public class PlayerController : BaseGameObject {
     {
         Mana -= manaSkillFire;//tru mana khi su dung skill
         finishSkillFire = true;
-        GameObject _fire = Instantiate(firePrefabs, transform.position, Quaternion.identity) as GameObject;
+        GameObject _fire = Instantiate(firePrefabs, new Vector3(transform.position.x,transform.position.y + 1 ,0), Quaternion.identity) as GameObject;
         _fire.transform.SetParent(gameObject.transform);
         
-        _fire.transform.localScale = new Vector3(0.5f, 0.5f, 1);
+        _fire.transform.localScale = new Vector3(1f, 1f, 1);
         DeActiveRender();
         
     }
@@ -269,7 +297,7 @@ public class PlayerController : BaseGameObject {
         finishSkillFire = true;
         GameObject _fire = Instantiate(telePrefabs, transform.position, Quaternion.identity) as GameObject;
         _fire.transform.SetParent(gameObject.transform);
-        _fire.transform.localScale = new Vector3(0.5f, 0.5f, 1);
+        _fire.transform.localScale = new Vector3(1f, 1f, 1);
         _fire.transform.localRotation = Quaternion.Euler(0, 0, 0);
         DeActiveRender();     
 
@@ -278,6 +306,10 @@ public class PlayerController : BaseGameObject {
     //Skill ban mui ten bang
     public void SkillArrowIce()
     {
+        if (gameObject == null)
+        {
+            return;
+        }
         Mana -= manaSkillArrow;
         arrowTransform.position = transform.position;
         if (!facingRight)
@@ -290,7 +322,7 @@ public class PlayerController : BaseGameObject {
         }
         GameObject _fire = Instantiate(arrowPrefabs, transform.position, Quaternion.identity) as GameObject;
         _fire.transform.SetParent(arrowTransform);
-        _fire.transform.localScale = new Vector3(0.5f, 0.5f, 1);       
+        _fire.transform.localScale = new Vector3(1f, 1f, 1);       
         
     }
 
@@ -305,6 +337,8 @@ public class PlayerController : BaseGameObject {
     
     void OnTriggerEnter2D(Collider2D col)
     {
+        if (col.tag == "")
+        { }
         
     }
 }

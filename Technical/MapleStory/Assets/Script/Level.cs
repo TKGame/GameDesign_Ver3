@@ -4,10 +4,22 @@ using System.Collections.Generic;
 
 public class Level : MonoBehaviour {
 
+    public PlayerController _player;
+    public List<GameObject> listCanh;
+    public List<GameObject> listLevel;
+    public Camera _camera;
+    private MapInfo mapInfo;
+    private int level = 0;
+    private int canh = 0;
 
-    public GameObject canh1;
-    public GameObject canh2;
-    public PlayerController player;
+    void Awake()
+    {
+        mapInfo = gameObject.GetComponentInChildren<MapInfo>();
+        if (mapInfo != null)
+        {
+            mapInfo.SetLevel();
+        }
+    }
 	// Use this for initialization
 	void Start () {
         
@@ -15,22 +27,29 @@ public class Level : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
+        CheckUpLevel();
 	}
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "Player")
-        {
-            UpLevel();
-        }
+       
     }
-    void UpLevel()
+    void CheckUpLevel()
     {
-        if (player != null)
+        mapInfo.CheckUpLevel();
+        UpCanh();
+    }
+    void UpCanh()
+    {
+        if (mapInfo.checkUpLevel == true)
         {
-            player.transform.position = new Vector3(-6, 0);
+            if (mapInfo.canh <= listCanh.Count)
+            {
+                listCanh[mapInfo.canh].SetActive(true);
+                listCanh[mapInfo.canh - 1].SetActive(false);
+                mapInfo = gameObject.GetComponentInChildren<MapInfo>();
+                mapInfo.SetLevel();
+                _player.nextLevel = false;
+            }
         }
-        canh2.SetActive(true);
-        canh1.SetActive(false);
     }
 }

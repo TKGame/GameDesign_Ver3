@@ -37,7 +37,7 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
     {
         float x = player.transform.position.x;
         float y = player.transform.position.y;
-        if (x > 0 && x < 1)
+        if (x > 0)
             battleCamera.position = new Vector3(x, battleCamera.position.y, battleCamera.position.z);
         if(y > -3)
         {

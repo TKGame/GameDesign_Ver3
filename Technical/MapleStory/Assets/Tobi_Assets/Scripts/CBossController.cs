@@ -5,6 +5,8 @@ public class CBossController : BaseEnemyScripts {
     // thời gian delay giữa 2 lần tấn công
     float _timeDelay = 0.0f;
 
+    public bool attack;
+    public bool inAroundOfPlayer = false;
     public Transform bulletPosition;
 
 
@@ -19,11 +21,11 @@ public class CBossController : BaseEnemyScripts {
         float distance= playerObj.transform.position.x - this.transform.position.x;
         if (playerObj != null)
         {
-            UpdateStatusOfBoss();
+            //UpdateStatusOfBoss();
             UpdateBossShoot(distance);
             if ((_timeDelay += Time.deltaTime) >= 4.0f && inAroundOfPlayer == false && attack == false)
             {
-                move = !move;
+                isMove = !isMove;
                 _timeDelay = 0.0f;
             }
         }
@@ -43,7 +45,7 @@ public class CBossController : BaseEnemyScripts {
         {
             _animator.SetBool("isAttack2", true);
             attack = false;
-            move = false;
+            isMove = false;
         }
     }
 
@@ -58,11 +60,11 @@ public class CBossController : BaseEnemyScripts {
         if (col.tag == "Around")
         {
             inAroundOfPlayer = true;
-            move = true;
+            isMove = true;
         }
         if(col.gameObject.tag == "Player")
         {
-            move = false;
+            isMove = false;
         }
         //if(col.tag == "Player")
         //{
@@ -74,7 +76,7 @@ public class CBossController : BaseEnemyScripts {
     {
         if(other.gameObject.tag == "Player")
         {
-            move = false;
+            isMove = false;
             attack = true;
             inAroundOfPlayer = false;
         }
@@ -85,7 +87,7 @@ public class CBossController : BaseEnemyScripts {
         if(coll.gameObject.tag == "Player")
         {
             attack = false;
-            move = true;
+            isMove = true;
         }
 
         if (coll.gameObject.tag == "Around")

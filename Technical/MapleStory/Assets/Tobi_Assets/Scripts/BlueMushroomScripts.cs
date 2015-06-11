@@ -3,10 +3,13 @@ using System.Collections;
 
 public class BlueMushroomScripts : BaseEnemyScripts {
 	// Use this for initialization
+    public float jumbForce = 400.0f;
+
+    bool isJumb = false;
+
 	void Start () {
-        startPosition = transform.position;
-        playerObj = GameObject.FindGameObjectWithTag("Player").gameObject;
-        
+        InitStart();
+        isMove = true;
 	}
 	
 	// Update is called once per frame
@@ -14,30 +17,52 @@ public class BlueMushroomScripts : BaseEnemyScripts {
     {
         if (playerObj != null)
         {
-            RunUpdateEnemy(transform);
+            if ((timeDelay += Time.deltaTime) >= 3 && isJumb)
+            {
+                rigid.AddForce(new Vector2(0, jumbForce));
+                timeDelay = 0;
+            }
+            if (transform.position.x >= startPosition.x + distanceMove || transform.position.x <= startPosition.x - distanceMove)
+            {
+                Flip();
+            }
+            if(isMove)
+            {
+                Move(speed);
+            }
         }
+
+        // update trạng thái die
+        Die();
     }
 
+    // override
+    float timeDelay = 0;
+    
     void OnTriggerEnter2D(Collider2D colEnter)
     {
         if (colEnter.tag == "Player")
         {
+            isMove = false;
+            isJumb = true;
             PlayerController _player = colEnter.gameObject.GetComponent<PlayerController>();
             if (_player != null)
             {
                 _player.Hit(damge);
             }
         }
-        onTriggerEnter2D(colEnter);
     }
+
+    
+
     void OnTriggerStay2D(Collider2D collStay)
     {
         
-        onTriggerStay2D(collStay);
     }
 
     void OnTriggerExit2D(Collider2D colExit)
     {
-        onTriggerExit2D(colExit);
+        isMove = true;
+        isJumb = false;
     }
 }

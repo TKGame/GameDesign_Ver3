@@ -21,7 +21,7 @@ public class BloodHafScripts : BaseEnemyScripts {
 	void Update () {
         if (playerObj != null)
         {
-            RunUpdateEnemy(transform);
+            RunUpdateEnemy();
         }
 	}
 
@@ -43,14 +43,14 @@ public class BloodHafScripts : BaseEnemyScripts {
                 _player.Hit(damge);
             }
         }
-        onTriggerEnter2D_Shoot(colEnter);
+ 
     }
     void OnTriggerStay2D(Collider2D colStay)
     {
-        onTriggerStay2D_Shoot(colStay);
+       
     }
     void OnTriggerExit2D(Collider2D colExit)
     {
-        onTriggerExit2D_Shoot(colExit);
+        
     }
 }

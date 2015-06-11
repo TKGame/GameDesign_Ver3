@@ -4,7 +4,8 @@ using System.Collections;
 public class ZombieScripts : BaseEnemyScripts {
 
     float timeDelay = 0.0f;
-
+    public bool attack;
+    public bool inAroundOfPlayer = false;
 	// Use this for initialization
 	void Start () {
         startPosition = transform.position;
@@ -13,7 +14,7 @@ public class ZombieScripts : BaseEnemyScripts {
 	
 	// Update is called once per frame
 	void Update () {
-        RunUpdateEnemy(transform);
+        RunUpdateEnemy();
 	}
 
     #region XetVaCham
@@ -23,7 +24,7 @@ public class ZombieScripts : BaseEnemyScripts {
         {
             // trong vung bao cua player
             inAroundOfPlayer = true;
-            move = true;
+            isMove = true;
         }
     }
 
@@ -31,7 +32,7 @@ public class ZombieScripts : BaseEnemyScripts {
     {
         if (collStay.gameObject.tag == "Player")
         {
-            move = false;
+            isMove = false;
             //Debug.Log("attack");
             attack = true;
             inAroundOfPlayer = false;
@@ -48,7 +49,7 @@ public class ZombieScripts : BaseEnemyScripts {
         if (colExit.gameObject.tag == "Player")
         {
             attack = false;
-            move = true;
+            isMove = true;
             inAroundOfPlayer = true;
         }
     }

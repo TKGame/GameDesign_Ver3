@@ -4,6 +4,7 @@ using System.Collections;
 public class NependeathScripts : BaseEnemyScripts {
     public GameObject objHitOfNependeath;
     public Transform posCreateHit;
+    public bool attack;
 	// Use this for initialization
 	void Start () {
         playerObj = GameObject.FindGameObjectWithTag("Player").gameObject;
@@ -33,7 +34,7 @@ public class NependeathScripts : BaseEnemyScripts {
 
     void OnTriggerEnter2D(Collider2D colEnter)
     {
-        onTriggerEnter2D(colEnter);
+
     }
 
     public void SetAnimatorRegen()

@@ -22,21 +22,28 @@ public class MapInfo : MonoBehaviour {
 
 
     private PlayerController player;
-    private Camera _camera;
-    public int canh = 0;
+    private BattleCameraMovement battleCamera;
+    private Level levelControl;
     void Awake()
     {
-        player = gameObject.GetComponentInParent<Level>()._player;
-        _camera = gameObject.GetComponentInParent<Level>()._camera;
+        
     }
 	// Use this for initialization
 	void Start () {
+        player = gameObject.GetComponentInParent<Level>()._player;
+        battleCamera = gameObject.GetComponentInParent<Level>().battleCamera;
+        levelControl = gameObject.GetComponentInParent<Level>();
+        if (player != null && battleCamera != null)
+        {
+            player.SetPosLimit(posMinPlayerX, posMaxPlayerX, posMinPlayerY, posMaxPlayerY);
+            battleCamera.SetLimitCamera(posMinCameraX, posMaxCameraX, posMinCameraY, posMaxCameraY);
+        }
 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        LimitCamera();
+        CheckUpLevel();
         for (int i = 0; i < listEnemy.Count; i++)
         {
             if (listEnemy[i] == null)
@@ -44,45 +51,9 @@ public class MapInfo : MonoBehaviour {
                 listEnemy.Remove(listEnemy[i]);
             }
         }
-        //LimitPlayer();
-
 	}
-    void LimitCamera()
-    {
-        if (_camera != null)
-        {
-            if (_camera.transform.position.x < posMinCameraX)
-            {
-                _camera.transform.position = new Vector3(posMinCameraX, _camera.transform.position.y, _camera.transform.position.z);
-            }
-            if (_camera.transform.position.x > posMaxCameraX)
-            {
-                _camera.transform.position = new Vector3(posMaxCameraX, _camera.transform.position.y, _camera.transform.position.z);
-            }
-            if (_camera.transform.position.y < posMinCameraY)
-            {
-                _camera.transform.position = new Vector3(_camera.transform.position.x, posMinCameraY, _camera.transform.position.z);
-            }
-            if (_camera.transform.position.y > posMaxCameraY)
-            {
-                _camera.transform.position = new Vector3(_camera.transform.position.x, posMaxCameraY, _camera.transform.position.z);
-            }
-        }
-    }
-    public void LimitPlayer()
-    {
-        if (player != null)
-        {
-            if (player.transform.position.x < posMinPlayerX || player.transform.position.x > posMaxPlayerX)
-            {
-                player.isMove = false;
-            }
-            else
-            {
-                player.isMove = true;
-            }
-        }
-    }
+   
+   
     public void CheckUpLevel()
     {
         if (listEnemy.Count <= 0)
@@ -92,14 +63,19 @@ public class MapInfo : MonoBehaviour {
             {
                 if (player.nextLevel == true)
                 {
-                    canh++;
-                    checkUpLevel = true;
+                    levelControl.canh++;
+                    if (levelControl.canh < levelControl.listCanh.Count)
+                    {
+                        levelControl.NextLevel();
+                        SetLevel();
+                        Destroy(gameObject);
+                    }
                 }
             }
         }
  
     }
-    public bool checkUpLevel = false;
+
     public void OpenNextLevel()
     {
         nextLevel.SetActive(true);
@@ -107,6 +83,7 @@ public class MapInfo : MonoBehaviour {
     public void SetLevel()
     {
         player.transform.position = posPlayerStart;
-       
+        nextLevel.SetActive(false);
+        player.nextLevel = false;
     }
 }

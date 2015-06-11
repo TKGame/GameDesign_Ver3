@@ -29,6 +29,7 @@ public class PlayerController : BaseGameObject {
     float manaStart;
 	// Use this for initialization
 	void Start () {
+        //SetPosLimit(-7, 7, -5, 5);
         HpStart = HP;
         manaStart = Mana;
         rangeControll = gameObject.GetComponentInChildren<RangeController>();
@@ -48,6 +49,8 @@ public class PlayerController : BaseGameObject {
     private float timeAddHp = 0;
 	// Update is called once per frame
 	void Update () {
+        
+        PosLimit();
         Move();
         if (timeAddHp > 1)
         {
@@ -333,7 +336,23 @@ public class PlayerController : BaseGameObject {
         finishSkillFire = false;
         ActiveRender();
     }
+    private float posMinX;
+    private float posMaxX;
+    private float posMinY;
+    private float posMaxY;
 
+    public void SetPosLimit(float _posMinX, float _posMaxX, float _posMinY, float _posMaxY)
+    {
+        posMinX = _posMinX;
+        posMaxX = _posMaxX;
+        posMinY = _posMinY;
+        posMaxY = _posMaxY;        
+    }
+    void PosLimit()
+    {
+        //gameObject.transform.position = new Vector3(Mathf.Lerp(posMinX, posMaxX,Time.time), Mathf.Lerp(posMinY, posMaxY,Time.time), 0);
+        gameObject.transform.position = new Vector3(Mathf.Clamp(transform.position.x, posMinX, posMaxX), Mathf.Clamp(transform.position.y, posMinY, posMaxY), 0);
+    }
     public bool nextLevel = false;
     void OnTriggerEnter2D(Collider2D col)
     {

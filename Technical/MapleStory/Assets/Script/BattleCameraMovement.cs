@@ -37,14 +37,9 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
     {
         float x = player.transform.position.x;
         float y = player.transform.position.y;
-        if (x > 0)
-            battleCamera.position = new Vector3(x, battleCamera.position.y, battleCamera.position.z);
-        if(y > -3)
-        {
-            //battleCamera.position = new Vector3(battleCamera.position.x, y, battleCamera.position.z);
-             //battleCamera.position = Mathf.c
-        }
-
+        //SetLimitCamera(0, 3, 0, 0);        
+        MoveCamera();
+        LimitCamera();
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -141,4 +136,26 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
     {
         //playerControl.Move();
     }
+    private float posMinXCamera;
+    private float posMaxXCamera;
+    private float posMinYCamera;
+    private float posMaxYCamera;
+    public void SetLimitCamera(float _posMinXCamera, float _posMaxXCamera, float _posMinYCamera, float _posMaxYCamera)
+    {
+        posMinXCamera = _posMinXCamera;
+        posMaxXCamera = _posMaxXCamera;
+        posMinYCamera = _posMinYCamera;
+        posMaxYCamera = _posMaxYCamera;
+    }
+    void LimitCamera()
+    {
+        battleCamera.position = new Vector3(Mathf.Clamp(battleCamera.position.x, posMinXCamera, posMaxXCamera), Mathf.Clamp(battleCamera.position.y, posMinYCamera, posMaxYCamera), battleCamera.position.z);
+    }
+    void MoveCamera()
+    {
+        //battleCamera.position = new Vector3(player.transform.position.x, Mathf.Lerp(battleCamera.position.y, player.transform.position.y, 1),battleCamera.position.z);
+        battleCamera.position = new Vector3(player.transform.position.x, battleCamera.position.y, battleCamera.position.z);
+
+    }
+
 }

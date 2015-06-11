@@ -1,50 +1,83 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public class NependeathScripts : BaseEnemyScripts {
     public GameObject objHitOfNependeath;
     public Transform posCreateHit;
-    public bool attack;
+    public bool isAttack = false;
+    public bool isGrow = false;
+
+    public int numHit = 5;
+    public List<GameObject> listHit;
 	// Use this for initialization
 	void Start () {
         playerObj = GameObject.FindGameObjectWithTag("Player").gameObject;
-        Flip();
+        if(playerObj.transform.position.x>transform.position.x)
+        {
+            Flip();
+        }
+
+        CreateHit(numHit);
 	}
 	
+
 	// Update is called once per frame
 	void Update () {
 	    if(playerObj != null)
         {
-            if (speed <0 && playerObj.transform.position.x > transform.position.x - 4 && playerObj.transform.position.x < transform.position.x &&
-                (playerObj.transform.position.y < transform.position.y + 2.5f)
-                )
+            if(isGrow)
             {
-                attack = true;
-            } else if(speed > 0 && playerObj.transform.position.x < transform.position.x + 4 && playerObj.transform.position.x > transform.position.x &&
-                (playerObj.transform.position.y < transform.position.y + 2.5f))
-            {
-                attack = true;
+                _animator.SetTrigger("grow");
             }
-            else
-                attack = false;
+            _animator.SetBool("isAttack", isAttack);
         }
-        _animator.SetBool("isAttack", attack);
+        //_animator.SetBool("isAttack", attack);
         Die();
 	}
-
-    void OnTriggerEnter2D(Collider2D colEnter)
-    {
-
-    }
 
     public void SetAnimatorRegen()
     {
         _animator.SetTrigger("stand");
     }
 
-    [ContextMenu("create hit")]
-    public void CreateHit()
+    public void CreateHit(int n)
     {
-        Instantiate(objHitOfNependeath, posCreateHit.position, Quaternion.identity);
+        listHit = new List<GameObject>();
+        for (int i = 0; i < n;i++)
+        {
+            GameObject obj = Instantiate(objHitOfNependeath, posCreateHit.position, Quaternion.identity) as GameObject;
+            listHit.Add(obj);
+            obj.transform.SetParent(transform);
+            obj.SetActive(false);
+        } 
+    }
+
+    [ContextMenu("create")]
+    public void SetActiveAttack()
+    {
+        //GameObject objHit = new GameObject();
+        //foreach(GameObject obj in listHit)
+        //{
+        //    if(!obj.activeInHierarchy)
+        //    {
+        //        objHit = obj;
+        //    }
+        //}
+        GameObject objHit = GetObjectHitFromList();
+        objHit.SetActive(true);
+        objHit.transform.position = posCreateHit.position;
+        objHit.transform.SetParent(transform);
+    }
+
+    public GameObject GetObjectHitFromList()
+    {
+        foreach(GameObject obj in listHit)
+        {
+            if(!obj.activeInHierarchy)
+            {
+                return obj;
+            }
+        }
+        return null;
     }
 }

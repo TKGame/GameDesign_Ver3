@@ -4,37 +4,36 @@ using System.Collections;
 public class HitOfNependeathScripts : MonoBehaviour {
 
     public float speedMoveX;
-    public float speedMoveY;
-
     Animator _anim;
 
-    public GameObject objectTarget;
+    public GameObject objNependeath;
     // Use this for initialization
     void Start()
     {
         gameObject.tag = "Hit";
         _anim = gameObject.GetComponent<Animator>();
-        float speedCurrent = objectTarget.GetComponent<NependeathScripts>().speed;
-        //Debug.Log(speedCurrent);
-        this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(speedCurrent * speedMoveX, 0);
+        objNependeath = transform.parent.gameObject;
+        
+        
     }
 
-    public void DestroyWhenFinish()
+    float _timeDelay = 0.0f;
+    void Update()
     {
-        Destroy(this.gameObject);
+        float speedCurrent = objNependeath.GetComponent<NependeathScripts>().speed;
+
+        this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(speedCurrent * speedMoveX, 0);
+        if((_timeDelay+= Time.deltaTime) >=5.0f)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
-    //// sử dụng cho hit bay có animation die
-    //public void onTriggerEnter2D(Collider2D col)
-    //{
-
-    //}
-
-    //public void onTriggerEnter2D(Collider2D colEnter, string tagOfEnemy)
-    //{
-    //    if (colEnter.gameObject.tag == tagOfEnemy)
-    //    {
-    //        Destroy(this.gameObject);
-    //    }
-    //}
+    public void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Player")
+        {
+            gameObject.SetActive(false);
+        }
+    }
 }

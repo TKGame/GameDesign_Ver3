@@ -2,22 +2,16 @@
 using System.Collections;
 
 public class HitOfStoneScripts : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-        
-	}
-
-    public void DestroyObj()
+    //Collider2D BoxCollider;
+    public void DestroyWhenDie()
     {
         Destroy(this.gameObject);
     }
+    //void OnTriggerEnter2D(Collider2D col)
+    //{
+    //    if(col.gameObject.tag == "Player")
+    //    {
 
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        if(col.gameObject.tag == "Ground")
-        {
-            gameObject.SetActive(false);
-        }
-    }
+    //    }
+    //}
 }

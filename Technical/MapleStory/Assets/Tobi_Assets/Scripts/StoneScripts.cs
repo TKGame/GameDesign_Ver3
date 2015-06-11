@@ -9,7 +9,9 @@ public class StoneScripts : BaseEnemyScripts {
     public bool isAttack;
     bool _facingRight = true;
 
-    bool inAroundOfPlayer = false;
+    public bool inAroundOfPlayer = false;
+
+    public Transform posCreateHit;
 	// Use this for initialization
 	void Start () {
         startPosition = transform.position;
@@ -20,15 +22,10 @@ public class StoneScripts : BaseEnemyScripts {
 	void Update () {
         if (playerObj != null)
         {
-            distanceEnemyToPlayer = playerObj.transform.position.x - this.transform.position.x;
-            if (!isAttack)
+            Die();
+            //distanceEnemyToPlayer = playerObj.transform.position.x - this.transform.position.x;
+            if (isAttack== false)
             {
-                if (Mathf.Abs(distanceEnemyToPlayer) < distanceMove && Mathf.Abs(playerObj.transform.position.y - transform.position.y) < 1.3f)
-                {
-                    inAroundOfPlayer = true;
-                }
-                else
-                    inAroundOfPlayer = false;
                 if ((_timeDelay += Time.deltaTime) >= dis_TimeDelay && inAroundOfPlayer == false)
                 {
                     isMove = !isMove;
@@ -36,8 +33,24 @@ public class StoneScripts : BaseEnemyScripts {
                 }
                 UpdateStatusMove();
             }
+            else
+            {
+                _animator.SetBool("isAttack", true);
+            }
         }
 	}
+
+    public void CreateHit()
+    {
+        Instantiate(bullet, posCreateHit.position, Quaternion.identity);
+        Instantiate(bullet, new Vector2(posCreateHit.position.x + 2.5f, posCreateHit.position.y), Quaternion.identity);
+        Instantiate(bullet, new Vector2(posCreateHit.position.x - 2.5f, posCreateHit.position.y), Quaternion.identity);
+    }
+    public void SetFrameAttackFinal()
+    {
+        _animator.SetBool("isAttack", false);
+        isAttack = false;
+    }
 
     public void UpdateStatusMove()
     {
@@ -51,11 +64,7 @@ public class StoneScripts : BaseEnemyScripts {
         }
         else                                            // nếu nằm trong vùng bao
         {
-            if (distanceEnemyToPlayer < 0 && speed < 0 || distanceEnemyToPlayer > 0 && speed > 0)
-            {
-                Move(speed);
-            }
-            else if (distanceEnemyToPlayer < 0 && speed > 0 || distanceEnemyToPlayer > 0 && speed < 0)
+            if (playerObj.transform.position.x < transform.position.x && speed > 0 || playerObj.transform.position.x > transform.position.x && speed < 0)
             {
                 if (_facingRight)
                 {
@@ -65,6 +74,8 @@ public class StoneScripts : BaseEnemyScripts {
                 else
                     _facingRight = !_facingRight;
             }
+
+            Move(speed);
 
             if (transform.position.x > startPosition.x + distanceMove || transform.position.x < startPosition.x - distanceMove)
             {
@@ -81,13 +92,20 @@ public class StoneScripts : BaseEnemyScripts {
 
     void OnTriggerStay2D(Collider2D collStay)
     {
-        
+        if (collStay.tag == "Player")
+        {
+            isAttack = true;
+        }
     }
 
-    void OnTriggerExit2D(Collider2D colExit)
-    {
-        
-    }
+    //void OnTriggerExit2D(Collider2D colExit)
+    //{
+    //    if (colExit.tag == "Player")
+    //    {
+    //        //isAttack = false;
+    //        //_animator.SetBool("isAttack", false);
+    //    }
+    //}
 
     #endregion 
 }

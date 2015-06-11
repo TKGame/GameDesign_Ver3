@@ -31,7 +31,6 @@ public class BlueMushroomScripts : BaseEnemyScripts {
                 Move(speed);
             }
         }
-
         // update trạng thái die
         Die();
     }
@@ -52,8 +51,6 @@ public class BlueMushroomScripts : BaseEnemyScripts {
             }
         }
     }
-
-    
 
     void OnTriggerStay2D(Collider2D collStay)
     {

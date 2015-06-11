@@ -23,7 +23,7 @@ public class StoneScripts : BaseEnemyScripts {
         if (playerObj != null)
         {
             Die();
-            //distanceEnemyToPlayer = playerObj.transform.position.x - this.transform.position.x;
+ 
             if (isAttack== false)
             {
                 if ((_timeDelay += Time.deltaTime) >= dis_TimeDelay && inAroundOfPlayer == false)
@@ -97,15 +97,6 @@ public class StoneScripts : BaseEnemyScripts {
             isAttack = true;
         }
     }
-
-    //void OnTriggerExit2D(Collider2D colExit)
-    //{
-    //    if (colExit.tag == "Player")
-    //    {
-    //        //isAttack = false;
-    //        //_animator.SetBool("isAttack", false);
-    //    }
-    //}
 
     #endregion 
 }

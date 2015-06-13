@@ -16,7 +16,7 @@ public class NependeathScripts : BaseEnemyScripts {
         {
             Flip();
         }
-
+        // tạo các prefabs đạn để bắn
         CreateHit(numHit);
 	}
 	
@@ -25,13 +25,22 @@ public class NependeathScripts : BaseEnemyScripts {
 	void Update () {
 	    if(playerObj != null)
         {
+            if (inAroundOfPlayer)
+            {
+                isGrow = true;
+                isAttack = true;
+            }
+            else
+            {
+                isAttack = false;
+            }
+                
             if(isGrow)
             {
                 _animator.SetTrigger("grow");
             }
             _animator.SetBool("isAttack", isAttack);
         }
-        //_animator.SetBool("isAttack", attack);
         Die();
 	}
 
@@ -55,14 +64,6 @@ public class NependeathScripts : BaseEnemyScripts {
     [ContextMenu("create")]
     public void SetActiveAttack()
     {
-        //GameObject objHit = new GameObject();
-        //foreach(GameObject obj in listHit)
-        //{
-        //    if(!obj.activeInHierarchy)
-        //    {
-        //        objHit = obj;
-        //    }
-        //}
         GameObject objHit = GetObjectHitFromList();
         objHit.SetActive(true);
         objHit.transform.position = posCreateHit.position;

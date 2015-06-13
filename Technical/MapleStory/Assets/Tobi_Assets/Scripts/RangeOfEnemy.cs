@@ -7,20 +7,12 @@ public class RangeOfEnemy : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         obj = transform.parent.gameObject;
-        //objStone = GameObject.FindGameObjectWithTag("Stone").gameObject;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 
     void OnTriggerStay2D(Collider2D colEnter)
     {
         if(colEnter.tag == "Player")
         {
-            //objStone.GetComponent<StoneScripts>().inAroundOfPlayer = true;
-            //baseEnemyScripts.GetComponent<BaseEnemyScripts>
             obj.GetComponent<BaseEnemyScripts>().inAroundOfPlayer = true;
         }
     }

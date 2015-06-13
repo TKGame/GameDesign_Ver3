@@ -24,4 +24,9 @@ public class HitOfEnemyScripts : MonoBehaviour {
         }
     }
 
+    public void DestroyWhenDie()
+    {
+        Destroy(this.gameObject);
+    }
+
 }

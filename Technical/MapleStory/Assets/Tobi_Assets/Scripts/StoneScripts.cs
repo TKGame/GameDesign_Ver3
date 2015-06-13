@@ -4,18 +4,24 @@ using System.Collections;
 public class StoneScripts : BaseEnemyScripts {
 
     float _timeDelay = 0.0f;
+
     float dis_TimeDelay = 2.0f;
 
     public bool isAttack;
+
     bool _facingRight = true;
 
-    public bool inAroundOfPlayer = false;
+   // GameObject _bullet;
 
     public Transform posCreateHit;
+
+    //public GameObject hitInfo;
 	// Use this for initialization
 	void Start () {
         startPosition = transform.position;
         playerObj = GameObject.FindGameObjectWithTag("Player").gameObject;
+        //_bullet = hitInfo.gameObject;
+        //_bullet.GetComponent<HitOfEnemyScripts>().damgeRocket = damge;
 	}
 	
 	// Update is called once per frame
@@ -43,7 +49,21 @@ public class StoneScripts : BaseEnemyScripts {
     public void CreateHit()
     {
         Instantiate(bullet, posCreateHit.position, Quaternion.identity);
+        //Instantiate(bullet, new Vector2(posCreateHit.position.x + 2.5f, posCreateHit.position.y), Quaternion.identity);
+        //Instantiate(bullet, new Vector2(posCreateHit.position.x - 2.5f, posCreateHit.position.y), Quaternion.identity);
+    }
+
+    public void CreateHit1()
+    {
+        //Instantiate(bullet, posCreateHit.position, Quaternion.identity);
         Instantiate(bullet, new Vector2(posCreateHit.position.x + 2.5f, posCreateHit.position.y), Quaternion.identity);
+        //Instantiate(bullet, new Vector2(posCreateHit.position.x - 2.5f, posCreateHit.position.y), Quaternion.identity);
+    }
+
+    public void CreateHit2()
+    {
+        //Instantiate(bullet, posCreateHit.position, Quaternion.identity);
+        //Instantiate(bullet, new Vector2(posCreateHit.position.x + 2.5f, posCreateHit.position.y), Quaternion.identity);
         Instantiate(bullet, new Vector2(posCreateHit.position.x - 2.5f, posCreateHit.position.y), Quaternion.identity);
     }
     public void SetFrameAttackFinal()

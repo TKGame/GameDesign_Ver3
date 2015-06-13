@@ -15,6 +15,7 @@ public class DrextonScripts : BaseEnemyScripts {
     public Transform positionCreateHit;
 
     GameObject _bullet;
+
     public Rigidbody2D rocket;
     // Use this for initialization
     void Start()
@@ -22,13 +23,12 @@ public class DrextonScripts : BaseEnemyScripts {
         startPosition = transform.position;
         playerObj = GameObject.FindGameObjectWithTag("Player").gameObject;
         _distanceToPlayer = playerObj.transform.position.x - this.transform.position.x;
-
-        _bullet = rocket.gameObject;
-        _bullet.GetComponent<HitOfEnemyScripts>().damgeRocket = damge;
         if (_distanceToPlayer >= 0)
         {
             Flip();
         } 
+        _bullet = rocket.gameObject;
+        _bullet.GetComponent<HitOfEnemyScripts>().damgeRocket = damge;
     }
 
     //public void createHit(int n)
@@ -120,6 +120,10 @@ public class DrextonScripts : BaseEnemyScripts {
         if (colEnter.tag == "Player")
         {
             isAttack = true;
+        }
+        if(colEnter.tag == "GroundTop")
+        {
+            Flip();
         }
     }
 

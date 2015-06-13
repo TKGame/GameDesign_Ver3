@@ -4,12 +4,18 @@ using System.Collections;
 public class BlueMushroomScripts : BaseEnemyScripts {
 	// Use this for initialization
     public float jumbForce = 400.0f;
-
+    // biến xác định nhảy
     bool isJumb = false;
+    // xác định đứng trên mặt đất
+    public bool grounded;
+    //điểm xác định đứng trên mặt đất
+    Transform groundCheck;
 
+    float _timeDelay = 0;
 	void Start () {
         InitStart();
         isMove = true;
+        groundCheck = transform.Find("groundCheck");
 	}
 	
 	// Update is called once per frame
@@ -17,10 +23,11 @@ public class BlueMushroomScripts : BaseEnemyScripts {
     {
         if (playerObj != null)
         {
-            if ((timeDelay += Time.deltaTime) >= 3 && isJumb)
+            grounded = Physics2D.Linecast(groundCheck.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+            if ((_timeDelay += Time.deltaTime) >= 3 && isJumb)
             {
                 rigid.AddForce(new Vector2(0, jumbForce));
-                timeDelay = 0;
+                _timeDelay = 0;
             }
             if (transform.position.x >= startPosition.x + distanceMove || transform.position.x <= startPosition.x - distanceMove)
             {
@@ -35,9 +42,6 @@ public class BlueMushroomScripts : BaseEnemyScripts {
         Die();
     }
 
-    // override
-    float timeDelay = 0;
-    
     void OnTriggerEnter2D(Collider2D colEnter)
     {
         if (colEnter.tag == "Player")
@@ -50,13 +54,18 @@ public class BlueMushroomScripts : BaseEnemyScripts {
                 _player.Hit(damge);
             }
         }
+        if (colEnter.tag == "GroundTop" && grounded)
+        {
+            
+            int rand = Random.Range(0, 2);
+            if (rand == 0)
+            {
+                rigid.AddForce(new Vector2(10, 650));
+            }
+            else 
+                Flip();
+        }
     }
-
-    void OnTriggerStay2D(Collider2D collStay)
-    {
-        
-    }
-
     void OnTriggerExit2D(Collider2D colExit)
     {
         isMove = true;

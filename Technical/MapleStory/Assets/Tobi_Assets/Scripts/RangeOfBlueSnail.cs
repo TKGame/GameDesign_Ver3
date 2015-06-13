@@ -7,23 +7,31 @@ public class RangeOfBlueSnail : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         //objStone = GameObject.FindGameObjectWithTag("Stone").gameObject;
-        objBlueSnail = transform.parent.gameObject;
+        //objBlueSnail = transform.parent.gameObject;
 	}
 
 
-    void OnTriggerStay2D(Collider2D colEnter)
-    {
-        if(colEnter.tag == "Player")
-        {
-            objBlueSnail.GetComponent<BlueSnailScripts>().inAroundOfPlayer = true;
-        }
-    }
+    //void OnTriggerStay2D(Collider2D colEnter)
+    //{
+    //    if(colEnter.tag == "Player")
+    //    {
+    //        //objBlueSnail.GetComponent<BlueSnailScripts>().inAroundOfPlayer = true;
+    //    }
+    //}
 
-    void OnTriggerExit2D(Collider2D colExit)
+    //void OnTriggerExit2D(Collider2D colExit)
+    //{
+    //    if (colExit.tag == "Player")
+    //    {
+    //        objBlueSnail.GetComponent<BlueSnailScripts>().inAroundOfPlayer = false;
+    //    }
+    //}
+
+    void OnTriggerEnter2D(Collider2D col)
     {
-        if (colExit.tag == "Player")
+        if (col.tag == "Player")
         {
-            objBlueSnail.GetComponent<BlueSnailScripts>().inAroundOfPlayer = false;
+            Debug.Log(" Da va cham voi Player");
         }
     }
 	

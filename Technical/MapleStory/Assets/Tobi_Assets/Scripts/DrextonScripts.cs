@@ -10,7 +10,7 @@ public class DrextonScripts : BaseEnemyScripts {
 
     public bool isAttack = false;
     bool _facingRight = true;
-    public bool inAroundOfPlayer = false;
+   // public bool inAroundOfPlayer = false;
 
     public Transform posiotionCreateHit;
 

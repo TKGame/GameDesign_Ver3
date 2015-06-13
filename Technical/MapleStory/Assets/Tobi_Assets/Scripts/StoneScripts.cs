@@ -85,10 +85,6 @@ public class StoneScripts : BaseEnemyScripts {
     }
 
     #region XetVaCham
-    void OnTriggerEnter2D(Collider2D colEnter)
-    {
-
-    }
 
     void OnTriggerStay2D(Collider2D collStay)
     {

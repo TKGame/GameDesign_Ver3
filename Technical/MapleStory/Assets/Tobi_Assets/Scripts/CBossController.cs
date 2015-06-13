@@ -6,7 +6,7 @@ public class CBossController : BaseEnemyScripts {
     float _timeDelay = 0.0f;
 
     public bool attack;
-    public bool inAroundOfPlayer = false;
+    //public bool inAroundOfPlayer = false;
     public Transform bulletPosition;
 
 

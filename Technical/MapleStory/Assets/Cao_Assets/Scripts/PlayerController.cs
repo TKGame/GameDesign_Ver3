@@ -29,7 +29,7 @@ public class PlayerController : BaseGameObject {
     float manaStart;
 	// Use this for initialization
 	void Start () {
-        //SetPosLimit(-7, 7, -5, 5);
+        
         HpStart = HP;
         manaStart = Mana;
         rangeControll = gameObject.GetComponentInChildren<RangeController>();
@@ -49,7 +49,7 @@ public class PlayerController : BaseGameObject {
     private float timeAddHp = 0;
 	// Update is called once per frame
 	void Update () {
-        
+        SetPosLimit(-7, 7, -5, 5);
         PosLimit();
         Move();
         if (timeAddHp > 1)

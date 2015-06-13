@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BlueSnailScripts : BaseEnemyScripts {
 
-    public bool inAroundOfPlayer = false;
+    //public bool inAroundOfPlayer = false;
     bool _facingRight = true;
     public bool isAttack = false;
 
@@ -71,21 +71,25 @@ public class BlueSnailScripts : BaseEnemyScripts {
     {
         if (colEnter.tag == "Player")
         {
+            isAttack = true;
             PlayerController _player = colEnter.gameObject.GetComponent<PlayerController>();
             if (_player != null)
             {
                 _player.Hit(damge);
             }
         }
-    }
-    void OnTriggerStay2D(Collider2D collStay)
-    {
-        if(collStay.tag == "Player")
+        if(colEnter.tag == "GroundTop")
         {
-            isAttack = true;
-            //Debug.Log("vac");
+            Flip();
         }
     }
+    //void OnTriggerStay2D(Collider2D collStay)
+    //{
+    //    if(collStay.tag == "Player")
+    //    {
+    //        isAttack = true;
+    //    }
+    //}
 
     void OnTriggerExit2D(Collider2D colExit)
     {

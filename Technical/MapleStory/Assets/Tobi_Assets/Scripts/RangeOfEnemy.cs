@@ -2,11 +2,12 @@
 using System.Collections;
 
 public class RangeOfEnemy : MonoBehaviour {
-    public GameObject objStone;
+    //public BaseEnemyScripts baseEnemyScripts;
+    public GameObject obj;
 	// Use this for initialization
 	void Start () {
+        obj = transform.parent.gameObject;
         //objStone = GameObject.FindGameObjectWithTag("Stone").gameObject;
-        objStone = transform.parent.gameObject;
 	}
 	
 	// Update is called once per frame
@@ -18,7 +19,9 @@ public class RangeOfEnemy : MonoBehaviour {
     {
         if(colEnter.tag == "Player")
         {
-            objStone.GetComponent<StoneScripts>().inAroundOfPlayer = true;
+            //objStone.GetComponent<StoneScripts>().inAroundOfPlayer = true;
+            //baseEnemyScripts.GetComponent<BaseEnemyScripts>
+            obj.GetComponent<BaseEnemyScripts>().inAroundOfPlayer = true;
         }
     }
 
@@ -26,7 +29,7 @@ public class RangeOfEnemy : MonoBehaviour {
     {
         if (colExit.tag == "Player")
         {
-            objStone.GetComponent<StoneScripts>().inAroundOfPlayer = false;
+            obj.GetComponent<BaseEnemyScripts>().inAroundOfPlayer = false;
         }
     }
 }

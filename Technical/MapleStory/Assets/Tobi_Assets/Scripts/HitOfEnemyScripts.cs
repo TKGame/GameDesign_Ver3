@@ -2,37 +2,26 @@
 using System.Collections;
 
 public class HitOfEnemyScripts : MonoBehaviour {
-    public float speedMoveX;
-    public float speedMoveY;
-
     Animator _anim;
 
-    public GameObject objectTarget;
-	// Use this for initialization
-	public void start () {
-        gameObject.tag = "Hit";
-        _anim =  gameObject.GetComponent<Animator>();
-        float speedCurrent = objectTarget.GetComponent<BaseEnemyScripts>().speed;
-        Debug.Log(speedCurrent);
-        this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(speedCurrent * speedMoveX, 0);
-	}
+    public float timeLife;
 
-    public void DestroyWhenFinish()
+    public float damgeRocket;
+    // Use this for initialization
+    void Start()
     {
-        Destroy(this.gameObject);
+        _anim = gameObject.GetComponent<Animator>();
+        Destroy(gameObject,timeLife);
     }
 
-    // sử dụng cho hit bay có animation die
-    public void onTriggerEnter2D(Collider2D col)
+    public void OnTriggerEnter2D(Collider2D colEnter)
     {
-
-    }
-
-    public void onTriggerEnter2D(Collider2D colEnter, string tagOfEnemy)
-    {
-        if(colEnter.gameObject.tag == tagOfEnemy)
+        if(colEnter.tag == "Player")
         {
-            Destroy(this.gameObject);
+            PlayerController _player = colEnter.gameObject.GetComponent<PlayerController>();
+            _player.Hit(damgeRocket);
+            Destroy(gameObject);
         }
     }
+
 }

@@ -15,8 +15,6 @@ public class BaseEnemyScripts : BaseGameObject
 {
     // biến xác định Flip
 
-    // khoang cách
-    public float distanceEnemyToPlayer = 0.0f;
     // khoảng cách di chuyển quanh vị trí ban đầu
     public float distanceMove = 0.0f;
     // vị trí ban đầu 
@@ -27,7 +25,6 @@ public class BaseEnemyScripts : BaseGameObject
     public bool inAroundOfPlayer = false;
     // xác định trong vùng bao của Player
     // trong vùng bao của Player nếu = true , và ngược lại
-    
 
     public bool isMove;
 
@@ -167,10 +164,10 @@ public class BaseEnemyScripts : BaseGameObject
     public void Flip()
     {
         speed = -speed;
+       // facingRight = !facingRight;
         Vector3 theScale = transform.localScale;
         theScale.x = -theScale.x;
         transform.localScale = theScale;
-
         if (transform.position.x < startPosition.x + distanceMove)
         {
             Vector3 newPos = transform.position;

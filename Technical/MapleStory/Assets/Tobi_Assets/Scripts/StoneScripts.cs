@@ -15,11 +15,12 @@ public class StoneScripts : BaseEnemyScripts {
 
     public Transform posCreateHit;
 
-    //public GameObject hitInfo;
+    public GameObject hitInfo;
 	// Use this for initialization
 	void Start () {
         startPosition = transform.position;
         playerObj = GameObject.FindGameObjectWithTag("Player").gameObject;
+        hitInfo.GetComponent<HitOfStoneScripts>().damgeRocket = damge;
         //_bullet = hitInfo.gameObject;
         //_bullet.GetComponent<HitOfEnemyScripts>().damgeRocket = damge;
 	}
@@ -48,15 +49,15 @@ public class StoneScripts : BaseEnemyScripts {
 
     public void CreateHit()
     {
-        Instantiate(bullet, posCreateHit.position, Quaternion.identity);
+        Instantiate(hitInfo, posCreateHit.position, Quaternion.identity);
         //Instantiate(bullet, new Vector2(posCreateHit.position.x + 2.5f, posCreateHit.position.y), Quaternion.identity);
         //Instantiate(bullet, new Vector2(posCreateHit.position.x - 2.5f, posCreateHit.position.y), Quaternion.identity);
     }
 
     public void CreateHit1()
     {
-        //Instantiate(bullet, posCreateHit.position, Quaternion.identity);
-        Instantiate(bullet, new Vector2(posCreateHit.position.x + 2.5f, posCreateHit.position.y), Quaternion.identity);
+        Instantiate(hitInfo, posCreateHit.position, Quaternion.identity);
+        Instantiate(hitInfo, new Vector2(posCreateHit.position.x + 2.5f, posCreateHit.position.y), Quaternion.identity);
         //Instantiate(bullet, new Vector2(posCreateHit.position.x - 2.5f, posCreateHit.position.y), Quaternion.identity);
     }
 
@@ -64,7 +65,7 @@ public class StoneScripts : BaseEnemyScripts {
     {
         //Instantiate(bullet, posCreateHit.position, Quaternion.identity);
         //Instantiate(bullet, new Vector2(posCreateHit.position.x + 2.5f, posCreateHit.position.y), Quaternion.identity);
-        Instantiate(bullet, new Vector2(posCreateHit.position.x - 2.5f, posCreateHit.position.y), Quaternion.identity);
+        Instantiate(hitInfo, new Vector2(posCreateHit.position.x - 2.5f, posCreateHit.position.y), Quaternion.identity);
     }
     public void SetFrameAttackFinal()
     {
@@ -105,7 +106,13 @@ public class StoneScripts : BaseEnemyScripts {
     }
 
     #region XetVaCham
-
+    void OnTriggerEnter2D(Collider2D colEnter)
+    {
+        if(colEnter.tag == "GroundTop")
+        {
+            Flip();
+        }
+    }
     void OnTriggerStay2D(Collider2D collStay)
     {
         if (collStay.tag == "Player")

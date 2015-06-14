@@ -1,47 +1,32 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ErgothScripts : MonoBehaviour {
+public class ErgothScripts : BaseEnemyScripts {
 
     float _timeDelay = 0.0f;
     int _indexAttack=0;
     Animator _anim;
-    float _distanceToPlayer =0;
 
-    public bool attack = false;
+    //public bool attack = false;
     public float distanceTimeAttack = 0.0f;
     GameObject _player;
     public int minRandom;
     public int maxRandom;
+
     public GameObject objHitAttack1;
     public GameObject objHitAttack2;
     public GameObject objHitAttack3;
+
+    public GameObject objHitSkill2;
 	// Use this for initialization
 	void Start () {
 	    _anim = gameObject.GetComponent<Animator>();
         _player = GameObject.FindGameObjectWithTag("Player").gameObject;
 	}
-
-    public void Init()
-    {
-        Instantiate(objHitAttack1);
-        Instantiate(objHitAttack2);
-        Instantiate(objHitAttack3);
-        objHitAttack1.SetActive(false);
-        objHitAttack2.SetActive(false);
-        objHitAttack2.SetActive(false);
-    }
 	
 	// Update is called once per frame
 	void Update () {
-        _distanceToPlayer = Mathf.Abs(_player.transform.position.x - transform.position.x);
-        if (_distanceToPlayer < 12)
-        {
-            attack = true;
-        }
-        else
-            attack = false;
-	    if(attack)
+	    if(inAroundOfPlayer)
         {
             if((_timeDelay += Time.deltaTime) >= distanceTimeAttack)
             {
@@ -50,9 +35,11 @@ public class ErgothScripts : MonoBehaviour {
                 _timeDelay = 0.0f;
             }
         }
+        else
+            _anim.SetBool("isAttack" + _indexAttack, false);
 	}
 
-    public void SetAnimator()
+    public void SetFrameAttackFinal()
     {
         _anim.SetBool("isAttack" + _indexAttack, false);
     }
@@ -86,4 +73,14 @@ public class ErgothScripts : MonoBehaviour {
         Instantiate(objHitAttack3, new Vector2(newPos.x + 3, newPos.y+1), Quaternion.identity);
         Instantiate(objHitAttack3, new Vector2(newPos.x+6,newPos.y), Quaternion.identity);
     }
+    public void CreateHitSkill2()
+    {
+        Vector2 newPos = new Vector2();
+        newPos.y = transform.position.y-0.5f;
+        newPos.x = Random.Range(transform.position.x - 15, transform.position.y);
+        Instantiate(objHitSkill2, newPos, Quaternion.identity);
+        Instantiate(objHitSkill2, new Vector2(newPos.x + 7, newPos.y + 0.5f), Quaternion.identity);
+        Instantiate(objHitSkill2, new Vector2(newPos.x + 14, newPos.y), Quaternion.identity);
+    }
 }
+

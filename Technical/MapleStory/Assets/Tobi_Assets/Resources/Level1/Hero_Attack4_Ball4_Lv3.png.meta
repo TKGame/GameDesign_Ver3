@@ -1,9 +1,25 @@
 fileFormatVersion: 2
 guid: 8421595443fa8e140a234743281d1bcf
-timeCreated: 1434028678
+timeCreated: 1434252101
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Hero_Attack4_Ball4_Lv3_0
+    21300002: Hero_Attack4_Ball4_Lv3_1
+    21300004: Hero_Attack4_Ball4_Lv3_2
+    21300006: Hero_Attack4_Ball4_Lv3_3
+    21300008: Hero_Attack4_Ball4_Lv3_4
+    21300010: Hero_Attack4_Ball4_Lv3_5
+    21300012: Hero_Attack4_Ball4_Lv3_6
+    21300014: Hero_Attack4_Ball4_Lv3_7
+    21300016: Hero_Attack4_Ball4_Lv3_8
+    21300018: Hero_Attack4_Ball4_Lv3_9
+    21300020: Hero_Attack4_Ball4_Lv3_10
+    21300022: Hero_Attack4_Ball4_Lv3_11
+    21300024: Hero_Attack4_Ball4_Lv3_12
+    21300026: Hero_Attack4_Ball4_Lv3_13
+    21300028: Hero_Attack4_Ball4_Lv3_14
+    21300030: Hero_Attack4_Ball4_Lv3_15
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -30,14 +46,14 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -48,7 +64,167 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: Hero_Attack4_Ball4_Lv3_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 687
+        width: 301
+        height: 229
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Hero_Attack4_Ball4_Lv3_1
+      rect:
+        serializedVersion: 2
+        x: 301
+        y: 687
+        width: 301
+        height: 229
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Hero_Attack4_Ball4_Lv3_2
+      rect:
+        serializedVersion: 2
+        x: 602
+        y: 687
+        width: 301
+        height: 229
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Hero_Attack4_Ball4_Lv3_3
+      rect:
+        serializedVersion: 2
+        x: 903
+        y: 687
+        width: 301
+        height: 229
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Hero_Attack4_Ball4_Lv3_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 458
+        width: 301
+        height: 229
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Hero_Attack4_Ball4_Lv3_5
+      rect:
+        serializedVersion: 2
+        x: 301
+        y: 458
+        width: 301
+        height: 229
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Hero_Attack4_Ball4_Lv3_6
+      rect:
+        serializedVersion: 2
+        x: 602
+        y: 458
+        width: 301
+        height: 229
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Hero_Attack4_Ball4_Lv3_7
+      rect:
+        serializedVersion: 2
+        x: 903
+        y: 458
+        width: 301
+        height: 229
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Hero_Attack4_Ball4_Lv3_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 229
+        width: 301
+        height: 229
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Hero_Attack4_Ball4_Lv3_9
+      rect:
+        serializedVersion: 2
+        x: 301
+        y: 229
+        width: 301
+        height: 229
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Hero_Attack4_Ball4_Lv3_10
+      rect:
+        serializedVersion: 2
+        x: 602
+        y: 229
+        width: 301
+        height: 229
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Hero_Attack4_Ball4_Lv3_11
+      rect:
+        serializedVersion: 2
+        x: 903
+        y: 229
+        width: 301
+        height: 229
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Hero_Attack4_Ball4_Lv3_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 301
+        height: 229
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Hero_Attack4_Ball4_Lv3_13
+      rect:
+        serializedVersion: 2
+        x: 301
+        y: 0
+        width: 301
+        height: 229
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Hero_Attack4_Ball4_Lv3_14
+      rect:
+        serializedVersion: 2
+        x: 602
+        y: 0
+        width: 301
+        height: 229
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Hero_Attack4_Ball4_Lv3_15
+      rect:
+        serializedVersion: 2
+        x: 903
+        y: 0
+        width: 301
+        height: 229
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
   assetBundleName: 

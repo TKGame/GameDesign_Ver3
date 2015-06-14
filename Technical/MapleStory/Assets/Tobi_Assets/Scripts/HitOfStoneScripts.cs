@@ -1,17 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HitOfStoneScripts : MonoBehaviour {
-    //Collider2D BoxCollider;
-    public void DestroyWhenDie()
+public class HitOfStoneScripts : HitOfEnemyScripts {
+    Collider2D BoxCollider;
+    void Start()
     {
-        Destroy(this.gameObject);
+        BoxCollider = gameObject.GetComponent<Collider2D>();
     }
-    //void OnTriggerEnter2D(Collider2D col)
-    //{
-    //    if(col.gameObject.tag == "Player")
-    //    {
-
-    //    }
-    //}
+    void OnTriggerEnter2D(Collider2D colEnter)
+    {
+        if (colEnter.gameObject.tag == "Player")
+        {
+            BoxCollider.enabled = false;
+            PlayerController _player = colEnter.gameObject.GetComponent<PlayerController>();
+            _player.Hit(damgeRocket);
+        }
+    }
 }

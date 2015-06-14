@@ -14,7 +14,7 @@ public class HitOfEnemyScripts : MonoBehaviour {
         Destroy(gameObject,timeLife);
     }
 
-    public void OnTriggerEnter2D(Collider2D colEnter)
+    public virtual void OnTriggerEnter2D(Collider2D colEnter)
     {
         if(colEnter.tag == "Player")
         {

@@ -3,11 +3,12 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class CowdownSkill : MonoBehaviour {
-
+    public GameController gameController;
     private Image imageCowdown;//Image cowdown
     public float timeCowdown;//time cowdown tung Skill
     private float timeDelay;
     private float timeCowdownStart;
+    public bool unlookSkill;
 	// Use this for initialization
 	void Start () {
         imageCowdown = gameObject.GetComponent<Image>();
@@ -23,7 +24,8 @@ public class CowdownSkill : MonoBehaviour {
         //}
         //timeDelay += Time.deltaTime;
         //imageCowdown.fillAmount = timeCowdown * 1 / timeCowdownStart;
-        CountDown();
+        if (unlookSkill == true)
+            CountDown();
 	}
     public void ResetTimeCountdown()
     {
@@ -31,7 +33,7 @@ public class CowdownSkill : MonoBehaviour {
     }
 
     void CountDown()
-    {
+    {        
         imageCowdown.fillAmount -= 1 / timeCowdownStart * Time.deltaTime;
     }
     //kiem tra thoi gian cowdown da xong chwua 

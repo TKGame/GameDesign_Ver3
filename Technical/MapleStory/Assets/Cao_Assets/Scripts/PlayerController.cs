@@ -29,7 +29,8 @@ public class PlayerController : BaseGameObject {
     float manaStart;
 	// Use this for initialization
 	void Start () {
-        
+        rigid = gameObject.GetComponent<Rigidbody2D>();
+        //SetPosLimit(-7, 7, -5, 5);
         HpStart = HP;
         manaStart = Mana;
         rangeControll = gameObject.GetComponentInChildren<RangeController>();
@@ -49,7 +50,7 @@ public class PlayerController : BaseGameObject {
     private float timeAddHp = 0;
 	// Update is called once per frame
 	void Update () {
-        SetPosLimit(-7, 7, -5, 5);
+        
         PosLimit();
         Move();
         if (timeAddHp > 1)
@@ -247,6 +248,12 @@ public class PlayerController : BaseGameObject {
             BaseEnemyScripts _enemy = rangeControll.listTaget[i].GetComponent<BaseEnemyScripts>();
             if (_enemy != null)
             {
+                GameObject _effect = Instantiate(effectHit, new Vector3(rangeControll.listTaget[i].transform.position.x, rangeControll.listTaget[i].transform.position.y +1 , 0), Quaternion.identity) as GameObject;
+                _effect.transform.SetParent(rangeControll.listTaget[i].transform);
+                _effect.transform.localScale = Vector3.one;
+                //_effect.transform.localPosition = new Vector3(rangeControll.listTaget[i].transform.position.x, rangeControll.listTaget[i].transform.position.y , 0);
+                EffectController _effectControll = _effect.GetComponent<EffectController>();
+                _effectControll.LayGiaTriDamge(damge);
                 _enemy.Hit(damge);                
             }
         }
@@ -256,14 +263,16 @@ public class PlayerController : BaseGameObject {
     public GameObject telePrefabs;
     public GameObject arrowPrefabs;
     public Transform arrowTransform;
+    public GameObject effectHit;
     public float manaSkillFire;
     public float manaSkillTele;
     public float manaSkillArrow;
-    private bool finishSkillFire;
+    public bool finishSkillFire;
     
     //skil no lua
     public void SkillFire()
     {
+        
         Mana -= manaSkillFire;//tru mana khi su dung skill
         finishSkillFire = true;
         GameObject _fire = Instantiate(firePrefabs, new Vector3(transform.position.x,transform.position.y + 1 ,0), Quaternion.identity) as GameObject;
@@ -275,8 +284,7 @@ public class PlayerController : BaseGameObject {
     }
     //tat nhan vat tren mam hinh
     void DeActiveRender()
-    {
-        
+    {        
         SpriteRenderer _spritePlayer = gameObject.GetComponent<SpriteRenderer>();     
         if (_spritePlayer != null)
         {
@@ -314,6 +322,7 @@ public class PlayerController : BaseGameObject {
             return;
         }
         Mana -= manaSkillArrow;
+        finishSkillFire = true;
         arrowTransform.position = transform.position;
         if (!facingRight)
         {

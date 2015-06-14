@@ -6,6 +6,8 @@ public class RangeController : MonoBehaviour {
 
 	// Use this for initialization
     public List<GameObject> listTaget;
+    [HideInInspector]
+    public List<Transform> transEffectHit;
     public GameObject player;
     void Awake()
     {
@@ -46,7 +48,7 @@ public class RangeController : MonoBehaviour {
             if (listTaget[i] == null)
             {
                 listTaget.Remove(listTaget[i]);
-            }
+            }             
         }
 
     }
@@ -57,7 +59,9 @@ public class RangeController : MonoBehaviour {
         {
             if (!listTaget.Contains(other.gameObject))
             {
+
                 listTaget.Add(other.gameObject);
+               
             }
         }
     }
@@ -68,5 +72,9 @@ public class RangeController : MonoBehaviour {
         {
             listTaget.Remove(other.gameObject);
         }
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+ 
     }
 }

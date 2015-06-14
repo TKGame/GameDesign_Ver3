@@ -7,7 +7,7 @@ public class Animation : MonoBehaviour {
     public PlayerController _playerControl;
 	// Use this for initialization
 	void Start () {
-        _playerControl = gameObject.GetComponentInParent<PlayerController>();
+        _playerControl = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 	
 	}
 	
@@ -31,5 +31,12 @@ public class Animation : MonoBehaviour {
             _playerControl.ActiveSpriteRender();
         }
         
+    }
+    void FinishSkill()
+    {
+        if (_playerControl != null)
+        {
+            _playerControl.finishSkillFire = false;
+        }
     }
 }

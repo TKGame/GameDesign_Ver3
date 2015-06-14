@@ -13,7 +13,7 @@ public class BaseGameObject : MonoBehaviour {
     void Awake()
     {
         _animator = GetComponent<Animator>();
-        rigid = GetComponent<Rigidbody2D>();
+        //rigid = GetComponent<Rigidbody2D>();
     }
 	
     //public void Flip()

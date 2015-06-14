@@ -7,7 +7,7 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
     public Transform battleCamera;
     public GameObject player;
     public PlayerController playerControl;
-    
+    public GameController gameController;
     public RectTransform canvasWorldTrans;
 
     private bool isTouch;
@@ -100,23 +100,26 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
     //khi nhan button skill Fire
     public void AttackSkillFire()
     {
-        if (playerControl.Mana > playerControl.manaSkillFire)//kiem tra xem con du mana dung Skill khong
-            if (CheckSkillCowdown(cowdownFire))//kiem tra cowdown
-                playerControl.SkillFire(); //thuc hien Skill
+        if (playerControl.finishSkillFire == false)
+            if (playerControl.Mana > playerControl.manaSkillFire)//kiem tra xem con du mana dung Skill khong
+                if (CheckSkillCowdown(cowdownFire))//kiem tra cowdown
+                    playerControl.SkillFire(); //thuc hien Skill
     }
     //khi nhan button skill Tele
     public void AttackSkillTele()
     {
-        if (playerControl.Mana > playerControl.manaSkillTele)
-            if (CheckSkillCowdown(cowdownTele))
-                playerControl.SkillTeleportation(); 
+        if (playerControl.finishSkillFire == false)
+            if (playerControl.Mana > playerControl.manaSkillTele)
+                if (CheckSkillCowdown(cowdownTele))
+                    playerControl.SkillTeleportation();
     }
     //khi nhan button skill Arrow
     public void AttackSkillArrow()
     {
-        if (playerControl.Mana > playerControl.manaSkillArrow)
-            if (CheckSkillCowdown(cowdownArrow))
-                playerControl.SkillArrowIce();        
+        if (playerControl.finishSkillFire == false)
+            if (playerControl.Mana > playerControl.manaSkillArrow)
+                if (CheckSkillCowdown(cowdownArrow))
+                    playerControl.SkillArrowIce();   
     }
     //kiem tra xem skill da cowdown xong chua
     bool CheckSkillCowdown(CowdownSkill typeSkill)

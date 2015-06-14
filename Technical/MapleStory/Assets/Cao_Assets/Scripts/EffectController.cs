@@ -9,57 +9,67 @@ public class EffectController : MonoBehaviour {
     public GameObject effect;
 	// Use this for initialization
 	void Start () {
-	
+        for (int i = 0; i < 4; i++)
+        {
+            //listSprite[i].sprite = null;
+        }
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+
+        if (activeFinish == true)
+        {
+            gameObject.transform.position += new Vector3(gameObject.transform.position.x, 0.2f, 0) * Time.deltaTime;
+            if (timeFinish > 3)
+            {
+                Destroy(gameObject);
+            }
+            timeFinish += Time.deltaTime;
+        }
 	}
-    void InstanceEffectHit()
-    {
-        GameObject _effect = Instantiate(effect, Vector3.zero, Quaternion.identity) as GameObject;
-    }
 
 
     //Test
-    public int damge;
+    public float damge;
+    private float timeFinish;
     [ContextMenu("Test")]
     void Test()
     {
         LayGiaTriDamge(damge);
     }
-    void LayGiaTriDamge(int _damge)
-    {
-        int hangDonvi = 0;
-        int hangChuc = 0;
-        int hangTram = 0;
-        int hangNghin = 0;
+    private bool activeFinish = false; 
 
+    //lay gia tri damge nhan vao vao in ra man hinh
+    public void LayGiaTriDamge(float _damge)
+    {
+        activeFinish = true;
+        List<int> dayso = new List<int>();
+        //tinh toan luong dam nhan vao
         if (_damge < 9999)
         {
-            int mod = -1;
-            List<int> dayso = new List<int>();
-            int count = 0;
 
-            while (_damge / 10 > 0)
+            int mod = -1;            
+            while ((int)_damge / 10 > 0)
             {
                 
                 mod = (int)_damge % 10;
                 _damge = _damge / 10;
-                //if(_damge > 0)
-                //    dayso.Add((int)_damge);
                 dayso.Add(mod);
-                
-                
-                count++;
-                Debug.Log("count = " + count);
             }
-            //dayso.Add((int)_damge);
-            for(int i = dayso.Count - 1;i>= 0; --i)
-            {
-                Debug.Log(System.String.Format("Day so phan tu i = {0}", dayso[i]));
-            }
+            dayso.Add((int)_damge);           
+        }
+        int j = 0;
+
+        // hien thi luong damge
+        for (int i = dayso.Count - 1; i >= 0; --i)
+        {
+            listSprite[j].sprite = listNumber[dayso[i]];
+            j++;
+        }
+        for (int i = 3; i > dayso.Count - 1; --i)
+        {
+            listSprite[i].sprite = null;
         }
     }
     

@@ -9,7 +9,7 @@ public class ErgothScripts : BaseEnemyScripts {
 
     //public bool attack = false;
     public float distanceTimeAttack = 0.0f;
-    GameObject _player;
+    public GameObject objPlayer;
     public int minRandom;
     public int maxRandom;
 
@@ -21,7 +21,12 @@ public class ErgothScripts : BaseEnemyScripts {
 	// Use this for initialization
 	void Start () {
 	    _anim = gameObject.GetComponent<Animator>();
-        _player = GameObject.FindGameObjectWithTag("Player").gameObject;
+        objPlayer = GameObject.FindGameObjectWithTag("Player").gameObject;
+
+        //objHitAttack1.GetComponent<HitOfErgoth>().damgeRocket = damge;
+        //objHitAttack2.GetComponent<HitOfErgoth>().damgeRocket = damge;
+        //objHitAttack3.GetComponent<HitOfErgoth>().damgeRocket = damge;
+        //objHitSkill2.GetComponent<HitOfErgoth>().damgeRocket = damge + 5;
 	}
 	
 	// Update is called once per frame
@@ -47,40 +52,37 @@ public class ErgothScripts : BaseEnemyScripts {
     public void CreateHitAttack1()
     {
         Vector2 newPos = new Vector2();
-        newPos.y = transform.position.y - 5;
-        newPos.x = Random.Range(transform.position.x - 15,transform.position.x-5);
+        newPos.y = transform.position.y - 4;
+        newPos.x = Random.Range(transform.position.x - 15,transform.position.x-3);
         Instantiate(objHitAttack1,newPos,Quaternion.identity);
-        Instantiate(objHitAttack1, new Vector2(newPos.x+3,newPos.y), Quaternion.identity);
-        Instantiate(objHitAttack1, new Vector2(newPos.x + 6, newPos.y), Quaternion.identity);
+        Instantiate(objHitAttack1, new Vector2(newPos.x+5,newPos.y), Quaternion.identity);
+        Instantiate(objHitAttack1, new Vector2(newPos.x + 10, newPos.y), Quaternion.identity);
     }
 
     public void CreateHitAttack2()
     {
-        Vector2 newPos = new Vector2();
+        Vector2 newPos = objPlayer.transform.position;
         newPos.y = transform.position.y - 5;
-        newPos.x = Random.Range(transform.position.x - 15, transform.position.x - 5);
+        //newPos.x = Random.Range(transform.position.x - 15, transform.position.x - 5);
         Instantiate(objHitAttack2, newPos,Quaternion.identity);
         Instantiate(objHitAttack2, new Vector2(newPos.x+4,newPos.y), Quaternion.identity);
-        Instantiate(objHitAttack2, new Vector2(newPos.x + 9, newPos.y), Quaternion.identity);
+        Instantiate(objHitAttack2, new Vector2(newPos.x + 8, newPos.y), Quaternion.identity);
     }
 
     public void CreateHitAttack3()
     {
-        Vector2 newPos = new Vector2();
-        newPos.y = transform.position.y - 5;
-        newPos.x = Random.Range(transform.position.x - 15, transform.position.x - 5);
-        Instantiate(objHitAttack3,newPos, Quaternion.identity);
-        Instantiate(objHitAttack3, new Vector2(newPos.x + 3, newPos.y+1), Quaternion.identity);
-        Instantiate(objHitAttack3, new Vector2(newPos.x+6,newPos.y), Quaternion.identity);
+        Instantiate(objHitAttack3, new Vector2(objPlayer.transform.position.x, objPlayer.transform.position.y +1), Quaternion.identity);
+        Instantiate(objHitAttack3, new Vector2(objPlayer.transform.position.x + 4, objPlayer.transform.position.y), Quaternion.identity);
+        Instantiate(objHitAttack3, new Vector2(objPlayer.transform.position.x - 4, objPlayer.transform.position.y), Quaternion.identity);
     }
     public void CreateHitSkill2()
     {
-        Vector2 newPos = new Vector2();
-        newPos.y = transform.position.y-0.5f;
-        newPos.x = Random.Range(transform.position.x - 15, transform.position.y);
+        Vector2 newPos = transform.position;
+        newPos.y = transform.position.y-1;
+        //newPos.x = Random.Range(transform.position.x - 15, transform.position.y-0.5f);
         Instantiate(objHitSkill2, newPos, Quaternion.identity);
-        Instantiate(objHitSkill2, new Vector2(newPos.x + 7, newPos.y + 0.5f), Quaternion.identity);
-        Instantiate(objHitSkill2, new Vector2(newPos.x + 14, newPos.y), Quaternion.identity);
+        Instantiate(objHitSkill2, new Vector2(newPos.x + 7, newPos.y), Quaternion.identity);
+        Instantiate(objHitSkill2, new Vector2(newPos.x - 7, newPos.y), Quaternion.identity);
     }
 }
 

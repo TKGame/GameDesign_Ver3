@@ -25,7 +25,7 @@ public class BlueMushroomScripts : BaseEnemyScripts {
     {
         if (playerObj != null)
         {
-            grounded = Physics2D.Linecast(groundCheck.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+           // grounded = Physics2D.Linecast(groundCheck.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
             if ((_timeDelay += Time.deltaTime) >= 3 && isJumb)
             {
                 rigid.AddForce(new Vector2(0, jumbForce));
@@ -56,9 +56,15 @@ public class BlueMushroomScripts : BaseEnemyScripts {
                 _player.Hit(damge);
             }
         }
-        if (colEnter.tag == "GroundTop" && grounded)
+        if(colEnter.tag == "Ground")
         {
             
+            grounded = true;
+            Debug.Log(grounded);
+        }
+        if (colEnter.tag == "GroundTop" && grounded)
+        {
+            Debug.Log("abc");
             int rand = Random.Range(0, 2);
             if (rand == 0 && rigid != null)
             {
@@ -72,5 +78,10 @@ public class BlueMushroomScripts : BaseEnemyScripts {
     {
         isMove = true;
         isJumb = false;
+        if(colExit.tag == "Ground")
+        {
+            grounded = false;
+            Debug.Log(grounded);
+        }
     }
 }

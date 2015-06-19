@@ -55,8 +55,8 @@ public class PlayerController : BaseGameObject {
         Move();
         if (timeAddHp > 1)
         {
-            if (HP < HpStart)
-                HP += 2;
+            //if (HP < HpStart)
+            //    HP += 2;
             if (Mana  < manaStart)
                 Mana += 1;
             timeAddHp = 0;

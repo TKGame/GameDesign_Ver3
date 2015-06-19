@@ -38,7 +38,11 @@ public class BaseGameObject : MonoBehaviour {
             _animator.SetBool("isDie", true);
             if (rigid != null)
                 rigid.gravityScale = 0;
-            GetComponent<BoxCollider2D>().enabled = false;
+            BoxCollider2D _box = GetComponent<BoxCollider2D>();
+            if (_box != null)
+            {
+                _box.enabled = false;
+            }
         }
     }
     

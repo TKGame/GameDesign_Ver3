@@ -157,7 +157,7 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
     void MoveCamera()
     {
         //battleCamera.position = new Vector3(player.transform.position.x, Mathf.Lerp(battleCamera.position.y, player.transform.position.y, 1),battleCamera.position.z);
-        battleCamera.position = new Vector3(player.transform.position.x, battleCamera.position.y, battleCamera.position.z);
+        battleCamera.position = new Vector3(player.transform.position.x, player.transform.position.y, battleCamera.position.z);
 
     }
 

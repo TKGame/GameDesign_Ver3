@@ -5,8 +5,8 @@ using System.Text;
 
 public class CTag 
 {
-    public string tagGound2 = "GroundTop";
-    public string tagPlayer = "Player";
-    public string tahEnemy = "Enemy";
+    public static string tagGound2 = "GroundTop";
+    public static string tagPlayer = "Player";
+    public static string tahEnemy = "Enemy";
 }
 

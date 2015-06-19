@@ -10,7 +10,7 @@ public class HitOfErgoth : HitOfEnemyScripts {
     }
     void OnTriggerEnter2D(Collider2D colEnter)
     {
-        if (colEnter.gameObject.tag == "Player")
+        if (colEnter.gameObject.tag == CTag.tagPlayer)
         {
             BoxCollider.enabled = false;
             PlayerController _player = colEnter.gameObject.GetComponent<PlayerController>();

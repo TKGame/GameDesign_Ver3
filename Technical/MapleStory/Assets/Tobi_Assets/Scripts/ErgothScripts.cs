@@ -21,7 +21,7 @@ public class ErgothScripts : BaseEnemyScripts {
 	// Use this for initialization
 	void Start () {
 	    _anim = gameObject.GetComponent<Animator>();
-        objPlayer = GameObject.FindGameObjectWithTag("Player").gameObject;
+        objPlayer = GameObject.FindGameObjectWithTag(CTag.tagPlayer).gameObject;
 
         //objHitAttack1.GetComponent<HitOfErgoth>().damgeRocket = damge;
         //objHitAttack2.GetComponent<HitOfErgoth>().damgeRocket = damge;

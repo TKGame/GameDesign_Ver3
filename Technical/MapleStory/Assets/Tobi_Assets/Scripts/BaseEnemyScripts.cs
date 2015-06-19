@@ -110,7 +110,7 @@ public class BaseEnemyScripts : BaseGameObject
 
     public void InitStart()
     {
-        playerObj = GameObject.FindGameObjectWithTag("Player").gameObject;
+        playerObj = GameObject.FindGameObjectWithTag(CTag.tagPlayer).gameObject;
         startPosition = transform.position;
     }
     /// <summary>

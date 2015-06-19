@@ -19,7 +19,7 @@ public class HitOfBloodHaf : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "Player")
+        if (col.tag == CTag.tagPlayer)
         {
             PlayerController _player = col.gameObject.GetComponent<PlayerController>();
             if (_player != null)

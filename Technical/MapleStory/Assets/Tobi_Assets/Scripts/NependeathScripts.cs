@@ -11,7 +11,7 @@ public class NependeathScripts : BaseEnemyScripts {
     public Rigidbody2D rocket;
 	// Use this for initialization
 	void Start () {
-        playerObj = GameObject.FindGameObjectWithTag("Player").gameObject;
+        playerObj = GameObject.FindGameObjectWithTag(CTag.tagPlayer).gameObject;
 
         _bullet = rocket.gameObject;
         _bullet.GetComponent<HitOfEnemyScripts>().damgeRocket = damge;
@@ -22,6 +22,7 @@ public class NependeathScripts : BaseEnemyScripts {
         }
 	}
 
+    // Hàm tạo các hit khi tấn công
     public void CreateHit()
     {
         if (speed < 0)
@@ -59,6 +60,7 @@ public class NependeathScripts : BaseEnemyScripts {
         Die();
 	}
 
+    // sét trạng thái regen ban đầu
     public void SetAnimatorRegen()
     {
         _animator.SetTrigger("stand");

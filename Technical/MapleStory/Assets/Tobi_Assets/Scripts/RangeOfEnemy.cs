@@ -11,7 +11,7 @@ public class RangeOfEnemy : MonoBehaviour {
 
     void OnTriggerStay2D(Collider2D colEnter)
     {
-        if(colEnter.tag == "Player")
+        if(colEnter.tag == CTag.tagPlayer)
         {
             obj.GetComponent<BaseEnemyScripts>().inAroundOfPlayer = true;
         }
@@ -19,7 +19,7 @@ public class RangeOfEnemy : MonoBehaviour {
 
     void OnTriggerExit2D(Collider2D colExit)
     {
-        if (colExit.tag == "Player")
+        if (colExit.tag == CTag.tagPlayer)
         {
             obj.GetComponent<BaseEnemyScripts>().inAroundOfPlayer = false;
         }

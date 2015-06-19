@@ -8,11 +8,11 @@ public class BlueSnailScripts : BaseEnemyScripts {
     public bool isAttack = false;
 
     float _timeDelay = 0;
-    float dis_TimeDelay = 3.0f;
+    public float dis_TimeDelay = 3.0f;
     void Start()
     {
         startPosition = transform.position;
-        playerObj = GameObject.FindGameObjectWithTag("Player").gameObject;
+        playerObj = GameObject.FindGameObjectWithTag(CTag.tagPlayer).gameObject;
     }
 
     // Update is called once per frame
@@ -69,7 +69,7 @@ public class BlueSnailScripts : BaseEnemyScripts {
 
     void OnTriggerEnter2D(Collider2D colEnter)
     {
-        if (colEnter.tag == "Player")
+        if (colEnter.tag == CTag.tagPlayer)
         {
             isAttack = true;
             PlayerController _player = colEnter.gameObject.GetComponent<PlayerController>();
@@ -78,7 +78,7 @@ public class BlueSnailScripts : BaseEnemyScripts {
                 _player.Hit(damge);
             }
         }
-        if(colEnter.tag == "GroundTop")
+        if(colEnter.tag == CTag.tagGound2)
         {
             Flip();
         }

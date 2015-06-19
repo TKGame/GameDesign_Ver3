@@ -21,7 +21,7 @@ public class DrextonScripts : BaseEnemyScripts {
     void Start()
     {
         startPosition = transform.position;
-        playerObj = GameObject.FindGameObjectWithTag("Player").gameObject;
+        playerObj = GameObject.FindGameObjectWithTag(CTag.tagPlayer).gameObject;
         _distanceToPlayer = playerObj.transform.position.x - this.transform.position.x;
         if (_distanceToPlayer >= 0)
         {
@@ -117,7 +117,7 @@ public class DrextonScripts : BaseEnemyScripts {
     #region XetVaCham
     void OnTriggerEnter2D(Collider2D colEnter)
     {
-        if (colEnter.tag == "Player")
+        if (colEnter.tag == CTag.tagPlayer)
         {
             isAttack = true;
         }

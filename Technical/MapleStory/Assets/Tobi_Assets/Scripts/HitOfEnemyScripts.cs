@@ -16,7 +16,7 @@ public class HitOfEnemyScripts : MonoBehaviour {
 
     public virtual void OnTriggerEnter2D(Collider2D colEnter)
     {
-        if(colEnter.tag == "Player")
+        if(colEnter.tag == CTag.tagPlayer)
         {
             PlayerController _player = colEnter.gameObject.GetComponent<PlayerController>();
             _player.Hit(damgeRocket);

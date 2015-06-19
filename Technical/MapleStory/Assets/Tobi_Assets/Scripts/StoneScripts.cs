@@ -19,7 +19,7 @@ public class StoneScripts : BaseEnemyScripts {
 	// Use this for initialization
 	void Start () {
         startPosition = transform.position;
-        playerObj = GameObject.FindGameObjectWithTag("Player").gameObject;
+        playerObj = GameObject.FindGameObjectWithTag(CTag.tagPlayer).gameObject;
         hitInfo.GetComponent<HitOfStoneScripts>().damgeRocket = damge;
         //_bullet = hitInfo.gameObject;
         //_bullet.GetComponent<HitOfEnemyScripts>().damgeRocket = damge;
@@ -108,14 +108,14 @@ public class StoneScripts : BaseEnemyScripts {
     #region XetVaCham
     void OnTriggerEnter2D(Collider2D colEnter)
     {
-        if(colEnter.tag == "GroundTop")
+        if(colEnter.tag == CTag.tagGound2)
         {
             Flip();
         }
     }
     void OnTriggerStay2D(Collider2D collStay)
     {
-        if (collStay.tag == "Player")
+        if (collStay.tag == CTag.tagPlayer)
         {
             isAttack = true;
         }

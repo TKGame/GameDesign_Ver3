@@ -47,6 +47,7 @@ public class BloodHafScripts : BaseEnemyScripts {
                 }
             }
         }
+        Die();
 	}
 
     [ContextMenu("create")]

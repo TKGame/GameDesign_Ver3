@@ -83,13 +83,13 @@ public class BlueSnailScripts : BaseEnemyScripts {
             Flip();
         }
     }
-    //void OnTriggerStay2D(Collider2D collStay)
-    //{
-    //    if(collStay.tag == "Player")
-    //    {
-    //        isAttack = true;
-    //    }
-    //}
+    void OnTriggerStay2D(Collider2D collStay)
+    {
+        if (collStay.tag == "Player")
+        {
+            isAttack = true;
+        }
+    }
 
     void OnTriggerExit2D(Collider2D colExit)
     {

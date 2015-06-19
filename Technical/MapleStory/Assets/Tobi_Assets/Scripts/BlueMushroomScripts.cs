@@ -64,7 +64,7 @@ public class BlueMushroomScripts : BaseEnemyScripts {
         }
         if (colEnter.tag == "GroundTop" && grounded)
         {
-            Debug.Log("abc");
+            //
             int rand = Random.Range(0, 2);
             if (rand == 0 && rigid != null)
             {

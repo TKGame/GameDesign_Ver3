@@ -9,13 +9,15 @@ public class BlueMushroomScripts : BaseEnemyScripts {
     // xác định đứng trên mặt đất
     public bool grounded;
     //điểm xác định đứng trên mặt đất
-    Transform groundCheck;
+    public Transform groundCheck;
 
     float _timeDelay = 0;
 	void Start () {
         InitStart();
         isMove = true;
         groundCheck = transform.Find("groundCheck");
+
+        rigid = gameObject.GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
@@ -58,7 +60,7 @@ public class BlueMushroomScripts : BaseEnemyScripts {
         {
             
             int rand = Random.Range(0, 2);
-            if (rand == 0)
+            if (rand == 0 && rigid != null)
             {
                 rigid.AddForce(new Vector2(10, 650));
             }

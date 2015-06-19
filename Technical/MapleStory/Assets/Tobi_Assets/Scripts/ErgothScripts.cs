@@ -23,12 +23,18 @@ public class ErgothScripts : BaseEnemyScripts {
 	    _anim = gameObject.GetComponent<Animator>();
         objPlayer = GameObject.FindGameObjectWithTag(CTag.tagPlayer).gameObject;
 
+        
         //objHitAttack1.GetComponent<HitOfErgoth>().damgeRocket = damge;
         //objHitAttack2.GetComponent<HitOfErgoth>().damgeRocket = damge;
         //objHitAttack3.GetComponent<HitOfErgoth>().damgeRocket = damge;
         //objHitSkill2.GetComponent<HitOfErgoth>().damgeRocket = damge + 5;
 	}
 	
+    public void SetFrameFinalRegen()
+    {
+        _anim.SetTrigger("isShow");
+    }
+
 	// Update is called once per frame
 	void Update () {
 	    if(inAroundOfPlayer)

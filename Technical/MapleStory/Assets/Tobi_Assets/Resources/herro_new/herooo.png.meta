@@ -1,0 +1,814 @@
+fileFormatVersion: 2
+guid: dbf22ba06d652004aab6ff95b0877415
+timeCreated: 1434735339
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: herooo_0
+    21300002: herooo_1
+    21300004: herooo_2
+    21300006: herooo_3
+    21300008: herooo_4
+    21300010: herooo_5
+    21300012: herooo_6
+    21300014: herooo_7
+    21300016: herooo_8
+    21300018: herooo_9
+    21300020: herooo_10
+    21300022: herooo_11
+    21300024: herooo_12
+    21300026: herooo_13
+    21300028: herooo_14
+    21300030: herooo_15
+    21300032: herooo_16
+    21300034: herooo_17
+    21300036: herooo_18
+    21300038: herooo_19
+    21300040: herooo_20
+    21300042: herooo_21
+    21300044: herooo_22
+    21300046: herooo_23
+    21300048: herooo_24
+    21300050: herooo_25
+    21300052: herooo_26
+    21300054: herooo_27
+    21300056: herooo_28
+    21300058: herooo_29
+    21300060: herooo_30
+    21300062: herooo_31
+    21300064: herooo_32
+    21300066: herooo_33
+    21300068: herooo_34
+    21300070: herooo_35
+    21300072: herooo_36
+    21300074: herooo_37
+    21300076: herooo_38
+    21300078: herooo_39
+    21300080: herooo_40
+    21300082: herooo_41
+    21300084: herooo_42
+    21300086: herooo_43
+    21300088: herooo_44
+    21300090: herooo_45
+    21300092: herooo_46
+    21300094: herooo_47
+    21300096: herooo_48
+    21300098: herooo_49
+    21300100: herooo_50
+    21300102: herooo_51
+    21300104: herooo_52
+    21300106: herooo_53
+    21300108: herooo_54
+    21300110: herooo_55
+    21300112: herooo_56
+    21300114: herooo_57
+    21300116: herooo_58
+    21300118: herooo_59
+    21300120: herooo_60
+    21300122: herooo_61
+    21300124: herooo_62
+    21300126: herooo_63
+    21300128: herooo_64
+    21300130: herooo_65
+    21300132: herooo_66
+    21300134: herooo_67
+    21300136: herooo_68
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: herooo_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 806
+        width: 78
+        height: 72
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_1
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 806
+        width: 79
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_2
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 806
+        width: 79
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_3
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 806
+        width: 77
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_4
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 806
+        width: 77
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_5
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 806
+        width: 77
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_6
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 806
+        width: 77
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_7
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 806
+        width: 77
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_8
+      rect:
+        serializedVersion: 2
+        x: 673
+        y: 806
+        width: 77
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_9
+      rect:
+        serializedVersion: 2
+        x: 755
+        y: 806
+        width: 77
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_10
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 608
+        width: 77
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_11
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 608
+        width: 78
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_12
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 608
+        width: 77
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_13
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 608
+        width: 77
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_14
+      rect:
+        serializedVersion: 2
+        x: 571
+        y: 616
+        width: 43
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_15
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 328
+        width: 96
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_16
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 328
+        width: 49
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_17
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 328
+        width: 70
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_18
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 329
+        width: 70
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_19
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 329
+        width: 68
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_20
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 327
+        width: 67
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_21
+      rect:
+        serializedVersion: 2
+        x: 675
+        y: 322
+        width: 73
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_22
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 220
+        width: 85
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_23
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 220
+        width: 85
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_24
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 220
+        width: 85
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_25
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 220
+        width: 85
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_26
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 173
+        width: 12
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_27
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 197
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_28
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 197
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_29
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 190
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_30
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 158
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_31
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 153
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_32
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 148
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_33
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 95
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_34
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 94
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_35
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 93
+        width: 12
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_36
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 94
+        width: 10
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_37
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 101
+        width: 16
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_38
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 104
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_39
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 71
+        width: 12
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_40
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 95
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_41
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 90
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_42
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 97
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_43
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 97
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_44
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 88
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_45
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 87
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_46
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 90
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_47
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 82
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_48
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 76
+        width: 14
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_49
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 83
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_50
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 79
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_51
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 16
+        width: 55
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_52
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 16
+        width: 62
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_53
+      rect:
+        serializedVersion: 2
+        x: 421
+        y: 16
+        width: 63
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_54
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 56
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_55
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 56
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_56
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 47
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_57
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 52
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_58
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 57
+        width: 30
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_59
+      rect:
+        serializedVersion: 2
+        x: 571
+        y: 16
+        width: 53
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_60
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 16
+        width: 62
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_61
+      rect:
+        serializedVersion: 2
+        x: 692
+        y: 16
+        width: 53
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_62
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 16
+        width: 62
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_63
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 16
+        width: 53
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_64
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 51
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_65
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 46
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_66
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 47
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_67
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 42
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: herooo_68
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 30
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

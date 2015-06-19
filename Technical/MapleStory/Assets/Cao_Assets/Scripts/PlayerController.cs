@@ -160,6 +160,12 @@ public class PlayerController : BaseGameObject {
         OnOffAnimatorMove(_posTouch);
         OnOffIsTrigger();
     }
+
+    public void SetFrameFinalAttack()
+    {
+        _animator.SetTrigger("stand");
+    }
+
     public void Move()
     {
         OnOffIsTrigger();  

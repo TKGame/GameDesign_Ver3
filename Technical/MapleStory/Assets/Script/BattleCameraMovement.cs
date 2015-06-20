@@ -28,8 +28,10 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
         if (player != null) 
         {
             MoveCameraByPlayer();
+            ManaSkill();
             //playerControl.MoveToTarget(posTouch);
         }
+      
        
 	}
 
@@ -101,25 +103,38 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
     public void AttackSkillFire()
     {
         if (playerControl.finishSkillFire == false)
-            if (playerControl.Mana > playerControl.manaSkillFire)//kiem tra xem con du mana dung Skill khong
-                if (CheckSkillCowdown(cowdownFire))//kiem tra cowdown
-                    playerControl.SkillFire(); //thuc hien Skill
+            if (playerControl.Mana >= playerControl.manaSkillFire)//kiem tra xem con du mana dung Skill khong
+            {
+                cowdownFire.active = true;
+                if (CheckSkillCowdown(cowdownFire) && cowdownFire.active == true)//kiem tra cowdown
+                    playerControl.SkillFire(); //thuc hien Skill                
+            }                   
     }
     //khi nhan button skill Tele
     public void AttackSkillTele()
     {
         if (playerControl.finishSkillFire == false)
-            if (playerControl.Mana > playerControl.manaSkillTele)
-                if (CheckSkillCowdown(cowdownTele))
+            if (playerControl.Mana >= playerControl.manaSkillTele)
+            {
+                cowdownTele.active = true;
+                if (CheckSkillCowdown(cowdownTele) && cowdownTele.active == true)
                     playerControl.SkillTeleportation();
+            }
+            
+            
     }
     //khi nhan button skill Arrow
     public void AttackSkillArrow()
     {
         if (playerControl.finishSkillFire == false)
-            if (playerControl.Mana > playerControl.manaSkillArrow)
-                if (CheckSkillCowdown(cowdownArrow))
-                    playerControl.SkillArrowIce();   
+            if (playerControl.Mana >= playerControl.manaSkillArrow)
+            {
+                cowdownArrow.active = true;
+                if (CheckSkillCowdown(cowdownArrow) && cowdownArrow.active == true)
+                    playerControl.SkillArrowIce();
+            }
+            
+            
     }
     //kiem tra xem skill da cowdown xong chua
     bool CheckSkillCowdown(CowdownSkill typeSkill)
@@ -130,6 +145,33 @@ public class BattleCameraMovement : MonoBehaviour, IPointerDownHandler, IPointer
             return  true;
         }
         return false;
+    }
+    void ManaSkill()
+    {
+        if (playerControl.Mana < playerControl.manaSkillArrow)
+        {
+            cowdownArrow.active = false;
+        }
+        if (playerControl.Mana >= playerControl.manaSkillArrow)
+        {
+            cowdownArrow.active = true;
+        }
+        if (playerControl.Mana < playerControl.manaSkillFire)
+        {
+            cowdownFire.active = false;
+        }
+        if (playerControl.Mana >= playerControl.manaSkillFire)
+        {
+            cowdownFire.active = true;
+        }
+        if (playerControl.Mana < playerControl.manaSkillTele)
+        {
+            cowdownTele.active = false;
+        }
+        if (playerControl.Mana >= playerControl.manaSkillTele)
+        {
+            cowdownTele.active = true;
+        }
     }
     public void Jumb()
     {

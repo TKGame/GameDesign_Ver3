@@ -9,8 +9,11 @@ public class CowdownSkill : MonoBehaviour {
     private float timeDelay;
     private float timeCowdownStart;
     public bool unlookSkill;
+
+    private float kill = 1;
 	// Use this for initialization
 	void Start () {
+        active = true;
         imageCowdown = gameObject.GetComponent<Image>();
         timeCowdownStart = timeCowdown;
 	}
@@ -25,28 +28,39 @@ public class CowdownSkill : MonoBehaviour {
         //timeDelay += Time.deltaTime;
         //imageCowdown.fillAmount = timeCowdown * 1 / timeCowdownStart;
         if (unlookSkill == true)
+        {
             CountDown();
+            if (active == true)
+                imageCowdown.fillAmount = kill;
+            else
+                imageCowdown.fillAmount = 1;
+        }
 	}
+    public bool active = true;
     public void ResetTimeCountdown()
     {
-        imageCowdown.fillAmount = 1;
+        kill = 1;
     }
 
     void CountDown()
-    {        
-        imageCowdown.fillAmount -= 1 / timeCowdownStart * Time.deltaTime;
+    {
+        kill -= 1 / timeCowdownStart * Time.deltaTime;
     }
     //kiem tra thoi gian cowdown da xong chwua 
     public bool SkillCowdown()
     {
         if (imageCowdown != null)
         {
-            if (imageCowdown.fillAmount <= 0)
+            if (kill <= 0)
             {
                 return true;
             }
         }
         return false;
+    }
+    public void SetSkill()
+    {
+        imageCowdown.fillAmount = 1; 
     }
     //lay time cowdown start
     public float GetTimeDelayStart()

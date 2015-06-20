@@ -26,7 +26,10 @@ public class GolemScript : BaseEnemyScripts {
                     _timeDelay = 0;
                 }
                 UpdateStatusMove();
+                
             }
+            _animator.SetBool("isAttack", isAttack);
+            _animator.SetBool("isMove", !isAttack);
         }
 	}
 
@@ -69,7 +72,8 @@ public class GolemScript : BaseEnemyScripts {
     {
         if (colEnter.tag == CTag.tagPlayer)
         {
-            //isAttack = true;
+            //Debug.Log("vc player");
+            isAttack = true;
             //PlayerController _player = colEnter.gameObject.GetComponent<PlayerController>();
             //if (_player != null)
             //{

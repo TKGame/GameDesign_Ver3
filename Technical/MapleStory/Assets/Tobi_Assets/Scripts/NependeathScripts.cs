@@ -9,6 +9,8 @@ public class NependeathScripts : BaseEnemyScripts {
 
     GameObject _bullet;
     public Rigidbody2D rocket;
+
+    public GameObject healthObj;
 	// Use this for initialization
 	void Start () {
         playerObj = GameObject.FindGameObjectWithTag(CTag.tagPlayer).gameObject;
@@ -20,7 +22,14 @@ public class NependeathScripts : BaseEnemyScripts {
         {
             Flip();
         }
+        
+        healthObj.gameObject.SetActive(false);
 	}
+
+    public void SetActiveHealth()
+    {
+        healthObj.gameObject.SetActive(true);
+    }
 
     // Hàm tạo các hit khi tấn công
     public void CreateHit()

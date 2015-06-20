@@ -18,6 +18,8 @@ public class ErgothScripts : BaseEnemyScripts {
     public GameObject objHitAttack3;
 
     public GameObject objHitSkill2;
+    public GameObject objHitSkill3;
+    public Transform tranformCreateHit;
 	// Use this for initialization
 	void Start () {
 	    _anim = gameObject.GetComponent<Animator>();
@@ -37,17 +39,21 @@ public class ErgothScripts : BaseEnemyScripts {
 
 	// Update is called once per frame
 	void Update () {
-	    if(inAroundOfPlayer)
+        if (objPlayer != null)
         {
-            if((_timeDelay += Time.deltaTime) >= distanceTimeAttack)
+            Die();
+            if (inAroundOfPlayer)
             {
-                _indexAttack = Random.Range(minRandom,maxRandom);
-                _anim.SetBool("isAttack"+_indexAttack,true);
-                _timeDelay = 0.0f;
+                if ((_timeDelay += Time.deltaTime) >= distanceTimeAttack)
+                {
+                    _indexAttack = Random.Range(minRandom, maxRandom);
+                    _anim.SetBool("isAttack" + _indexAttack, true);
+                    _timeDelay = 0.0f;
+                }
             }
+            else
+                _anim.SetBool("isAttack" + _indexAttack, false);
         }
-        else
-            _anim.SetBool("isAttack" + _indexAttack, false);
 	}
 
     public void SetFrameAttackFinal()
@@ -58,7 +64,8 @@ public class ErgothScripts : BaseEnemyScripts {
     public void CreateHitAttack1()
     {
         Vector2 newPos = new Vector2();
-        newPos.y = transform.position.y - 4;
+        //newPos.y = transform.position.y - 4;
+        newPos.y = tranformCreateHit.position.y;
         newPos.x = Random.Range(transform.position.x - 15,transform.position.x-3);
         Instantiate(objHitAttack1,newPos,Quaternion.identity);
         Instantiate(objHitAttack1, new Vector2(newPos.x+5,newPos.y), Quaternion.identity);
@@ -68,7 +75,7 @@ public class ErgothScripts : BaseEnemyScripts {
     public void CreateHitAttack2()
     {
         Vector2 newPos = objPlayer.transform.position;
-        newPos.y = transform.position.y - 5;
+        newPos.y = tranformCreateHit.position.y;
         //newPos.x = Random.Range(transform.position.x - 15, transform.position.x - 5);
         Instantiate(objHitAttack2, newPos,Quaternion.identity);
         Instantiate(objHitAttack2, new Vector2(newPos.x+4,newPos.y), Quaternion.identity);
@@ -86,9 +93,19 @@ public class ErgothScripts : BaseEnemyScripts {
         Vector2 newPos = transform.position;
         newPos.y = transform.position.y-1;
         //newPos.x = Random.Range(transform.position.x - 15, transform.position.y-0.5f);
-        Instantiate(objHitSkill2, newPos, Quaternion.identity);
+        Instantiate(objHitSkill2, new Vector2(newPos.x,newPos.y+1), Quaternion.identity);
         Instantiate(objHitSkill2, new Vector2(newPos.x + 7, newPos.y), Quaternion.identity);
         Instantiate(objHitSkill2, new Vector2(newPos.x - 7, newPos.y), Quaternion.identity);
+    }
+
+    public void CreateHitSkill3()
+    {
+        //newPos.x = Random.Range(transform.position.x - 15, transform.position.y-0.5f);
+        GameObject obj1= Instantiate(objHitSkill3, tranformCreateHit.position, Quaternion.identity) as GameObject;
+        obj1.gameObject.GetComponent<BaseEnemyScripts>().isMove = true;
+        GameObject obj2 = Instantiate(objHitSkill3, tranformCreateHit.position, Quaternion.identity) as GameObject;
+        obj2.GetComponent<BaseEnemyScripts>().distanceMove = 6;
+        Instantiate(objHitSkill3, tranformCreateHit.position, Quaternion.identity);
     }
 }
 

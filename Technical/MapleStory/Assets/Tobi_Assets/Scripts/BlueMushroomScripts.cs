@@ -60,7 +60,6 @@ public class BlueMushroomScripts : BaseEnemyScripts {
         {
             
             grounded = true;
-            Debug.Log(grounded);
         }
         if (colEnter.tag == "GroundTop" && grounded)
         {
@@ -81,7 +80,6 @@ public class BlueMushroomScripts : BaseEnemyScripts {
         if(colExit.tag == "Ground")
         {
             grounded = false;
-            Debug.Log(grounded);
         }
     }
 }

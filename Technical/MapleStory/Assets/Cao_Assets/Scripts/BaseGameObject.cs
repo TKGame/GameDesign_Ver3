@@ -9,6 +9,10 @@ public class BaseGameObject : MonoBehaviour {
     protected Animator _animator;
     public GameObject bullet;
     protected Rigidbody2D rigid;
+    public GameObject item;
+
+    public bool isHP = false;
+    public bool isMana = false;
 
     void Awake()
     {
@@ -42,6 +46,17 @@ public class BaseGameObject : MonoBehaviour {
             if (_box != null)
             {
                 _box.enabled = false;
+            }
+        }
+    }
+
+    public void CreateItem()
+    {
+        if (isHP || isMana)
+        {
+            if (item != null)
+            {
+                Instantiate(item, transform.position, Quaternion.identity);
             }
         }
     }

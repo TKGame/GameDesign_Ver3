@@ -15,6 +15,7 @@ public class BaseEnemyScripts : BaseGameObject
 {
     // biến xác định Flip
 
+    //public bool isSkillTele;
     // khoảng cách di chuyển quanh vị trí ban đầu
     public float distanceMove = 0.0f;
     // vị trí ban đầu 

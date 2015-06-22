@@ -1,0 +1,165 @@
+fileFormatVersion: 2
+guid: 5bb3ba154b46e0c49b5df00a2a21c165
+timeCreated: 1434959338
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: map nhiu cuc_0
+    21300002: map nhiu cuc_1
+    21300004: map nhiu cuc_2
+    21300006: map nhiu cuc_3
+    21300008: map nhiu cuc_4
+    21300010: map nhiu cuc_5
+    21300012: map nhiu cuc_6
+    21300014: map nhiu cuc_7
+    21300016: map nhiu cuc_8
+    21300018: map nhiu cuc_9
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: map nhiu cuc_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 714
+        width: 70
+        height: 69
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: map nhiu cuc_1
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 624
+        width: 100
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: map nhiu cuc_2
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 717
+        width: 105
+        height: 55
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: map nhiu cuc_3
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 641
+        width: 185
+        height: 57
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: map nhiu cuc_4
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 539
+        width: 286
+        height: 57
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: map nhiu cuc_5
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 560
+        width: 38
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: map nhiu cuc_6
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 344
+        width: 196
+        height: 157
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: map nhiu cuc_7
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 213
+        width: 603
+        height: 89
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: map nhiu cuc_8
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 118
+        width: 544
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: map nhiu cuc_9
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 16
+        width: 460
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

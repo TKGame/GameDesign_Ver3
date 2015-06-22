@@ -8,6 +8,7 @@ public class MapMovePingPong : MonoBehaviour {
     public bool isUp;
     private Vector3 posStart;
     private GameObject _player;
+    public Transform check;
     void Start()
     {
         posStart = transform.position;
@@ -18,17 +19,25 @@ public class MapMovePingPong : MonoBehaviour {
     }
     void Move()
     {
+        
         if (isUp == true)
         {
-            transform.position += new Vector3(0, speed, 0) * Time.deltaTime;
-            if (Vector3.Distance(transform.position, posStart) > distance)
+            //gameObject.transform.position = new Vector3(transform.position.x, Mathf.PingPong(Time.time, distance), transform.position.z);
+            gameObject.transform.position += new Vector3(0, speed, 0) * Time.deltaTime;
+            if (Vector3.Distance(transform.position, posStart) >= distance)
+            {
                 speed = -speed;
+            }
         }
         else
         {
-            transform.position += new Vector3(speed, 0, 0) * Time.deltaTime;
-            if (Vector3.Distance(transform.position, posStart) > distance)
-                speed = -speed;
+            Debug.Log(transform.position);
+            //gameObject.transform.position = new Vector3(Mathf.PingPong(Time.time, distance), transform.position.y, transform.position.z);
+            gameObject.transform.position += new Vector3(speed, 0, 0) * Time.deltaTime;
+            if (Vector3.Distance(transform.position, posStart) >= distance)
+            {
+                speed = -speed;                
+            }
             
         }
         MovePlayer();
@@ -55,5 +64,9 @@ public class MapMovePingPong : MonoBehaviour {
         {
             _player = col.gameObject;
         }
+    }
+    void OnTriggerExit2D(Collider2D col)
+    {
+        _player = null;
     }
 }

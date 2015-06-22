@@ -67,6 +67,9 @@ public class MapMovePingPong : MonoBehaviour {
     }
     void OnTriggerExit2D(Collider2D col)
     {
-        _player = null;
+        if (col.tag == "Player")
+        {
+            _player = null;
+        }
     }
 }

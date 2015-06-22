@@ -65,8 +65,10 @@ public class DrextonScripts : BaseEnemyScripts {
     // Update is called once per frame
     void Update()
     {
+
         if (playerObj != null)
         {
+            Die();
             if (inAroundOfPlayer)
             {
                 isAttack = true;

@@ -202,7 +202,7 @@ public class PlayerController : BaseGameObject {
     {
         if (rigid.velocity.y >= 0 && isJumb == true && rigid.velocity.x == 0)
         {            
-            GetComponent<BoxCollider2D>().isTrigger = true;
+            //GetComponent<BoxCollider2D>().isTrigger = true;
         }
         if (rigid.velocity.y < 0)
         {            

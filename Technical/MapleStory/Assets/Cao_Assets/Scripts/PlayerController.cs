@@ -50,7 +50,10 @@ public class PlayerController : BaseGameObject {
     private float timeAddHp = 0;
 	// Update is called once per frame
 	void Update () {
-        
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            Jumb();
+        }
         PosLimit();
         Move();
         if (timeAddHp > 1)
@@ -197,7 +200,7 @@ public class PlayerController : BaseGameObject {
     //bat tat trigger cua player khi nhay
     void OnOffIsTrigger()
     {
-        if (rigid.velocity.y >= 0 && isJumb == true)
+        if (rigid.velocity.y >= 0 && isJumb == true && rigid.velocity.x == 0)
         {            
             GetComponent<BoxCollider2D>().isTrigger = true;
         }

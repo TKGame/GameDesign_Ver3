@@ -52,21 +52,24 @@ public class ButtonHandle : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (isRight == true)
+        if (isJumb == false)
         {
-            playerControll.speed = 5;
-            if (!playerControll.facingRight && playerControll.isMove)
+            if (isRight == true)
             {
-                playerControll.Flip();
+                playerControll.speed = 5;
+                if (!playerControll.facingRight && playerControll.isMove)
+                {
+                    playerControll.Flip();
+                }
             }
-        }
-        else
-        {
-            if (playerControll.facingRight && playerControll.isMove)
+            else
             {
-                playerControll.Flip();
+                if (playerControll.facingRight && playerControll.isMove)
+                {
+                    playerControll.Flip();
+                }
+                playerControll.speed = -5;
             }
-            playerControll.speed = -5;
         }
     }
     public void OnPointerExit(PointerEventData eventData)

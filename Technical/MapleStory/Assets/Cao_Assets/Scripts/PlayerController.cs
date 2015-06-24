@@ -50,10 +50,10 @@ public class PlayerController : BaseGameObject {
     private float timeAddHp = 0;
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            Jumb();
-        }
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+        //    Jumb();
+        //}
         PosLimit();
         Move();
         if (timeAddHp > 1)
@@ -66,7 +66,9 @@ public class PlayerController : BaseGameObject {
         }
         timeAddHp += Time.deltaTime;
         Die();
-        grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));        
+        grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+       // Debug.Log(grounded);
+        _animator.SetBool("isJumb", !grounded);
         UpdateManaAndHp();
 	}
     //quay huong di chuyen cua Player
@@ -112,7 +114,6 @@ public class PlayerController : BaseGameObject {
     public void MoveToTarget(Vector3 posTarget) 
     {
         MovePlayer(posTarget);
-
     }
     //di chuyen player
     void MovePlayer(Vector3 _posTouch)
@@ -133,7 +134,6 @@ public class PlayerController : BaseGameObject {
         }
         if (isMouse == true)
         {
-            
             if (transform.position.x <= _posTouch.x && !facingRight)
             {
                 Flip();
@@ -151,10 +151,12 @@ public class PlayerController : BaseGameObject {
         {
             if (DistanceClickMouse(transform.position, _posTouch))
             {
-                _animator.SetTrigger("isJump");
+                //_animator.SetTrigger("isJump");
+                //Debug.Log("jumb");
                 isJumb = true;
                 if (isJumb == true && Mathf.Abs(rigid.velocity.y) < 0.2f)
                 {
+                    Debug.Log("jumb");
                     JumbPlayer();
                 }
             }

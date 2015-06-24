@@ -15,7 +15,6 @@ public class BoomController : BaseEnemyScripts {
 	}
     void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("no booom");
         if (col.tag == "Player")
         {
             PlayerController _player = col.GetComponent<PlayerController>();

@@ -23,7 +23,6 @@ public class ButtonHandle : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     {              
         if (isJumb == false)
         {
-            Debug.Log("Is Press = " + isPress);
             if (isRight == true)
             {
                 playerControll.speed = 5;
@@ -41,12 +40,14 @@ public class ButtonHandle : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
                 playerControll.speed = -5;
             }
             playerControll.isMove = true;
-            Debug.Log("Button Down");
         }
         else
         {
             if (playerControll != null)
+            {
+                Debug.Log("asd");
                 playerControll.Jumb();
+            } 
         }
         //throw new System.NotImplementedException();
     }
@@ -82,7 +83,6 @@ public class ButtonHandle : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         if (isJumb == false)
         {
             playerControll.isMove = false;
-            Debug.Log("Button Up");
         }
         else
         {

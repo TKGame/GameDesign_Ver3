@@ -31,7 +31,6 @@ public class MapMovePingPong : MonoBehaviour {
         }
         else
         {
-            Debug.Log(transform.position);
             //gameObject.transform.position = new Vector3(Mathf.PingPong(Time.time, distance), transform.position.y, transform.position.z);
             gameObject.transform.position += new Vector3(speed, 0, 0) * Time.deltaTime;
             if (Vector3.Distance(transform.position, posStart) >= distance)

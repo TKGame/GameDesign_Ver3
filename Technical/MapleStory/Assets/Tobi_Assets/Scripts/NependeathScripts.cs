@@ -16,7 +16,7 @@ public class NependeathScripts : BaseEnemyScripts {
         playerObj = GameObject.FindGameObjectWithTag(CTag.tagPlayer).gameObject;
 
         _bullet = rocket.gameObject;
-        _bullet.GetComponent<HitOfEnemyScripts>().damgeRocket = damge;
+        //_bullet.GetComponent<HitOfEnemyScripts>().damgeRocket = damge;
 
         if(playerObj.transform.position.x>transform.position.x)
         {
@@ -34,16 +34,17 @@ public class NependeathScripts : BaseEnemyScripts {
     // Hàm tạo các hit khi tấn công
     public void CreateHit()
     {
-        if (speed < 0)
-        {
-            Rigidbody2D bulletInstance = Instantiate(rocket, posCreateHit.position, Quaternion.identity) as Rigidbody2D;
-            bulletInstance.velocity = new Vector2(-3, 0);
-        }
-        else
-        {
-            Rigidbody2D bulletInstance = Instantiate(rocket, posCreateHit.position, Quaternion.Euler(new Vector3(0, 0, 180.0f))) as Rigidbody2D;
-            bulletInstance.velocity = new Vector2(3, 0);
-        }
+        Instantiate(rocket, posCreateHit.position, Quaternion.identity);
+        //if (speed < 0)
+        //{
+        //    Rigidbody2D bulletInstance = Instantiate(rocket, posCreateHit.position, Quaternion.identity) as Rigidbody2D;
+        //    bulletInstance.velocity = new Vector2(-3, 0);
+        //}
+        //else
+        //{
+        //    Rigidbody2D bulletInstance = Instantiate(rocket, posCreateHit.position, Quaternion.Euler(new Vector3(0, 0, 180.0f))) as Rigidbody2D;
+        //    bulletInstance.velocity = new Vector2(3, 0);
+        //}
     }
 
 	// Update is called once per frame
@@ -73,6 +74,20 @@ public class NependeathScripts : BaseEnemyScripts {
     public void SetAnimatorRegen()
     {
         _animator.SetTrigger("stand");
+    }
+
+    public void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.tag == CTag.tagHitOfPlayer)
+        {
+            //Debug.Log("hit");
+            _animator.SetBool("isHit", true);
+        }
+    }
+
+    public void SetFrameFinalHit()
+    {
+        _animator.SetBool("isHit", false);
     }
 
     //public void CreateHit(int n)

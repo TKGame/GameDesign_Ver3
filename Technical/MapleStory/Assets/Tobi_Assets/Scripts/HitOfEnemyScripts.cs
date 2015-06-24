@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class HitOfEnemyScripts : MonoBehaviour {
-    Animator _anim;
+    public Animator _anim;
 
     public float timeLife;
 

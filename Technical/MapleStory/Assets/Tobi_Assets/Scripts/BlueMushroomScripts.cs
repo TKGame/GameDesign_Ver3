@@ -12,12 +12,16 @@ public class BlueMushroomScripts : BaseEnemyScripts {
     public Transform groundCheck;
 
     float _timeDelay = 0;
+
+    float _startSpeed;
 	void Start () {
         InitStart();
         isMove = true;
         groundCheck = transform.Find("groundCheck");
 
         rigid = gameObject.GetComponent<Rigidbody2D>();
+
+        _startSpeed = speed;
 	}
 	
 	// Update is called once per frame
@@ -58,7 +62,6 @@ public class BlueMushroomScripts : BaseEnemyScripts {
         }
         if(colEnter.tag == "Ground")
         {
-            
             grounded = true;
         }
         if (colEnter.tag == "GroundTop" && grounded)
@@ -67,12 +70,23 @@ public class BlueMushroomScripts : BaseEnemyScripts {
             int rand = Random.Range(0, 2);
             if (rand == 0 && rigid != null)
             {
-                rigid.AddForce(new Vector2(10, 650));
+                rigid.AddForce(new Vector2(10, jumbForce));
             }
             else 
                 Flip();
         }
+        if(colEnter.tag == CTag.tagHitOfPlayer)
+        {
+            _animator.SetBool("isHit", true);
+            speed = 0;
+        }
     }
+    public void SetFrameFinalHit()
+    {
+        _animator.SetBool("isHit", false);
+        speed = _startSpeed;
+    }
+    
     void OnTriggerExit2D(Collider2D colExit)
     {
         isMove = true;

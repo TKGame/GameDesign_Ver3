@@ -17,6 +17,9 @@ public class DrextonScripts : BaseEnemyScripts {
     GameObject _bullet;
 
     public Rigidbody2D rocket;
+
+    float _startSpeed = 0;
+
     // Use this for initialization
     void Start()
     {
@@ -29,6 +32,7 @@ public class DrextonScripts : BaseEnemyScripts {
         } 
         _bullet = rocket.gameObject;
         _bullet.GetComponent<HitOfEnemyScripts>().damgeRocket = damge;
+        _startSpeed = speed;
     }
 
     //public void createHit(int n)
@@ -116,6 +120,12 @@ public class DrextonScripts : BaseEnemyScripts {
         Flip();
     }
 
+    public void SetFrameFinalHit()
+    {
+        _animator.SetBool("isHit", false);
+        speed = _startSpeed;
+    }
+
     #region XetVaCham
     void OnTriggerEnter2D(Collider2D colEnter)
     {
@@ -126,6 +136,11 @@ public class DrextonScripts : BaseEnemyScripts {
         if(colEnter.tag == "GroundTop")
         {
             Flip();
+        }
+        if(colEnter.tag == CTag.tagHitOfPlayer)
+        {
+            _animator.SetBool("isHit", true);
+            speed = 0;
         }
     }
 

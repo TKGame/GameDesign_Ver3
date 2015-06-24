@@ -9,11 +9,13 @@ public class BlueSnailScripts : BaseEnemyScripts {
 
     float _timeDelay = 0;
     public float dis_TimeDelay = 3.0f;
+    float _startSpeed;
     void Start()
     {
         startPosition = transform.position;
         playerObj = GameObject.FindGameObjectWithTag(CTag.tagPlayer).gameObject;
-        //rigid = gameObject.GetComponent<Rigidbody2D>();
+        
+        _startSpeed = speed;
     }
 
     // Update is called once per frame
@@ -31,6 +33,7 @@ public class BlueSnailScripts : BaseEnemyScripts {
                 }
                 UpdateStatusMove();
             }
+            _animator.SetBool("isAttack", isAttack);
         }
     }
     public void UpdateStatusMove()
@@ -83,6 +86,18 @@ public class BlueSnailScripts : BaseEnemyScripts {
         {
             Flip();
         }
+        if(colEnter.tag == CTag.tagHitOfPlayer)
+        {
+            _animator.SetBool("isHit",true);
+            speed = 0;
+        }
+    }
+
+    public void SetFrameFinalHit()
+    {
+        _animator.SetBool("isHit", false);
+        speed = _startSpeed;
+        
     }
     void OnTriggerStay2D(Collider2D collStay)
     {
@@ -91,6 +106,7 @@ public class BlueSnailScripts : BaseEnemyScripts {
             isAttack = true;
             //rigid.AddForce(new Vector2(2,0));
         }
+        
     }
 
     void OnTriggerExit2D(Collider2D colExit)

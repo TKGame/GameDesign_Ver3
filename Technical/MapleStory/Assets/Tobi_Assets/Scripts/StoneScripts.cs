@@ -5,7 +5,7 @@ public class StoneScripts : BaseEnemyScripts {
 
     float _timeDelay = 0.0f;
 
-    float dis_TimeDelay = 2.0f;
+    float dis_TimeDelay = 3.0f;
 
     public bool isAttack;
 
@@ -16,11 +16,14 @@ public class StoneScripts : BaseEnemyScripts {
     public Transform posCreateHit;
 
     public GameObject hitInfo;
+
+    float _startSpeed=0;
 	// Use this for initialization
 	void Start () {
         startPosition = transform.position;
         playerObj = GameObject.FindGameObjectWithTag(CTag.tagPlayer).gameObject;
         hitInfo.GetComponent<HitOfStoneScripts>().damgeRocket = damge;
+        _startSpeed = speed;
         //_bullet = hitInfo.gameObject;
         //_bullet.GetComponent<HitOfEnemyScripts>().damgeRocket = damge;
 	}
@@ -77,7 +80,14 @@ public class StoneScripts : BaseEnemyScripts {
     {
         if (inAroundOfPlayer == false)                    // nếu nằm ngoài vùng bao
         {
-            Move(speed);
+            if(isMove)
+            {
+                Move(speed);
+            }else
+            {
+                _animator.SetBool("isMove",false);
+            }
+            
             if (transform.position.x >= startPosition.x + distanceMove || transform.position.x <= startPosition.x - distanceMove)
             {
                 Flip();
@@ -104,13 +114,23 @@ public class StoneScripts : BaseEnemyScripts {
             }
         }
     }
+    public void SetFrameFinalHit()
+    {
+        _animator.SetBool("isHit", false);
+        speed = _startSpeed;
+    }
 
     #region XetVaCham
     void OnTriggerEnter2D(Collider2D colEnter)
     {
-        if(colEnter.tag == CTag.tagGound2)
+        if (colEnter.tag == CTag.tagGound2)
         {
             Flip();
+        }
+        if(colEnter.tag == CTag.tagHitOfPlayer)
+        {
+            speed = 0;
+            _animator.SetBool("isHit", true);
         }
     }
     void OnTriggerStay2D(Collider2D collStay)

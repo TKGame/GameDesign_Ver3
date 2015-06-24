@@ -12,12 +12,14 @@ public class BloodHafScripts : BaseEnemyScripts {
 
     public Rigidbody2D rocket;
 
+    float _startSpeed = 0;
 	// Use this for initialization
 	void Start () {
         startPosition = transform.position;
         playerObj = GameObject.FindGameObjectWithTag("Player").gameObject;
         _bullet = rocket.gameObject;
         _bullet.GetComponent<HitOfEnemyScripts>().damgeRocket = damge;
+        _startSpeed = speed;
 
 	}
 	
@@ -50,6 +52,12 @@ public class BloodHafScripts : BaseEnemyScripts {
         Die();
 	}
 
+    public void SetFrameFinalHit()
+    {
+        _animator.SetBool("isHit", false);
+        speed = _startSpeed;
+    }
+
     [ContextMenu("create")]
     public void CreateHit()
     {
@@ -67,13 +75,11 @@ public class BloodHafScripts : BaseEnemyScripts {
 
     void OnTriggerEnter2D(Collider2D colEnter)
     {
-        if (colEnter.tag == "Player")
+        
+        if(colEnter.tag == CTag.tagHitOfPlayer)
         {
-            //PlayerController _player = colEnter.gameObject.GetComponent<PlayerController>();
-            //if (_player != null)
-            //{
-            //    _player.Hit(damge);
-            //}
+            speed = 0;
+            _animator.SetBool("isHit",true);
         }
     }
 

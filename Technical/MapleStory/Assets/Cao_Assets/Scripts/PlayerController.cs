@@ -10,10 +10,16 @@ public class PlayerController : BaseGameObject {
     public float maxSpeed = 5f;
     public float jumpForce = 1000f;
     public GameObject boxJump;
-    public Transform groundCheck;
+
+    public Transform groundCheckBefore;
+    public Transform groundCheckAfter;
+
     public HealthController healthController;
     public HealthController manaController;
-    public bool grounded = false;
+    
+    public bool grounded1 = false;
+    public bool grounded2 = false;
+
     public float distance;//khoang cach nhay
     private Vector3 posMousePoint = new Vector3();//vi tri cua chuot theo Screen
     private Vector3 posRaycastPoint = new Vector3();//vi tri cua raycast theo Screen
@@ -66,9 +72,22 @@ public class PlayerController : BaseGameObject {
         }
         timeAddHp += Time.deltaTime;
         Die();
-        grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+        grounded1 = Physics2D.Linecast(transform.position, groundCheckBefore.position, 1 << LayerMask.NameToLayer("Ground"));
+        grounded2 = Physics2D.Linecast(transform.position, groundCheckAfter.position, 1 << LayerMask.NameToLayer("Ground"));
        // Debug.Log(grounded);
-        _animator.SetBool("isJumb", !grounded);
+
+        //_animator.SetBool("isJumb", !grounded);
+        if(grounded1 && grounded2)
+        {
+            _animator.SetBool("isJumb", !grounded1);
+        }
+        else if(grounded1 == false && grounded2 || grounded1 == true && grounded2 == false)
+        {
+            _animator.SetBool("isJumb", false);
+        }
+        else
+            _animator.SetBool("isJumb", true);
+
         UpdateManaAndHp();
 	}
     //quay huong di chuyen cua Player
@@ -146,7 +165,7 @@ public class PlayerController : BaseGameObject {
         {
             isMouse = false;
         }
-        if (isMouse == true && grounded && _posTouch.y >= transform.position.y + 1)
+        if (isMouse == true && grounded1 && _posTouch.y >= transform.position.y + 1)
         {
             if (DistanceClickMouse(transform.position, _posTouch))
             {
@@ -155,7 +174,7 @@ public class PlayerController : BaseGameObject {
                 isJumb = true;
                 if (isJumb == true && Mathf.Abs(rigid.velocity.y) < 0.2f)
                 {
-                    Debug.Log("jumb");
+                    //Debug.Log("jumb");
                     JumbPlayer();
                 }
             }
@@ -214,7 +233,7 @@ public class PlayerController : BaseGameObject {
     //nhay
     void JumbPlayer()
     {        
-        if (grounded &&  isJumb == false )
+        if (grounded1 &&  isJumb == false )
         {
             isJumb = true;      
             rigid.AddForce(new Vector2(1.0f, jumpForce));
@@ -378,6 +397,14 @@ public class PlayerController : BaseGameObject {
         if (col.tag == "Level")
         {
             nextLevel = true; 
-        }        
+        }
+        //grounded = true;
+        //Debug.Log(grounded);
+    }
+
+    void OnTriggerExit2D(Collider2D colExit)
+    {
+        //Debug.Log("exit");
+        //grounded = false;
     }
 }

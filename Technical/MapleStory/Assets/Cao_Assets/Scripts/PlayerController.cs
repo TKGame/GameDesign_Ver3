@@ -83,9 +83,9 @@ public class PlayerController : BaseGameObject {
         //_animator.SetBool("isJumb", !grounded);
         if(grounded1 && grounded2)
         {
-            _animator.SetBool("isJumb", !grounded1);
+            _animator.SetBool("isJumb", false);
         }
-        else if(grounded1 == false && grounded2 || grounded1 == true && grounded2 == false)
+        else if(grounded1 == false && grounded2 == true || grounded1 == true && grounded2 == false)
         {
             _animator.SetBool("isJumb", false);
         }
@@ -169,7 +169,7 @@ public class PlayerController : BaseGameObject {
         {
             isMouse = false;
         }
-        if (isMouse == true && grounded1 && _posTouch.y >= transform.position.y + 1)
+        if (isMouse == true && (grounded1 || grounded2) && _posTouch.y >= transform.position.y + 1)
         {
             if (DistanceClickMouse(transform.position, _posTouch))
             {
@@ -237,7 +237,7 @@ public class PlayerController : BaseGameObject {
     //nhay
     void JumbPlayer()
     {        
-        if (grounded1 &&  isJumb == false )
+        if (grounded1 ||grounded2 &&  isJumb == false )
         {
             isJumb = true;      
             rigid.AddForce(new Vector2(1.0f, jumpForce));

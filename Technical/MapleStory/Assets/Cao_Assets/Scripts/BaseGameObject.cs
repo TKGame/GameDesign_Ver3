@@ -14,6 +14,7 @@ public class BaseGameObject : MonoBehaviour {
     public bool isHP = false;
     public bool isMana = false;
 
+    public bool isDie =false;
     void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -38,6 +39,7 @@ public class BaseGameObject : MonoBehaviour {
     {
         if (HP <= 0)
         {
+            isDie = true;
             speed = 0;
             _animator.SetBool("isDie", true);
             if (rigid != null)

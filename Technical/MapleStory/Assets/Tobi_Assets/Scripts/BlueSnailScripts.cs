@@ -13,6 +13,7 @@ public class BlueSnailScripts : BaseEnemyScripts {
     {
         startPosition = transform.position;
         playerObj = GameObject.FindGameObjectWithTag(CTag.tagPlayer).gameObject;
+        //rigid = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -88,6 +89,7 @@ public class BlueSnailScripts : BaseEnemyScripts {
         if (collStay.tag == "Player")
         {
             isAttack = true;
+            //rigid.AddForce(new Vector2(2,0));
         }
     }
 

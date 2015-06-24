@@ -42,7 +42,7 @@ public class PlayerController : BaseGameObject {
         rangeControll = gameObject.GetComponentInChildren<RangeController>();
         attackSkill = false;
         posPlayerStart = transform.position;
-        cameraMovement = GameObject.Find("Canvas").GetComponentInChildren<BattleCameraMovement>();
+        cameraMovement = GameObject.Find("CanvasGUI").GetComponentInChildren<BattleCameraMovement>();
         if (cameraMovement == null)
         {
             Debug.Log("Chua lay duoc CameraMovement");
@@ -71,7 +71,11 @@ public class PlayerController : BaseGameObject {
             timeAddHp = 0;
         }
         timeAddHp += Time.deltaTime;
-        Die();
+        if(HP <= 0)
+        {
+            CGameController.Instance.isLose = true;
+            Die();
+        }
         grounded1 = Physics2D.Linecast(transform.position, groundCheckBefore.position, 1 << LayerMask.NameToLayer("Ground"));
         grounded2 = Physics2D.Linecast(transform.position, groundCheckAfter.position, 1 << LayerMask.NameToLayer("Ground"));
        // Debug.Log(grounded);

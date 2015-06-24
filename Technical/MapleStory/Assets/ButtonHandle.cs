@@ -23,7 +23,7 @@ public class ButtonHandle : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     {              
         if (isJumb == false)
         {
-            if (isRight == true)
+            if (isRight == true)                    // button right click
             {
                 playerControll.speed = 5;
                 if (!playerControll.facingRight)
@@ -33,7 +33,7 @@ public class ButtonHandle : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             }
             else
             {
-                if (playerControll.facingRight)
+                if (playerControll.facingRight)     // button left click
                 {
                     playerControll.Flip();
                 }
@@ -41,11 +41,11 @@ public class ButtonHandle : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             }
             playerControll.isMove = true;
         }
-        else
+        else                                       // button up click
         {
             if (playerControll != null)
             {
-                Debug.Log("asd");
+               // Debug.Log("asd");
                 playerControll.Jumb();
             } 
         }

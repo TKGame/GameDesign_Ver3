@@ -74,13 +74,12 @@ public class PlayerController : BaseGameObject {
     //quay huong di chuyen cua Player
     public void Flip()
     {
-        
         facingRight = !facingRight;        
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
     }
-    //tim goc giua 2 diem
+    // tim goc giua 2 diem
     // gia tri tra ve la 1 goc
     float AngleRotation(Vector3 posBegin, Vector3 posEnd)
     {

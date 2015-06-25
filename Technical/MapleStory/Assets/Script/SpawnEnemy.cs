@@ -35,10 +35,16 @@ public class SpawnEnemy : MonoBehaviour {
             obj = new GameObject();
             obj = _objectTarger;
             //Debug.Log(obj.tag);
-            obj.GetComponent<BaseEnemyScripts>().distanceMove = dis_Move;
-            obj.GetComponent<BaseEnemyScripts>().isMove = is_Move;
-            obj.GetComponent<BaseEnemyScripts>().isMana = isCreateMana;
-            obj.GetComponent<BaseEnemyScripts>().isHP = isCreateHP;
+            BaseEnemyScripts _base = _objectTarger.GetComponent<BaseEnemyScripts>();
+            if (_base != null)
+            {
+                _base.distanceMove = dis_Move;
+
+            }
+            //obj.GetComponent<BaseEnemyScripts>().distanceMove = dis_Move;
+            //obj.GetComponent<BaseEnemyScripts>().isMove = is_Move;
+            //obj.GetComponent<BaseEnemyScripts>().isMana = isCreateMana;
+            //obj.GetComponent<BaseEnemyScripts>().isHP = isCreateHP;
         }else
         {
             Debug.Log("isnull");

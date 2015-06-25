@@ -33,6 +33,8 @@ public class PlayerController : BaseGameObject {
 
     float HpStart;
     float manaStart;
+
+    public AudioClip attackAudio;
 	// Use this for initialization
 	void Start () {
         rigid = gameObject.GetComponent<Rigidbody2D>();
@@ -268,8 +270,7 @@ public class PlayerController : BaseGameObject {
     }
     //skil danh thuong
     public void AttackSkillDefault()
-    {        
-        
+    {
         _animator.SetTrigger("isAttack");
         for (int i = 0; i < rangeControll.listTaget.Count; i++)
         {

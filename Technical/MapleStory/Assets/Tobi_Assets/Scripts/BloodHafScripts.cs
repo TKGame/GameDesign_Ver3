@@ -75,7 +75,6 @@ public class BloodHafScripts : BaseEnemyScripts {
 
     void OnTriggerEnter2D(Collider2D colEnter)
     {
-        
         if(colEnter.tag == CTag.tagHitOfPlayer)
         {
             speed = 0;

@@ -24,6 +24,8 @@ public class BaseEnemyScripts : BaseGameObject
     public GameObject playerObj;
 
     public bool inAroundOfPlayer = false;
+
+
     // xác định trong vùng bao của Player
     // trong vùng bao của Player nếu = true , và ngược lại
 

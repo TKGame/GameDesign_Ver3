@@ -10,12 +10,17 @@ public class BlueSnailScripts : BaseEnemyScripts {
     float _timeDelay = 0;
     public float dis_TimeDelay = 3.0f;
     float _startSpeed;
+
+    public Transform frontCheck;
+    Collider2D[] listCol2D;
     void Start()
     {
         startPosition = transform.position;
         playerObj = GameObject.FindGameObjectWithTag(CTag.tagPlayer).gameObject;
         
         _startSpeed = speed;
+        frontCheck = transform.Find("FrontCheck");
+        rigid = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -34,6 +39,14 @@ public class BlueSnailScripts : BaseEnemyScripts {
                 UpdateStatusMove();
             }
             _animator.SetBool("isAttack", isAttack);
+        }
+        listCol2D = Physics2D.OverlapPointAll(frontCheck.position);
+        foreach(Collider2D col in listCol2D)
+        {
+            if(col.tag == CTag.tagGound2)
+            {
+                Flip();
+            }
         }
     }
     public void UpdateStatusMove()
@@ -81,7 +94,15 @@ public class BlueSnailScripts : BaseEnemyScripts {
             {
                 _player.Hit(damge);
             }
+            //if(transform.localScale.x > 0)
+            //{
+            //    rigid.AddForce(new Vector2(200, 0));
+            //}else
+            //{
+            //    rigid.AddForce(new Vector2(-200, 0));
+            //}
         }
+
         if(colEnter.tag == CTag.tagGound2)
         {
             Flip();
@@ -106,7 +127,10 @@ public class BlueSnailScripts : BaseEnemyScripts {
             isAttack = true;
             //rigid.AddForce(new Vector2(2,0));
         }
-        
+        //if(collStay.tag == CTag.tagGound2)
+        //{
+        //    Flip();
+        //}
     }
 
     void OnTriggerExit2D(Collider2D colExit)

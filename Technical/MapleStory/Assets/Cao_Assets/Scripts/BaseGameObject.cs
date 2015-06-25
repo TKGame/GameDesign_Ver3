@@ -39,7 +39,7 @@ public class BaseGameObject : MonoBehaviour {
     {
         if (HP <= 0)
         {
-            isDie = true;
+            this.isDie = true;
             speed = 0;
             _animator.SetBool("isDie", true);
             if (rigid != null)

@@ -96,4 +96,12 @@ public class BlueMushroomScripts : BaseEnemyScripts {
             grounded = false;
         }
     }
+
+    void OnTriggerStay2D(Collider2D col)
+    {
+        if(col.tag == CTag.tagGound2)
+        {
+            Flip();
+        }
+    }
 }

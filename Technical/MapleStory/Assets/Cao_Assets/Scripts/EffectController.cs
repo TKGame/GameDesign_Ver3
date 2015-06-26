@@ -20,8 +20,8 @@ public class EffectController : MonoBehaviour {
 
         if (activeFinish == true)
         {
-            gameObject.transform.position += new Vector3(0, 0.2f, 0) * Time.deltaTime;
-            if (timeFinish > 3)
+            gameObject.transform.position += new Vector3(0, 0.5f, 0) * Time.deltaTime;
+            if (timeFinish > 1.5)
             {
                 Destroy(gameObject);
             }

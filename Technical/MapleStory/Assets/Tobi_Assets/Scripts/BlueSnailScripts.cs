@@ -40,12 +40,15 @@ public class BlueSnailScripts : BaseEnemyScripts {
             }
             _animator.SetBool("isAttack", isAttack);
         }
-        listCol2D = Physics2D.OverlapPointAll(frontCheck.position);
-        foreach(Collider2D col in listCol2D)
+        if (frontCheck != null)
         {
-            if(col.tag == CTag.tagGound2)
+            listCol2D = Physics2D.OverlapPointAll(frontCheck.position);
+            foreach (Collider2D col in listCol2D)
             {
-                Flip();
+                if (col.tag == CTag.tagGound2)
+                {
+                    Flip();
+                }
             }
         }
     }

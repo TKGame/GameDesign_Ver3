@@ -45,6 +45,11 @@ public class BaseGameObject : MonoBehaviour {
             if (rigid != null)
                 rigid.gravityScale = 0;
             BoxCollider2D _box = GetComponent<BoxCollider2D>();
+            CircleCollider2D _cir = GetComponent<CircleCollider2D>();
+            if (_cir != null)
+            {
+                _cir.enabled = false;
+            }
             if (_box != null)
             {
                 _box.enabled = false;

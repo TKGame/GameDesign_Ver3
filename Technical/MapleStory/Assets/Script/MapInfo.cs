@@ -20,7 +20,7 @@ public class MapInfo : MonoBehaviour {
 
     public Vector3 posPlayerStart;
 
-
+    public GameObject effectNextLevel;
     private PlayerController player;
     private BattleCameraMovement battleCamera;
     private Level levelControl;
@@ -33,14 +33,18 @@ public class MapInfo : MonoBehaviour {
         player = gameObject.GetComponentInParent<Level>()._player;
         battleCamera = gameObject.GetComponentInParent<Level>().battleCamera;
         levelControl = gameObject.GetComponentInParent<Level>();
+        effectNextLevel = GameObject.FindGameObjectWithTag("Effect");
+
+        SetInfo();
+	}
+    public void SetInfo()
+    {
         if (player != null && battleCamera != null)
         {
             player.SetPosLimit(posMinPlayerX, posMaxPlayerX, posMinPlayerY, posMaxPlayerY);
             battleCamera.SetLimitCamera(posMinCameraX, posMaxCameraX, posMinCameraY, posMaxCameraY);
         }
-	
-	}
-	
+    }
 	// Update is called once per frame
 	void Update () {
         CheckUpLevel();
@@ -58,10 +62,11 @@ public class MapInfo : MonoBehaviour {
     {
         if (listEnemy.Count <= 0)
         {
-            OpenNextLevel();
-            if (player != null)
+            if (effectNextLevel != null)
             {
-                if (player.nextLevel == true)
+                EffectNextLevel _effect = effectNextLevel.GetComponent<EffectNextLevel>();
+                _effect.active = true;
+                if (_effect.Finish())
                 {
                     levelControl.canh++;
                     if (levelControl.canh < levelControl.listCanh.Count)
@@ -72,6 +77,7 @@ public class MapInfo : MonoBehaviour {
                     }
                 }
             }
+        
         }
  
     }
@@ -83,7 +89,7 @@ public class MapInfo : MonoBehaviour {
     public void SetLevel()
     {
         player.transform.position = posPlayerStart;
-        nextLevel.SetActive(false);
-        player.nextLevel = false;
+        //nextLevel.SetActive(false);
+        //player.nextLevel = false;
     }
 }

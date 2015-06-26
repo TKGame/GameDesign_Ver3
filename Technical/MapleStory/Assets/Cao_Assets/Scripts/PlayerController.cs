@@ -283,8 +283,8 @@ public class PlayerController : BaseGameObject {
             if (_enemy != null)
             {
                 GameObject _effect = Instantiate(effectHit, new Vector3(rangeControll.listTaget[i].transform.position.x, rangeControll.listTaget[i].transform.position.y +1 , 0), Quaternion.identity) as GameObject;
-                _effect.transform.SetParent(rangeControll.listTaget[i].transform);
-                _effect.transform.localScale = Vector3.one;
+                //_effect.transform.SetParent(rangeControll.listTaget[i].transform);
+                //_effect.transform.localScale = Vector3.one;
                 //_effect.transform.localPosition = new Vector3(rangeControll.listTaget[i].transform.position.x, rangeControll.listTaget[i].transform.position.y , 0);
                 EffectController _effectControll = _effect.GetComponent<EffectController>();
                 _effectControll.LayGiaTriDamge(damge);

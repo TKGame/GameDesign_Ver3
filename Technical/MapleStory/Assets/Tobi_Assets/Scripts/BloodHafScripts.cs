@@ -20,7 +20,6 @@ public class BloodHafScripts : BaseEnemyScripts {
         _bullet = rocket.gameObject;
         _bullet.GetComponent<HitOfEnemyScripts>().damgeRocket = damge;
         _startSpeed = speed;
-
 	}
 	
 	// Update is called once per frame

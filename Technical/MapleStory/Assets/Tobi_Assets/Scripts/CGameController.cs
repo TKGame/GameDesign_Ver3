@@ -2,17 +2,18 @@
 using System.Collections;
 
 public class CGameController : MonoSingleton<CGameController> {
-
+    // man hình start
     public GameObject startGame;
-
+    //màn hinh gameplay
     public GameObject GamePlay;
-
+    //màn hình control
     public GameObject control;
-
+    // xác định thua
     public bool isLose = false;
-    
+    //mà hình thua
     public GameObject loseGame;
-
+    // màn hình nói chuyện
+    public GameObject ScreenTalking;
 	// Use this for initialization
 	void Start () {
         //loseGame.gameObject.SetActive(false);
@@ -31,7 +32,12 @@ public class CGameController : MonoSingleton<CGameController> {
         control.SetActive(true);
         loseGame.SetActive(false);
     }
-	
+    public GameObject objCharacter1;
+    public void ClickButtonTiep()
+    {
+        Destroy(objCharacter1);
+    }
+
     float distanceTimeLose =0.0f;
 	// Update is called once per frame
 	void Update () {

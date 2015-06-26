@@ -4,13 +4,7 @@ using System.Collections.Generic;
 
 public class SpawnEnemy : MonoBehaviour {
     public List<GameObject> listEnemy;
-    //public bool isSnail;
-    //public bool isMusroom;
-    //public bool isDrexton;
-    //public bool isHaf;
-    //public bool isStone;
-    //public bool isNependeath;
-
+  
     public int indexCreateEnemy =0;
     bool isCreateNewEnemy = false;
 
@@ -29,22 +23,18 @@ public class SpawnEnemy : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         GameObject _objectTarger = Instantiate(listEnemy[indexCreateEnemy], transform.position, Quaternion.identity) as GameObject;
-        //Debug.Log(_objectTarger.tag);
         if(_objectTarger != null)
         {
             obj = new GameObject();
             obj = _objectTarger;
-            //Debug.Log(obj.tag);
             BaseEnemyScripts _base = _objectTarger.GetComponent<BaseEnemyScripts>();
             if (_base != null)
             {
                 _base.distanceMove = dis_Move;
-
+                _base.isMove = is_Move;
+                _base.isMana = isCreateMana;
+                _base.isHP = isCreateHP;
             }
-            //obj.GetComponent<BaseEnemyScripts>().distanceMove = dis_Move;
-            //obj.GetComponent<BaseEnemyScripts>().isMove = is_Move;
-            //obj.GetComponent<BaseEnemyScripts>().isMana = isCreateMana;
-            //obj.GetComponent<BaseEnemyScripts>().isHP = isCreateHP;
         }else
         {
             Debug.Log("isnull");
@@ -53,12 +43,6 @@ public class SpawnEnemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //if(_objectTarger.GetComponent<BaseEnemyScripts>().isDie && _objectTarger != null)
-        //{
-        //    isCreateNewEnemy = true;
-        //    //Debug.Log(isCreateNewEnemy);
-        //}
-
         if (obj == null && isCreateNewEnemy == false )
         {
             //Debug.Log("ok");
@@ -70,10 +54,13 @@ public class SpawnEnemy : MonoBehaviour {
             {
                 isCreateNewEnemy = false;
                 GameObject _objectTarger = Instantiate(listEnemy[indexCreateEnemy], transform.position, Quaternion.identity) as GameObject;
-                _objectTarger.GetComponent<BaseEnemyScripts>().distanceMove = dis_Move;
-                _objectTarger.GetComponent<BaseEnemyScripts>().isMove = is_Move;
-                _objectTarger.GetComponent<BaseEnemyScripts>().isMana = isCreateMana;
-                _objectTarger.GetComponent<BaseEnemyScripts>().isHP = isCreateHP;
+
+                BaseEnemyScripts _base = _objectTarger.GetComponent<BaseEnemyScripts>();
+                _base.distanceMove = dis_Move;
+                _base.isMove = is_Move;
+                _base.isHP = isCreateHP;
+                _base.isMana = isCreateMana;
+
                 _timeDelay = 0;
                 //obj = new GameObject();
                 obj = _objectTarger;

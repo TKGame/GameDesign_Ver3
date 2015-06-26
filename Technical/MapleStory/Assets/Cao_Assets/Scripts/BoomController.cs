@@ -17,7 +17,6 @@ public class BoomController : MonoBehaviour {
         {
             //_anim.SetBool("isAttack", true);
             _anim.SetTrigger("Bum");
-            Debug.Log("bum");
             PlayerController _player = col.GetComponent<PlayerController>();
             if (_player != null)
             {

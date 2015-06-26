@@ -22,9 +22,8 @@ public class CreateSkill2 : MonoBehaviour {
     {
         GameObject obj1 = Instantiate(objSkill, tranformCreateSkill.position, Quaternion.identity) as GameObject;
 
-        GameObject obj2 = Instantiate(objSkill, new Vector3(tranformCreateSkill.position.x + 10, tranformCreateSkill.position.y), Quaternion.identity) as GameObject;
-
-        GameObject obj3 = Instantiate(objSkill, new Vector3(tranformCreateSkill.position.x - 10, tranformCreateSkill.position.y), Quaternion.identity) as GameObject;
-
+        GameObject obj2 = Instantiate(objSkill, new Vector3(tranformCreateSkill.position.x + 5, tranformCreateSkill.position.y), Quaternion.identity) as GameObject;
+        
+        GameObject obj3 = Instantiate(objSkill, new Vector3(tranformCreateSkill.position.x - 3, tranformCreateSkill.position.y), Quaternion.identity) as GameObject;
     }
 }
